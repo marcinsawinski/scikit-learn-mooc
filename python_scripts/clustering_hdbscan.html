@@ -1,0 +1,1882 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Non-convex clustering using HDBSCAN &#8212; Scikit-learn course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=80799b6b" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python_scripts/clustering_hdbscan';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sklearn_mooc.js?v=d42e1409"></script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Making clusters part of a supervised pipeline" href="clustering_transformer.html" />
+    <link rel="prev" title="Clustering when k-means assumptions fail" href="../clustering/clustering_assumptions_index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script src="../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../toc.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo.png" class="logo__image only-light" alt="Scikit-learn course - Home"/>
+    <img src="../_static/scikit-learn-logo.png" class="logo__image only-dark pst-js-only" alt="Scikit-learn course - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ml_concepts/slides.html">🎥 Introducing machine-learning concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml_concepts/quiz_intro_01.html">✅ Quiz Intro.01</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The predictive modeling pipeline</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../predictive_modeling_pipeline/predictive_modeling_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/01_tabular_data_exploration_index.html">Tabular data exploration</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration.html">First look at our dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration_ex_01.html">📝 Exercise M1.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration_sol_01.html">📃 Solution for Exercise M1.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/01_tabular_data_exploration_quiz_m1_01.html">✅ Quiz M1.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_index.html">Fitting a scikit-learn model on numerical data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_introduction.html">First model with scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_ex_00.html">📝 Exercise M1.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_sol_00.html">📃 Solution for Exercise M1.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_hands_on.html">Working with numerical data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_ex_01.html">📝 Exercise M1.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_sol_01.html">📃 Solution for Exercise M1.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_scaling.html">Preprocessing for numerical features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation.html">🎥 Validation of a model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_cross_validation.html">Model evaluation using cross-validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02.html">✅ Quiz M1.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_index.html">Handling categorical data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline.html">Encoding of categorical variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_ex_01.html">📝 Exercise M1.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_sol_01.html">📃 Solution for Exercise M1.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_column_transformer.html">Using numerical and categorical variables together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_ex_02.html">📝 Exercise M1.05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_sol_02.html">📃 Solution for Exercise M1.05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_visualization_video.html">🎥 Visualizing scikit-learn pipelines in Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_visualization.html">Visualizing scikit-learn pipelines in Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03.html">✅ Quiz M1.03</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../predictive_modeling_pipeline/wrap_up_quiz.html">🏁 Wrap-up quiz 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../predictive_modeling_pipeline/predictive_modeling_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selecting the best model</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_overfitting_underfitting_index.html">Overfitting and underfitting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_slides.html">🎥 Comparing train and test errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_validation_curve.html">Overfit-generalization-underfit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_learning_curve.html">Effect of the sample size in cross-validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameter tuning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuning/parameter_tuning_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/parameter_tuning_manual_index.html">Manual tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_manual.html">Set and get hyperparameters in scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_ex_02.html">📝 Exercise M3.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_sol_02.html">📃 Solution for Exercise M3.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/parameter_tuning_manual_quiz_m3_01.html">✅ Quiz M3.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/parameter_tuning_automated_index.html">Automated tuning</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_grid_search.html">Hyperparameter tuning by grid-search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_randomized_search.html">Hyperparameter tuning by randomized-search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/parameter_tuning_parallel_plot_video.html">🎥 Analysis of hyperparameter search results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_parallel_plot.html">Analysis of hyperparameter search results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_nested.html">Evaluation and hyperparameter tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_ex_03.html">📝 Exercise M3.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_sol_03.html">📃 Solution for Exercise M3.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/parameter_tuning_automated_quiz_m3_02.html">✅ Quiz M3.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuning/parameter_tuning_wrap_up_quiz.html">🏁 Wrap-up quiz 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuning/parameter_tuning_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../linear_models/linear_models_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear_models/linear_models_intuitions_index.html">Intuitions on linear models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_slides.html">🎥 Intuitions on linear models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression_without_sklearn.html">Linear regression without scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_01.html">📝 Exercise M4.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_01.html">📃 Solution for Exercise M4.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression_in_sklearn.html">Linear regression using scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Linear models for classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_quiz_m4_01.html">✅ Quiz M4.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear_models/linear_models_non_linear_index.html">Non-linear feature engineering for linear models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression_non_linear_link.html">Non-linear feature engineering for Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_02.html">📝 Exercise M4.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_02.html">📃 Solution for Exercise M4.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_feature_engineering_classification.html">Non-linear feature engineering for Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_03.html">📝 Exercise M4.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_03.html">📃 Solution for Exercise M4.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_quiz_m4_02.html">✅ Quiz M4.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear_models/linear_models_regularization_index.html">Regularization in linear model</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/regularized_linear_models_slides.html">🎥 Intuitions on regularized linear models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_regularization.html">Regularization of linear regression model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_04.html">📝 Exercise M4.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_04.html">📃 Solution for Exercise M4.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_quiz_m4_03.html">✅ Quiz M4.03</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../linear_models/linear_models_wrap_up_quiz.html">🏁 Wrap-up quiz 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linear_models/linear_models_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Decision tree models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../trees/trees_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_intuitions_index.html">Intuitions on tree-based models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trees/slides.html">🎥 Intuitions on tree-based models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_01.html">✅ Quiz M5.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_classification_index.html">Decision tree in classification</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_classification.html">Build a classification decision tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_ex_01.html">📝 Exercise M5.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_sol_01.html">📃 Solution for Exercise M5.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_02.html">✅ Quiz M5.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_regression_index.html">Decision tree in regression</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_regression.html">Decision tree for regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_ex_02.html">📝 Exercise M5.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_sol_02.html">📃 Solution for Exercise M5.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_03.html">✅ Quiz M5.03</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_hyperparameters_index.html">Hyperparameters of decision tree</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_hyperparameters.html">Importance of decision tree hyperparameters on generalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_04.html">✅ Quiz M5.04</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../trees/trees_wrap_up_quiz.html">🏁 Wrap-up quiz 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trees/trees_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ensemble of models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/ensemble_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ensemble/ensemble_bootstrap_index.html">Ensemble method using bootstrapping</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/bagging_slides.html">🎥 Intuitions on ensemble models: bagging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_introduction.html">Introductory example to ensemble models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_bagging.html">Bagging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_01.html">📝 Exercise M6.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_01.html">📃 Solution for Exercise M6.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_random_forest.html">Random forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_02.html">📝 Exercise M6.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_02.html">📃 Solution for Exercise M6.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/ensemble_quiz_m6_01.html">✅ Quiz M6.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ensemble/ensemble_boosting_index.html">Ensemble based on boosting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/boosting_slides.html">🎥 Intuitions on ensemble models: boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_adaboost.html">Adaptive Boosting (AdaBoost)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_gradient_boosting.html">Gradient-boosting decision tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_03.html">📝 Exercise M6.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_03.html">📃 Solution for Exercise M6.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_hist_gradient_boosting.html">Speeding-up gradient-boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/ensemble_quiz_m6_02.html">✅ Quiz M6.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ensemble/ensemble_hyperparameters_index.html">Hyperparameter tuning with ensemble methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_hyperparameters.html">Hyperparameter tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_04.html">📝 Exercise M6.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_04.html">📃 Solution for Exercise M6.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/ensemble_quiz_m6_03.html">✅ Quiz M6.03</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/ensemble_wrap_up_quiz.html">🏁 Wrap-up quiz 6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/ensemble_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluating model performance</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/cross_validation_baseline_index.html">Comparing a model with simple baselines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_baseline.html">Comparing model performance with a simple baseline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_02.html">📝 Exercise M7.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_02.html">📃 Solution for Exercise M7.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_01.html">✅ Quiz M7.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/cross_validation_choices_index.html">Choice of cross-validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_stratification.html">Stratification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_grouping.html">Sample grouping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_time.html">Non i.i.d. data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_02.html">✅ Quiz M7.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/cross_validation_nested_index.html">Nested cross-validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_nested.html">Nested cross-validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_03.html">✅ Quiz M7.03</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/metrics_classification_index.html">Classification metrics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics_classification.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_ex_01.html">📝 Exercise M7.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_sol_01.html">📃 Solution for Exercise M7.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_04.html">✅ Quiz M7.04</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/metrics_regression_index.html">Regression metrics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics_regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_ex_02.html">📝 Exercise M7.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_sol_02.html">📃 Solution for Exercise M7.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_05.html">✅ Quiz M7.05</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation_wrap_up_quiz.html">🏁 Wrap-up quiz 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concluding remarks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../concluding_remarks_video.html">🎥 Concluding remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concluding_remarks.html">Concluding remarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix/datasets_intro.html">Datasets description</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_dataset.html">The penguins datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_adult_census.html">The adult census dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_california_housing.html">The California housing dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_ames_housing.html">The Ames housing dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_blood_transfusion.html">The blood transfusion dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_bike_rides.html">The bike rides dataset</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/notebook_timings.html">Notebook timings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/toc_redirect.html">Table of contents</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🚧 Dimensionality reduction</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../dimensionality/dimred_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../dimensionality/dimred_pca_index.html">Intuitions on dimensionality reduction</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="dimred_intuitions.html">Geometric Intuitions of PCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dimred_preprocessing.html">Preprocessing for PCA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dimred_ex_01.html">Exercise M8.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dimred_sol_01.html">Solution for Exercise M8.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dimred_components.html">Choice of <code class="docutils literal notranslate"><span class="pre">n_components</span></code> in the unsupervised case</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dimred_text.html">Dimensionality reduction of text data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../dimensionality/dimred_quiz_m8_01.html">✅ Quiz M8.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../dimensionality/dimred_wrap_up_quiz.html">🏁 Wrap-up quiz</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🚧 Feature selection</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection/feature_selection_module_intro.html">Module overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection_introduction.html">Benefits of using feature selection</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../feature_selection/feature_selection_limitation_index.html">Caveats of feature selection</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_ex_01.html">📝 Exercise 01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_sol_01.html">📃 Solution for Exercise 01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_limitation_model.html">Limitation of selecting feature using a model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection/feature_selection_module_take_away.html">Main take-away</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection/feature_selection_quiz.html">✅ Quiz</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🚧 Interpretation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dev_features_importance.html">Feature importance</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../interpretation/interpretation_quiz.html">✅ Quiz</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🚧 Clustering</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../clustering/clustering_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../clustering/clustering_kmeans_index.html">K-means</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="clustering_kmeans.html">K-means clustering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_ex_01.html">📝 Exercise M4.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_sol_01.html">📃 Solution for Exercise M4.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_supervised_metrics.html">Clustering performance metrics in the presence of labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_ex_02.html">📝 Exercise M4.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_sol_02.html">📃 Solution for Exercise M4.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clustering/clustering_quiz_m4_01.html">✅ Quiz M4.01</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../clustering/clustering_assumptions_index.html">Clustering when k-means assumptions fail</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Non-convex clustering using HDBSCAN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clustering_transformer.html">Making clusters part of a supervised pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../clustering/clustering_quiz_m4_02.html">✅ Quiz M4.02</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../clustering/clustering_wrap_up_quiz.html">🏁 Wrap-up quiz 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../clustering/clustering_module_take_away.html">Main take-away</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/marcinsawinski/scikit-learn-mooc/main?urlpath=tree/python_scripts/clustering_hdbscan.py" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/marcinsawinski/scikit-learn-mooc/blob/main/python_scripts/clustering_hdbscan.py" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/marcinsawinski/scikit-learn-mooc" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/marcinsawinski/scikit-learn-mooc/edit/main/python_scripts/clustering_hdbscan.py" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/marcinsawinski/scikit-learn-mooc/issues/new?title=Issue%20on%20page%20%2Fpython_scripts/clustering_hdbscan.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python_scripts/clustering_hdbscan.py" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.py</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Non-convex clustering using HDBSCAN</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-of-geospatial-data">Clustering of geospatial data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concluding-remarks">Concluding remarks</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="non-convex-clustering-using-hdbscan">
+<h1>Non-convex clustering using HDBSCAN<a class="headerlink" href="#non-convex-clustering-using-hdbscan" title="Link to this heading">#</a></h1>
+<p>We have previously mentioned that k-means consists of minimizing the samples
+euclidean distances to their assigned centroid. As a consequence, k-means is
+more appropriate for clusters that are isotropic and normally distributed
+(look like spherical blobs). When this assumption is not met, k-means can
+lead to unstable clustering results that do not qualitatively match the
+cluster we seek. On possible way is to use a more general variant of k-means
+named Gaussian Mixture Models (GMM), which allows for elongated clusters with
+strong correlation between features as explained in <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_assumptions.html">this tutorial of the
+scikit-learn
+documentation</a>.
+However, GMM still assumes that clusters are convex, which is not always the
+case in practice.</p>
+<p>In this notebook we introduce another clustering technique named HDBSCAN, an
+acronym which stands for “Hierarchical Density-Based Spatial Clustering of
+Applications with Noise” which further allows for non-convex clusters.</p>
+<p>Let’s explain each of those terms. HDBSCAN is hierarchical, which means it
+handles data with clusters nested within each other. The user controls the
+level in the hierarchy at which clusters are formed.</p>
+<p>It is non-parametric, density-based method that does not assume a specific
+shape or number of clusters. Instead, it automatically finds the clusters
+based on areas where data points are densely packed together. In other words,
+it looks for regions of high density (many data points close to each other)
+and forms clusters around them. This allows it to find clusters of varying
+shapes and sizes.</p>
+<p>HDBSCAN assigns a label of -1 to points that do not have enough neighbors
+(low density) to be considered part of a cluster or are too far from any
+dense region (too isolated from core points). They are usually considered to
+be noise.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want more information on how HDBSCAN works, you can refer to the
+<a class="reference external" href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">hdbscan documentation</a>
+or watch this <a class="reference external" href="https://www.youtube.com/watch?v=dGsxd67IFiU">youtube video</a>.</p>
+</div>
+<p>Let’s first illustrate those concepts with a toy dataset generated using the
+code below. You do not need to understand the details of the data generation
+process, and instead pay attention to the resulting scatter plot.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_blobs</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">4.8</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">3.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.5</span><span class="p">]])</span>
+<span class="n">X_gaussian</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span>
+    <span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span>
+    <span class="n">cluster_std</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># Two anisotropic blobs</span>
+<span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]])</span>
+<span class="n">X_aniso_base</span><span class="p">,</span> <span class="n">y_aniso_base</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span>
+    <span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="n">centers</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c1"># Define two different transformations</span>
+<span class="n">transformation_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]])</span>
+<span class="n">transformation_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]])</span>
+
+<span class="c1"># Apply different transformations to each blob</span>
+<span class="n">X_aniso</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">X_aniso_base</span><span class="p">)</span>
+<span class="n">X_aniso</span><span class="p">[</span><span class="n">y_aniso_base</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span>
+    <span class="n">X_aniso_base</span><span class="p">[</span><span class="n">y_aniso_base</span> <span class="o">==</span> <span class="mi">0</span><span class="p">],</span> <span class="n">transformation_0</span>
+<span class="p">)</span>
+<span class="n">X_aniso</span><span class="p">[</span><span class="n">y_aniso_base</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span>
+    <span class="n">X_aniso_base</span><span class="p">[</span><span class="n">y_aniso_base</span> <span class="o">==</span> <span class="mi">1</span><span class="p">],</span> <span class="n">transformation_1</span>
+<span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_wavy_blob</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+    <span class="s2">"Make wavy blobs in feature space"</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">freq</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">shift</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">+=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="n">noise</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+
+
+<span class="n">X_wave1</span> <span class="o">=</span> <span class="n">make_wavy_blob</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">4.7</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">transformation</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.6</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.6</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]])</span>
+<span class="n">X_wave1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X_wave1</span><span class="p">,</span> <span class="n">transformation</span><span class="p">)</span>
+<span class="n">X_wave2</span> <span class="o">=</span> <span class="n">make_wavy_blob</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">shift</span><span class="o">=-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="n">X_noise</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=-</span><span class="mi">8</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>  <span class="c1"># background noise</span>
+
+<span class="n">X_all</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">X_gaussian</span><span class="p">,</span> <span class="n">X_aniso</span><span class="p">,</span> <span class="n">X_wave1</span><span class="p">,</span> <span class="n">X_wave2</span><span class="p">,</span> <span class="n">X_noise</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_all</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Synthetic dataset"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/51e0f6ce2880dd55c4dd229905a1b06675d3f34cda7aff86ac5d5c72a210a13a.png" src="../_images/51e0f6ce2880dd55c4dd229905a1b06675d3f34cda7aff86ac5d5c72a210a13a.png" />
+</div>
+</div>
+<p>You can observe that the dataset contains:</p>
+<ul class="simple">
+<li><p>four Gaussian blobs with different sizes and densities, some of which
+are elongated and other more spherical;</p></li>
+<li><p>two non-convex clusters with wavy shapes;</p></li>
+<li><p>a background noise of points uniformly distributed in the feature space.</p></li>
+</ul>
+<p>Let’s first try to find a cluster structure using K-means with 6 clusters to
+match our data generating process.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_all</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_all</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">cluster_labels</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b0e37de75e80cd7cab5dfc9981f8490ec2b77d61ca268377322cccd4444fbb4f.png" src="../_images/b0e37de75e80cd7cab5dfc9981f8490ec2b77d61ca268377322cccd4444fbb4f.png" />
+</div>
+</div>
+<p>We could try to increase the number of clusters to avoid grouping
+unrelated points in the same cluster:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_all</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_all</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">cluster_labels</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/51ab0c3f6d5d8f2f379c363f11ffc9d8b72dab6be8533279acbaacd795f39f23.png" src="../_images/51ab0c3f6d5d8f2f379c363f11ffc9d8b72dab6be8533279acbaacd795f39f23.png" />
+</div>
+</div>
+<p>However, we can observe this cluster assignment divides the high density regions
+while also grouping unrelated points together. Furthermore, the background
+noise data points are always assigned to the nearest centroids and thus
+treated as cluster members. Therefore, adjusting the number of clusters is
+not enough to get good results in this kind of data.</p>
+<p>We can compute the silhouette score for this number of clusters and keep it
+in mind for the moment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">silhouette_score</span>
+
+<span class="n">kmeans_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Silhouette score for k-means clusters: </span><span class="si">{</span><span class="n">kmeans_score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette score for k-means clusters: 0.472
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s now repeat the experiment using HDBSCAN instead. For this clustering
+technique, the most important hyperparameter is <code class="docutils literal notranslate"><span class="pre">min_cluster_size</span></code>, which
+controls the minimum number of samples for a group to be considered a cluster;
+groupings smaller than this size are considered as noise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDBSCAN</span>
+
+<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">HDBSCAN</span><span class="p">(</span><span class="n">min_cluster_size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_all</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_all</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">X_all</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">cluster_labels</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/sklearn/cluster/_hdbscan/hdbscan.py:722: FutureWarning: The default value of `copy` will change from False to True in 1.10. Explicitly set a value for `copy` to silence this warning.
+  warn(
+</pre></div>
+</div>
+<img alt="../_images/21622047b9935ff74be9967cad95862a43e1272044fa613d765dbcac493358d4.png" src="../_images/21622047b9935ff74be9967cad95862a43e1272044fa613d765dbcac493358d4.png" />
+</div>
+</div>
+<p>The clusters found using HDBSCAN better match our intuition of how data points
+should be grouped. We can compute the corresponding silhouette score:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdbscan_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">X_all</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Silhouette score for HDBSCAN clusters: </span><span class="si">{</span><span class="n">hdbscan_score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette score for HDBSCAN clusters: 0.382
+</pre></div>
+</div>
+</div>
+</div>
+<p>Notice that this score is lower than the score using k-means, even if HDBSCAN
+seems to do a better job when grouping the data points. The reason here is
+that points considered as noise (labeled with <code class="docutils literal notranslate"><span class="pre">-1</span></code> by HDBSCAN) do not follow a
+cluster-like structure. We can test that hypothesis as follows:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mask</span> <span class="o">=</span> <span class="n">cluster_labels</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># mask is TRUE for entries that are NOT -1</span>
+<span class="n">cluster_labels_filtered</span> <span class="o">=</span> <span class="n">cluster_labels</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="n">X_all_filtered</span> <span class="o">=</span> <span class="n">X_all</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="n">hdbscan_score</span> <span class="o">=</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">X_all_filtered</span><span class="p">,</span> <span class="n">cluster_labels_filtered</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"Silhouette score for HDBSCAN clusters without noise: </span><span class="si">{</span><span class="n">hdbscan_score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Silhouette score for HDBSCAN clusters without noise: 0.517
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case we do obtain a better silhouette score, but in general we <strong>do
+not</strong> suggest dropping samples labeled as noise.</p>
+<p>Also, keep in mind that HDBSCAN does not optimize intra- or inter-cluster
+distances, which are the basis of the silhouette score. It is then more
+appropriate to use the silhouette score when clusters are compact and roughly
+convex. Otherwise, if the clusters are elongated, wavy, or even wrap around
+other clusters, comparing average distances becomes less meaningful.</p>
+<section id="clustering-of-geospatial-data">
+<h2>Clustering of geospatial data<a class="headerlink" href="#clustering-of-geospatial-data" title="Link to this heading">#</a></h2>
+<p>Let’s now apply HDBSCAN to a more realistic use-case: the geospatial columns
+of the California Housing Dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_california_housing</span>
+
+<span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">return_X_y</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">*=</span> <span class="mi">100</span>  <span class="c1"># rescale the target in k$</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use plotly to first visualize the housing prices across the state of
+California.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_map</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">color_feature</span><span class="p">,</span> <span class="n">colorbar_label</span><span class="o">=</span><span class="s2">"cluster label"</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_map</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">,</span>
+        <span class="n">lat</span><span class="o">=</span><span class="s2">"Latitude"</span><span class="p">,</span>
+        <span class="n">lon</span><span class="o">=</span><span class="s2">"Longitude"</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">color_feature</span><span class="p">,</span>
+        <span class="n">zoom</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">"color"</span><span class="p">:</span> <span class="n">colorbar_label</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+        <span class="n">mapbox_style</span><span class="o">=</span><span class="s2">"open-street-map"</span><span class="p">,</span>
+        <span class="n">mapbox_center</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"lat"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Latitude"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+            <span class="s2">"lon"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Longitude"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+        <span class="p">},</span>
+        <span class="n">margin</span><span class="o">=</span><span class="p">{</span><span class="s2">"r"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"t"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"l"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">renderer</span><span class="o">=</span><span class="s2">"notebook"</span><span class="p">)</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">colorbar_label</span><span class="o">=</span><span class="s2">"price (k$)"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">25</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span>     <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span>     <span class="k">return</span> <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">renderer</span><span class="o">=</span><span class="s2">"notebook"</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">23</span> 
+<span class="g g-Whitespace">     </span><span class="mi">24</span> 
+<span class="ne">---&gt; </span><span class="mi">25</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plot_map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">colorbar_label</span><span class="o">=</span><span class="s2">"price (k$)"</span><span class="p">)</span>
+
+<span class="nn">Cell In[9], line 14,</span> in <span class="ni">plot_map</span><span class="nt">(df, color_feature, colorbar_label)</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span>         <span class="n">zoom</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>         <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span>         <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">"color"</span><span class="p">:</span> <span class="n">colorbar_label</span><span class="p">},</span>
+<span class="g g-Whitespace">     </span><span class="mi">13</span>     <span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">14</span>     <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>         <span class="n">mapbox_style</span><span class="o">=</span><span class="s2">"open-street-map"</span><span class="p">,</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span>         <span class="n">mapbox_center</span><span class="o">=</span><span class="p">{</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span>             <span class="s2">"lat"</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Latitude"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/plotly/graph_objs/_figure.py:217,</span> in <span class="ni">Figure.update_layout</span><span class="nt">(self, dict1, overwrite, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">213</span>         <span class="n">BaseFigure</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>             <span class="n">The</span> <span class="n">Figure</span> <span class="nb">object</span> <span class="n">that</span> <span class="n">the</span> <span class="n">update_layout</span> <span class="n">method</span> <span class="n">was</span> <span class="n">called</span> <span class="n">on</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span><span class="w"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">216</span><span class="w">         </span><span class="sd">"""</span>
+<span class="ne">--&gt; </span><span class="mi">217</span><span class="sd">         return super().update_layout(dict1, overwrite, **kwargs)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/plotly/basedatatypes.py:1415,</span> in <span class="ni">BaseFigure.update_layout</span><span class="nt">(self, dict1, overwrite, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1391</span><span class="sd"> def update_layout(self, dict1=None, overwrite=False, **kwargs):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1392</span><span class="sd">     """</span>
+<span class="g g-Whitespace">   </span><span class="mi">1393</span>     <span class="n">Update</span> <span class="n">the</span> <span class="n">properties</span> <span class="n">of</span> <span class="n">the</span> <span class="n">figure</span><span class="s1">'s layout with a dict and/or with</span>
+<span class="g g-Whitespace">   </span><span class="mi">1394</span>     <span class="n">keyword</span> <span class="n">arguments</span><span class="o">.</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>   <span class="mi">1413</span>         <span class="n">The</span> <span class="n">Figure</span> <span class="nb">object</span> <span class="n">that</span> <span class="n">the</span> <span class="n">update_layout</span> <span class="n">method</span> <span class="n">was</span> <span class="n">called</span> <span class="n">on</span>
+<span class="g g-Whitespace">   </span><span class="mi">1414</span>     <span class="s2">"""</span>
+<span class="ne">-&gt; </span><span class="mi">1415</span><span class="s2">     self.layout.update(dict1, overwrite=overwrite, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1416</span><span class="s2">     return self</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/plotly/basedatatypes.py:5105,</span> in <span class="ni">BasePlotlyType.update</span><span class="nt">(self, dict1, overwrite, **kwargs)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5103</span><span class="s2">     with self.figure.batch_update():</span>
+<span class="g g-Whitespace">   </span><span class="mi">5104</span><span class="s2">         BaseFigure._perform_update(self, dict1, overwrite=overwrite)</span>
+<span class="ne">-&gt; </span><span class="mi">5105</span><span class="s2">         BaseFigure._perform_update(self, kwargs, overwrite=overwrite)</span>
+<span class="g g-Whitespace">   </span><span class="mi">5106</span><span class="s2"> else:</span>
+<span class="g g-Whitespace">   </span><span class="mi">5107</span><span class="s2">     BaseFigure._perform_update(self, dict1, overwrite=overwrite)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.11.18/x64/lib/python3.11/site-packages/plotly/basedatatypes.py:3859,</span> in <span class="ni">BaseFigure._perform_update</span><span class="nt">(plotly_obj, update_obj, overwrite)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3857</span><span class="s2">     err = _check_path_in_prop_tree(plotly_obj, key, error_cast=ValueError)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3858</span><span class="s2">     if err is not None:</span>
+<span class="ne">-&gt; </span><span class="mi">3859</span><span class="s2">         raise err</span>
+<span class="g g-Whitespace">   </span><span class="mi">3861</span><span class="s2"> # Convert update_obj to dict</span>
+<span class="g g-Whitespace">   </span><span class="mi">3862</span><span class="s2"> # --------------------------</span>
+<span class="g g-Whitespace">   </span><span class="mi">3863</span><span class="s2"> if isinstance(update_obj, BasePlotlyType):</span>
+
+<span class="ne">ValueError</span>: Invalid property specified for object of type plotly.graph_objs.Layout: 'mapbox'
+
+<span class="s2">Did you mean "map"?</span>
+
+<span class="s2">    Valid properties:</span>
+<span class="s2">        activeselection</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Activeselection`</span>
+<span class="s2">            instance or dict with compatible properties</span>
+<span class="s2">        activeshape</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Activeshape`</span>
+<span class="s2">            instance or dict with compatible properties</span>
+<span class="s2">        annotations</span>
+<span class="s2">            A tuple of</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Annotation`</span>
+<span class="s2">            instances or dicts with compatible properties</span>
+<span class="s2">        annotationdefaults</span>
+<span class="s2">            When used in a template (as</span>
+<span class="s2">            layout.template.layout.annotationdefaults), sets the</span>
+<span class="s2">            default property values to use for elements of</span>
+<span class="s2">            layout.annotations</span>
+<span class="s2">        autosize</span>
+<span class="s2">            Determines whether or not a layout width or height that</span>
+<span class="s2">            has been left undefined by the user is initialized on</span>
+<span class="s2">            each relayout. Note that, regardless of this attribute,</span>
+<span class="s2">            an undefined layout width or height is always</span>
+<span class="s2">            initialized on the first call to plot.</span>
+<span class="s2">        autotypenumbers</span>
+<span class="s2">            Using "strict" a numeric string in trace data is not</span>
+<span class="s2">            converted to a number. Using *convert types* a numeric</span>
+<span class="s2">            string in trace data may be treated as a number during</span>
+<span class="s2">            automatic axis `type` detection. This is the default</span>
+<span class="s2">            value; however it could be overridden for individual</span>
+<span class="s2">            axes.</span>
+<span class="s2">        barcornerradius</span>
+<span class="s2">            Sets the rounding of bar corners. May be an integer</span>
+<span class="s2">            number of pixels, or a percentage of bar width (as a</span>
+<span class="s2">            string ending in %).</span>
+<span class="s2">        bargap</span>
+<span class="s2">            Sets the gap (in plot fraction) between bars of</span>
+<span class="s2">            adjacent location coordinates.</span>
+<span class="s2">        bargroupgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between bars of the</span>
+<span class="s2">            same location coordinate.</span>
+<span class="s2">        barmode</span>
+<span class="s2">            Determines how bars at the same location coordinate are</span>
+<span class="s2">            displayed on the graph. With "stack", the bars are</span>
+<span class="s2">            stacked on top of one another With "relative", the bars</span>
+<span class="s2">            are stacked on top of one another, with negative values</span>
+<span class="s2">            below the axis, positive values above With "group", the</span>
+<span class="s2">            bars are plotted next to one another centered around</span>
+<span class="s2">            the shared location. With "overlay", the bars are</span>
+<span class="s2">            plotted over one another, you might need to reduce</span>
+<span class="s2">            "opacity" to see multiple bars.</span>
+<span class="s2">        barnorm</span>
+<span class="s2">            Sets the normalization for bar traces on the graph.</span>
+<span class="s2">            With "fraction", the value of each bar is divided by</span>
+<span class="s2">            the sum of all values at that location coordinate.</span>
+<span class="s2">            "percent" is the same but multiplied by 100 to show</span>
+<span class="s2">            percentages.</span>
+<span class="s2">        boxgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between boxes of</span>
+<span class="s2">            adjacent location coordinates. Has no effect on traces</span>
+<span class="s2">            that have "width" set.</span>
+<span class="s2">        boxgroupgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between boxes of the</span>
+<span class="s2">            same location coordinate. Has no effect on traces that</span>
+<span class="s2">            have "width" set.</span>
+<span class="s2">        boxmode</span>
+<span class="s2">            Determines how boxes at the same location coordinate</span>
+<span class="s2">            are displayed on the graph. If "group", the boxes are</span>
+<span class="s2">            plotted next to one another centered around the shared</span>
+<span class="s2">            location. If "overlay", the boxes are plotted over one</span>
+<span class="s2">            another, you might need to set "opacity" to see them</span>
+<span class="s2">            multiple boxes. Has no effect on traces that have</span>
+<span class="s2">            "width" set.</span>
+<span class="s2">        calendar</span>
+<span class="s2">            Sets the default calendar system to use for</span>
+<span class="s2">            interpreting and displaying dates throughout the plot.</span>
+<span class="s2">        clickanywhere</span>
+<span class="s2">            If true, `plotly_click` events will fire for any click</span>
+<span class="s2">            position within the plot area, not just over traces.</span>
+<span class="s2">            When clicking where there is no trace data, the event</span>
+<span class="s2">            will have an empty `points` array but will include</span>
+<span class="s2">            `xvals` and `yvals` with click coordinates in data</span>
+<span class="s2">            space, and `xPixel` and `yPixel` with click coordinates</span>
+<span class="s2">            in pixels, relative to the top-left corner of the graph</span>
+<span class="s2">            div.</span>
+<span class="s2">        clickmode</span>
+<span class="s2">            Determines the mode of single click interactions.</span>
+<span class="s2">            "event" is the default value and emits the</span>
+<span class="s2">            `plotly_click` event. In addition this mode emits the</span>
+<span class="s2">            `plotly_selected` event in drag modes "lasso" and</span>
+<span class="s2">            "select", but with no event data attached (kept for</span>
+<span class="s2">            compatibility reasons). The "select" flag enables</span>
+<span class="s2">            selecting single data points via click. This mode also</span>
+<span class="s2">            supports persistent selections, meaning that pressing</span>
+<span class="s2">            Shift while clicking, adds to / subtracts from an</span>
+<span class="s2">            existing selection. "select" with `hovermode`: "x" can</span>
+<span class="s2">            be confusing, consider explicitly setting `hovermode`:</span>
+<span class="s2">            "closest" when using this feature. Selection events are</span>
+<span class="s2">            sent accordingly as long as "event" flag is set as</span>
+<span class="s2">            well. When the "event" flag is missing, `plotly_click`</span>
+<span class="s2">            and `plotly_selected` events are not fired.</span>
+<span class="s2">        coloraxis</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Coloraxis` instance</span>
+<span class="s2">            or dict with compatible properties</span>
+<span class="s2">        colorscale</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Colorscale`</span>
+<span class="s2">            instance or dict with compatible properties</span>
+<span class="s2">        colorway</span>
+<span class="s2">            Sets the default trace colors.</span>
+<span class="s2">        computed</span>
+<span class="s2">            Placeholder for exporting automargin-impacting values</span>
+<span class="s2">            namely `margin.t`, `margin.b`, `margin.l` and</span>
+<span class="s2">            `margin.r` in "full-json" mode.</span>
+<span class="s2">        datarevision</span>
+<span class="s2">            If provided, a changed value tells `Plotly.react` that</span>
+<span class="s2">            one or more data arrays has changed. This way you can</span>
+<span class="s2">            modify arrays in-place rather than making a complete</span>
+<span class="s2">            new copy for an incremental change. If NOT provided,</span>
+<span class="s2">            `Plotly.react` assumes that data arrays are being</span>
+<span class="s2">            treated as immutable, thus any data array with a</span>
+<span class="s2">            different identity from its predecessor contains new</span>
+<span class="s2">            data.</span>
+<span class="s2">        dragmode</span>
+<span class="s2">            Determines the mode of drag interactions. "select" and</span>
+<span class="s2">            "lasso" apply only to scatter traces with markers or</span>
+<span class="s2">            text. "orbit" and "turntable" apply only to 3D scenes.</span>
+<span class="s2">        editrevision</span>
+<span class="s2">            Controls persistence of user-driven changes in</span>
+<span class="s2">            `editable: true` configuration, other than trace names</span>
+<span class="s2">            and axis titles. Defaults to `layout.uirevision`.</span>
+<span class="s2">        extendfunnelareacolors</span>
+<span class="s2">            If `true`, the funnelarea slice colors (whether given</span>
+<span class="s2">            by `funnelareacolorway` or inherited from `colorway`)</span>
+<span class="s2">            will be extended to three times its original length by</span>
+<span class="s2">            first repeating every color 20</span><span class="si">% li</span><span class="s2">ghter then each color</span>
+<span class="g g-Whitespace">            </span><span class="mi">20</span><span class="si">% d</span><span class="s2">arker. This is intended to reduce the likelihood</span>
+<span class="s2">            of reusing the same color when you have many slices,</span>
+<span class="s2">            but you can set `false` to disable. Colors provided in</span>
+<span class="s2">            the trace, using `marker.colors`, are never extended.</span>
+<span class="s2">        extendiciclecolors</span>
+<span class="s2">            If `true`, the icicle slice colors (whether given by</span>
+<span class="s2">            `iciclecolorway` or inherited from `colorway`) will be</span>
+<span class="s2">            extended to three times its original length by first</span>
+<span class="s2">            repeating every color 20</span><span class="si">% li</span><span class="s2">ghter then each color 20%</span>
+<span class="s2">            darker. This is intended to reduce the likelihood of</span>
+<span class="s2">            reusing the same color when you have many slices, but</span>
+<span class="s2">            you can set `false` to disable. Colors provided in the</span>
+<span class="s2">            trace, using `marker.colors`, are never extended.</span>
+<span class="s2">        extendpiecolors</span>
+<span class="s2">            If `true`, the pie slice colors (whether given by</span>
+<span class="s2">            `piecolorway` or inherited from `colorway`) will be</span>
+<span class="s2">            extended to three times its original length by first</span>
+<span class="s2">            repeating every color 20</span><span class="si">% li</span><span class="s2">ghter then each color 20%</span>
+<span class="s2">            darker. This is intended to reduce the likelihood of</span>
+<span class="s2">            reusing the same color when you have many slices, but</span>
+<span class="s2">            you can set `false` to disable. Colors provided in the</span>
+<span class="s2">            trace, using `marker.colors`, are never extended.</span>
+<span class="s2">        extendsunburstcolors</span>
+<span class="s2">            If `true`, the sunburst slice colors (whether given by</span>
+<span class="s2">            `sunburstcolorway` or inherited from `colorway`) will</span>
+<span class="s2">            be extended to three times its original length by first</span>
+<span class="s2">            repeating every color 20</span><span class="si">% li</span><span class="s2">ghter then each color 20%</span>
+<span class="s2">            darker. This is intended to reduce the likelihood of</span>
+<span class="s2">            reusing the same color when you have many slices, but</span>
+<span class="s2">            you can set `false` to disable. Colors provided in the</span>
+<span class="s2">            trace, using `marker.colors`, are never extended.</span>
+<span class="s2">        extendtreemapcolors</span>
+<span class="s2">            If `true`, the treemap slice colors (whether given by</span>
+<span class="s2">            `treemapcolorway` or inherited from `colorway`) will be</span>
+<span class="s2">            extended to three times its original length by first</span>
+<span class="s2">            repeating every color 20</span><span class="si">% li</span><span class="s2">ghter then each color 20%</span>
+<span class="s2">            darker. This is intended to reduce the likelihood of</span>
+<span class="s2">            reusing the same color when you have many slices, but</span>
+<span class="s2">            you can set `false` to disable. Colors provided in the</span>
+<span class="s2">            trace, using `marker.colors`, are never extended.</span>
+<span class="s2">        font</span>
+<span class="s2">            Sets the global font. Note that fonts used in traces</span>
+<span class="s2">            and other layout components inherit from the global</span>
+<span class="s2">            font.</span>
+<span class="s2">        funnelareacolorway</span>
+<span class="s2">            Sets the default funnelarea slice colors. Defaults to</span>
+<span class="s2">            the main `colorway` used for trace colors. If you</span>
+<span class="s2">            specify a new list here it can still be extended with</span>
+<span class="s2">            lighter and darker colors, see</span>
+<span class="s2">            `extendfunnelareacolors`.</span>
+<span class="s2">        funnelgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between bars of</span>
+<span class="s2">            adjacent location coordinates.</span>
+<span class="s2">        funnelgroupgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between bars of the</span>
+<span class="s2">            same location coordinate.</span>
+<span class="s2">        funnelmode</span>
+<span class="s2">            Determines how bars at the same location coordinate are</span>
+<span class="s2">            displayed on the graph. With "stack", the bars are</span>
+<span class="s2">            stacked on top of one another With "group", the bars</span>
+<span class="s2">            are plotted next to one another centered around the</span>
+<span class="s2">            shared location. With "overlay", the bars are plotted</span>
+<span class="s2">            over one another, you might need to reduce "opacity" to</span>
+<span class="s2">            see multiple bars.</span>
+<span class="s2">        geo</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Geo` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        grid</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Grid` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        height</span>
+<span class="s2">            Sets the plot's height (in px).</span>
+<span class="s2">        hiddenlabels</span>
+<span class="s2">            hiddenlabels is the funnelarea &amp; pie chart analog of</span>
+<span class="s2">            visible:'legendonly' but it can contain many labels,</span>
+<span class="s2">            and can simultaneously hide slices from several</span>
+<span class="s2">            pies/funnelarea charts</span>
+<span class="s2">        hoveranywhere</span>
+<span class="s2">            If true, `plotly_hover` events will fire for any cursor</span>
+<span class="s2">            position within the plot area, not just over traces.</span>
+<span class="s2">            When the cursor is not over a trace, the event will</span>
+<span class="s2">            have an empty `points` array but will include `xvals`</span>
+<span class="s2">            and `yvals` with cursor coordinates in data space, and</span>
+<span class="s2">            `xPixel` and `yPixel` with cursor coordinates in</span>
+<span class="s2">            pixels, relative to the top-left corner of the graph</span>
+<span class="s2">            div. A `plotly_unhover` event fires when the cursor</span>
+<span class="s2">            leaves the plot area.</span>
+<span class="s2">        hoverdistance</span>
+<span class="s2">            Sets the default distance (in pixels) to look for data</span>
+<span class="s2">            to add hover labels (-1 means no cutoff, 0 means no</span>
+<span class="s2">            looking for data). This is only a real distance for</span>
+<span class="s2">            hovering on point-like objects, like scatter points.</span>
+<span class="s2">            For area-like objects (bars, scatter fills, etc)</span>
+<span class="s2">            hovering is on inside the area and off outside, but</span>
+<span class="s2">            these objects will not supersede hover on point-like</span>
+<span class="s2">            objects in case of conflict.</span>
+<span class="s2">        hoverlabel</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Hoverlabel`</span>
+<span class="s2">            instance or dict with compatible properties</span>
+<span class="s2">        hovermode</span>
+<span class="s2">            Determines the mode of hover interactions. If</span>
+<span class="s2">            "closest", a single hoverlabel will appear for the</span>
+<span class="s2">            "closest" point within the `hoverdistance`. If "x" (or</span>
+<span class="s2">            "y"), multiple hoverlabels will appear for multiple</span>
+<span class="s2">            points at the "closest" x- (or y-) coordinate within</span>
+<span class="s2">            the `hoverdistance`, with the caveat that no more than</span>
+<span class="s2">            one hoverlabel will appear per trace. If *x unified*</span>
+<span class="s2">            (or *y unified*), a single hoverlabel will appear</span>
+<span class="s2">            multiple points at the closest x- (or y-) coordinate</span>
+<span class="s2">            within the `hoverdistance` with the caveat that no more</span>
+<span class="s2">            than one hoverlabel will appear per trace. In this</span>
+<span class="s2">            mode, spikelines are enabled by default perpendicular</span>
+<span class="s2">            to the specified axis. If false, hover interactions are</span>
+<span class="s2">            disabled.</span>
+<span class="s2">        hoversort</span>
+<span class="s2">            Determines the order of items shown in unified hover</span>
+<span class="s2">            labels. If "trace", items are sorted by trace index. If</span>
+<span class="s2">            *value descending*, items are sorted by value from</span>
+<span class="s2">            largest to smallest. If *value ascending*, items are</span>
+<span class="s2">            sorted by value from smallest to largest. Only applies</span>
+<span class="s2">            when `hovermode` is *x unified* or *y unified*.</span>
+<span class="s2">        hoversubplots</span>
+<span class="s2">            Determines expansion of hover effects to other subplots</span>
+<span class="s2">            If "single" just the axis pair of the primary point is</span>
+<span class="s2">            included without overlaying subplots. If "overlaying"</span>
+<span class="s2">            all subplots using the main axis and occupying the same</span>
+<span class="s2">            space are included. If "axis", also include stacked</span>
+<span class="s2">            subplots using the same axis when `hovermode` is set to</span>
+<span class="s2">            "x", *x unified*, "y" or *y unified*.</span>
+<span class="s2">        iciclecolorway</span>
+<span class="s2">            Sets the default icicle slice colors. Defaults to the</span>
+<span class="s2">            main `colorway` used for trace colors. If you specify a</span>
+<span class="s2">            new list here it can still be extended with lighter and</span>
+<span class="s2">            darker colors, see `extendiciclecolors`.</span>
+<span class="s2">        images</span>
+<span class="s2">            A tuple of :class:`plotly.graph_objects.layout.Image`</span>
+<span class="s2">            instances or dicts with compatible properties</span>
+<span class="s2">        imagedefaults</span>
+<span class="s2">            When used in a template (as</span>
+<span class="s2">            layout.template.layout.imagedefaults), sets the default</span>
+<span class="s2">            property values to use for elements of layout.images</span>
+<span class="s2">        legend</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Legend` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        map</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Map` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        margin</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Margin` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        meta</span>
+<span class="s2">            Assigns extra meta information that can be used in</span>
+<span class="s2">            various `text` attributes. Attributes such as the</span>
+<span class="s2">            graph, axis and colorbar `title.text`, annotation</span>
+<span class="s2">            `text` `trace.name` in legend items, `rangeselector`,</span>
+<span class="s2">            `updatemenus` and `sliders` `label` text all support</span>
+<span class="s2">            `meta`. One can access `meta` fields using template</span>
+<span class="s2">            strings: `%</span><span class="si">{meta[i]}</span><span class="s2">` where `i` is the index of the</span>
+<span class="s2">            `meta` item in question. `meta` can also be an object</span>
+<span class="s2">            for example `{key: value}` which can be accessed</span>
+<span class="s2">            %</span><span class="si">{meta[key]}</span><span class="s2">.</span>
+<span class="s2">        minreducedheight</span>
+<span class="s2">            Minimum height of the plot with margin.automargin</span>
+<span class="s2">            applied (in px)</span>
+<span class="s2">        minreducedwidth</span>
+<span class="s2">            Minimum width of the plot with margin.automargin</span>
+<span class="s2">            applied (in px)</span>
+<span class="s2">        modebar</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Modebar` instance</span>
+<span class="s2">            or dict with compatible properties</span>
+<span class="s2">        newselection</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Newselection`</span>
+<span class="s2">            instance or dict with compatible properties</span>
+<span class="s2">        newshape</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Newshape` instance</span>
+<span class="s2">            or dict with compatible properties</span>
+<span class="s2">        paper_bgcolor</span>
+<span class="s2">            Sets the background color of the paper where the graph</span>
+<span class="s2">            is drawn.</span>
+<span class="s2">        piecolorway</span>
+<span class="s2">            Sets the default pie slice colors. Defaults to the main</span>
+<span class="s2">            `colorway` used for trace colors. If you specify a new</span>
+<span class="s2">            list here it can still be extended with lighter and</span>
+<span class="s2">            darker colors, see `extendpiecolors`.</span>
+<span class="s2">        plot_bgcolor</span>
+<span class="s2">            Sets the background color of the plotting area in-</span>
+<span class="s2">            between x and y axes.</span>
+<span class="s2">        polar</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Polar` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        scattergap</span>
+<span class="s2">            Sets the gap (in plot fraction) between scatter points</span>
+<span class="s2">            of adjacent location coordinates. Defaults to `bargap`.</span>
+<span class="s2">        scattermode</span>
+<span class="s2">            Determines how scatter points at the same location</span>
+<span class="s2">            coordinate are displayed on the graph. With "group",</span>
+<span class="s2">            the scatter points are plotted next to one another</span>
+<span class="s2">            centered around the shared location. With "overlay",</span>
+<span class="s2">            the scatter points are plotted over one another, you</span>
+<span class="s2">            might need to reduce "opacity" to see multiple scatter</span>
+<span class="s2">            points.</span>
+<span class="s2">        scene</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Scene` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        selectdirection</span>
+<span class="s2">            When `dragmode` is set to "select", this limits the</span>
+<span class="s2">            selection of the drag to horizontal, vertical or</span>
+<span class="s2">            diagonal. "h" only allows horizontal selection, "v"</span>
+<span class="s2">            only vertical, "d" only diagonal and "any" sets no</span>
+<span class="s2">            limit.</span>
+<span class="s2">        selectionrevision</span>
+<span class="s2">            Controls persistence of user-driven changes in selected</span>
+<span class="s2">            points from all traces.</span>
+<span class="s2">        selections</span>
+<span class="s2">            A tuple of</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Selection`</span>
+<span class="s2">            instances or dicts with compatible properties</span>
+<span class="s2">        selectiondefaults</span>
+<span class="s2">            When used in a template (as</span>
+<span class="s2">            layout.template.layout.selectiondefaults), sets the</span>
+<span class="s2">            default property values to use for elements of</span>
+<span class="s2">            layout.selections</span>
+<span class="s2">        separators</span>
+<span class="s2">            Sets the decimal and thousand separators. For example,</span>
+<span class="s2">            *. * puts a '.' before decimals and a space between</span>
+<span class="s2">            thousands. In English locales, dflt is ".," but other</span>
+<span class="s2">            locales may alter this default.</span>
+<span class="s2">        shapes</span>
+<span class="s2">            A tuple of :class:`plotly.graph_objects.layout.Shape`</span>
+<span class="s2">            instances or dicts with compatible properties</span>
+<span class="s2">        shapedefaults</span>
+<span class="s2">            When used in a template (as</span>
+<span class="s2">            layout.template.layout.shapedefaults), sets the default</span>
+<span class="s2">            property values to use for elements of layout.shapes</span>
+<span class="s2">        showlegend</span>
+<span class="s2">            Determines whether or not a legend is drawn. Default is</span>
+<span class="s2">            `true` if there is a trace to show and any of these: a)</span>
+<span class="s2">            Two or more traces would by default be shown in the</span>
+<span class="s2">            legend. b) One pie trace is shown in the legend. c) One</span>
+<span class="s2">            trace is explicitly given with `showlegend: true`.</span>
+<span class="s2">        sliders</span>
+<span class="s2">            A tuple of :class:`plotly.graph_objects.layout.Slider`</span>
+<span class="s2">            instances or dicts with compatible properties</span>
+<span class="s2">        sliderdefaults</span>
+<span class="s2">            When used in a template (as</span>
+<span class="s2">            layout.template.layout.sliderdefaults), sets the</span>
+<span class="s2">            default property values to use for elements of</span>
+<span class="s2">            layout.sliders</span>
+<span class="s2">        smith</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Smith` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        spikedistance</span>
+<span class="s2">            Sets the default distance (in pixels) to look for data</span>
+<span class="s2">            to draw spikelines to (-1 means no cutoff, 0 means no</span>
+<span class="s2">            looking for data). As with hoverdistance, distance does</span>
+<span class="s2">            not apply to area-like objects. In addition, some</span>
+<span class="s2">            objects can be hovered on but will not generate</span>
+<span class="s2">            spikelines, such as scatter fills.</span>
+<span class="s2">        sunburstcolorway</span>
+<span class="s2">            Sets the default sunburst slice colors. Defaults to the</span>
+<span class="s2">            main `colorway` used for trace colors. If you specify a</span>
+<span class="s2">            new list here it can still be extended with lighter and</span>
+<span class="s2">            darker colors, see `extendsunburstcolors`.</span>
+<span class="s2">        template</span>
+<span class="s2">            Default attributes to be applied to the plot. This</span>
+<span class="s2">            should be a dict with format: `{'layout':</span>
+<span class="s2">            layoutTemplate, 'data': {trace_type: [traceTemplate,</span>
+<span class="s2">            ...], ...}}` where `layoutTemplate` is a dict matching</span>
+<span class="s2">            the structure of `figure.layout` and `traceTemplate` is</span>
+<span class="s2">            a dict matching the structure of the trace with type</span>
+<span class="s2">            `trace_type` (e.g. 'scatter'). Alternatively, this may</span>
+<span class="s2">            be specified as an instance of</span>
+<span class="s2">            plotly.graph_objs.layout.Template.  Trace templates are</span>
+<span class="s2">            applied cyclically to traces of each type. Container</span>
+<span class="s2">            arrays (eg `annotations`) have special handling: An</span>
+<span class="nn">            object ending</span> in <span class="ni">`defaults` </span><span class="nt">(eg `annotationdefaults`)</span>
+<span class="s2">            is applied to each array item. But if an item has a</span>
+<span class="s2">            `templateitemname` key we look in the template array</span>
+<span class="s2">            for an item with matching `name` and apply that</span>
+<span class="s2">            instead. If no matching `name` is found we mark the</span>
+<span class="s2">            item invisible. Any named template item not referenced</span>
+<span class="s2">            is appended to the end of the array, so this can be</span>
+<span class="s2">            used to add a watermark annotation or a logo image, for</span>
+<span class="s2">            example. To omit one of these items on the plot, make</span>
+<span class="s2">            an item with matching `templateitemname` and `visible:</span>
+<span class="s2">            false`.</span>
+<span class="s2">        ternary</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Ternary` instance</span>
+<span class="s2">            or dict with compatible properties</span>
+<span class="s2">        title</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Title` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        transition</span>
+<span class="s2">            Sets transition options used during Plotly.react</span>
+<span class="s2">            updates.</span>
+<span class="s2">        treemapcolorway</span>
+<span class="s2">            Sets the default treemap slice colors. Defaults to the</span>
+<span class="s2">            main `colorway` used for trace colors. If you specify a</span>
+<span class="s2">            new list here it can still be extended with lighter and</span>
+<span class="s2">            darker colors, see `extendtreemapcolors`.</span>
+<span class="s2">        uirevision</span>
+<span class="s2">            Used to allow user interactions with the plot to</span>
+<span class="s2">            persist after `Plotly.react` calls that are unaware of</span>
+<span class="s2">            these interactions. If `uirevision` is omitted, or if</span>
+<span class="s2">            it is given and it changed from the previous</span>
+<span class="s2">            `Plotly.react` call, the exact new figure is used. If</span>
+<span class="s2">            `uirevision` is truthy and did NOT change, any</span>
+<span class="s2">            attribute that has been affected by user interactions</span>
+<span class="s2">            and did not receive a different value in the new figure</span>
+<span class="s2">            will keep the interaction value. `layout.uirevision`</span>
+<span class="s2">            attribute serves as the default for `uirevision`</span>
+<span class="s2">            attributes in various sub-containers. For finer control</span>
+<span class="s2">            you can set these sub-attributes directly. For example,</span>
+<span class="s2">            if your app separately controls the data on the x and y</span>
+<span class="s2">            axes you might set `xaxis.uirevision=*time*` and</span>
+<span class="s2">            `yaxis.uirevision=*cost*`. Then if only the y data is</span>
+<span class="s2">            changed, you can update `yaxis.uirevision=*quantity*`</span>
+<span class="s2">            and the y axis range will reset but the x axis range</span>
+<span class="s2">            will retain any user-driven zoom.</span>
+<span class="s2">        uniformtext</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Uniformtext`</span>
+<span class="s2">            instance or dict with compatible properties</span>
+<span class="s2">        updatemenus</span>
+<span class="s2">            A tuple of</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.Updatemenu`</span>
+<span class="s2">            instances or dicts with compatible properties</span>
+<span class="s2">        updatemenudefaults</span>
+<span class="s2">            When used in a template (as</span>
+<span class="s2">            layout.template.layout.updatemenudefaults), sets the</span>
+<span class="s2">            default property values to use for elements of</span>
+<span class="s2">            layout.updatemenus</span>
+<span class="s2">        violingap</span>
+<span class="s2">            Sets the gap (in plot fraction) between violins of</span>
+<span class="s2">            adjacent location coordinates. Has no effect on traces</span>
+<span class="s2">            that have "width" set.</span>
+<span class="s2">        violingroupgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between violins of the</span>
+<span class="s2">            same location coordinate. Has no effect on traces that</span>
+<span class="s2">            have "width" set.</span>
+<span class="s2">        violinmode</span>
+<span class="s2">            Determines how violins at the same location coordinate</span>
+<span class="s2">            are displayed on the graph. If "group", the violins are</span>
+<span class="s2">            plotted next to one another centered around the shared</span>
+<span class="s2">            location. If "overlay", the violins are plotted over</span>
+<span class="s2">            one another, you might need to set "opacity" to see</span>
+<span class="s2">            them multiple violins. Has no effect on traces that</span>
+<span class="s2">            have "width" set.</span>
+<span class="s2">        waterfallgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between bars of</span>
+<span class="s2">            adjacent location coordinates.</span>
+<span class="s2">        waterfallgroupgap</span>
+<span class="s2">            Sets the gap (in plot fraction) between bars of the</span>
+<span class="s2">            same location coordinate.</span>
+<span class="s2">        waterfallmode</span>
+<span class="s2">            Determines how bars at the same location coordinate are</span>
+<span class="s2">            displayed on the graph. With "group", the bars are</span>
+<span class="s2">            plotted next to one another centered around the shared</span>
+<span class="s2">            location. With "overlay", the bars are plotted over one</span>
+<span class="s2">            another, you might need to reduce "opacity" to see</span>
+<span class="s2">            multiple bars.</span>
+<span class="s2">        width</span>
+<span class="s2">            Sets the plot's width (in px).</span>
+<span class="s2">        xaxis</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.XAxis` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        yaxis</span>
+<span class="s2">            :class:`plotly.graph_objects.layout.YAxis` instance or</span>
+<span class="s2">            dict with compatible properties</span>
+<span class="s2">        </span>
+<span class="s2">Did you mean "map"?</span>
+
+<span class="s2">Bad property path:</span>
+<span class="s2">mapbox_style</span>
+<span class="s2">^^^^^^</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can try to use K-means to group data points into different spatial regions
+(irrespective of the housing prices) and visualize the results on a map.</p>
+<p>Note that the Geospatial columns are <code class="docutils literal notranslate"><span class="pre">Latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> are already
+on the same scale so there is no need to standardize them before clustering.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+
+<span class="n">geo_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Latitude"</span><span class="p">,</span> <span class="s2">"Longitude"</span><span class="p">]</span>
+<span class="n">geo_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">geo_columns</span><span class="p">]</span>
+
+<span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">geo_data</span><span class="p">)</span>
+<span class="n">cluster_labels</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can observe that results are really influenced by the fact that K-means favors
+spherical-shaped clusters. Let’s try again with HDBSCAN which should not suffer
+from the same bias.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDBSCAN</span>
+
+<span class="n">hdbscan</span> <span class="o">=</span> <span class="n">HDBSCAN</span><span class="p">(</span><span class="n">min_cluster_size</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">hdbscan</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">geo_data</span><span class="p">)</span>
+<span class="n">cluster_labels</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plot_map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>HDBSCAN automatically detects highly populated areas that match urban centers,
+potentially increasing the housing prices. In addition we observe that points
+lying in low density regions are labeled <code class="docutils literal notranslate"><span class="pre">-1</span></code> instead of being forced into a
+cluster.</p>
+<p>The number of resulting clusters is a consequence of the choice of
+<code class="docutils literal notranslate"><span class="pre">min_cluster_size</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of clusters: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">cluster_labels</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Decreasing <code class="docutils literal notranslate"><span class="pre">min_cluster_size</span></code> increases the number of clusters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hdbscan</span> <span class="o">=</span> <span class="n">HDBSCAN</span><span class="p">(</span><span class="n">min_cluster_size</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">hdbscan</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">geo_data</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of clusters: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">cluster_labels</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We previously mentioned that the user can control the level in the hierarchy
+at which clusters are formed. This can be done without retraining the model by
+using the <code class="docutils literal notranslate"><span class="pre">dbscan_clustering</span></code> method, and is an indirect way to control the
+number of clusters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">cut_distance</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]:</span>
+    <span class="n">cluster_labels</span> <span class="o">=</span> <span class="n">hdbscan</span><span class="o">.</span><span class="n">dbscan_clustering</span><span class="p">(</span>
+        <span class="n">cut_distance</span><span class="o">=</span><span class="n">cut_distance</span><span class="p">,</span> <span class="n">min_cluster_size</span><span class="o">=</span><span class="mi">30</span>
+    <span class="p">)</span>
+    <span class="n">plot_map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cluster_labels</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"str"</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Number of clusters: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">cluster_labels</span><span class="p">))</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="concluding-remarks">
+<h2>Concluding remarks<a class="headerlink" href="#concluding-remarks" title="Link to this heading">#</a></h2>
+<p>In this notebook we have introduced HDBSCAN, a clustering technique that
+allows for non-convex clusters and does not require the user to specify the
+number of clusters.</p>
+<p>Keep in mind however, that despite its flexibility, even HDBSCAN can still
+fail to find relevant clusters in some datasets: sometimes there is no
+meaningful cluster structure in the data.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python_scripts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../clustering/clustering_assumptions_index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Clustering when k-means assumptions fail</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="clustering_transformer.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Making clusters part of a supervised pipeline</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clustering-of-geospatial-data">Clustering of geospatial data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concluding-remarks">Concluding remarks</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By scikit-learn developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022-2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+  <div class="mooc_add">
+   <a href="https://www.fun-mooc.fr/en/courses/machine-learning-python-scikit-learn">Join the full MOOC experience</a>
+   <a href="https://skolar.probabl.ai/en/a/2573308139833002183">Get officially certified!</a>
+  </div>
+  Brought to you under a <a href="https://github.com/INRIA/scikit-learn-mooc/blob/main/LICENSE">CC-BY License</a> by
+  <a href="https://learninglab.inria.fr">Inria Learning Lab</a>,
+  <a href="https://scikit-learn.fondation-inria.fr">scikit-learn @ La Fondation Inria</a>,
+  <a href="https://www.inria-academy.fr/formation/scikit-learn-la-boite-a-outils-de-lapprentissage-automatique/">Inria Academy</a>,
+  <a href="https://probabl.ai/">probabl</a>,
+  with many thanks to the <a href="https://scikit-learn.org">scikit-learn</a> community as a whole!
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
