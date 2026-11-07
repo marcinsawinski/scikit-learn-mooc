@@ -24,12 +24,33 @@
         // use the Notebook interface to open the .py but ?factory=Notebook
         // does not work on the mybinder.org URL only on the
         // hub.2i2c.mybinder.org URL
-        var elements = document.querySelectorAll('.dropdown-launch-buttons a');
+        var elements = document.querySelectorAll(
+            'a[href^="https://mybinder.org"], a[href^="https://colab.research.google.com"]');
         elements.forEach(
             function(el) {
                 el.href = el.href.replace(/python_scripts\/(.+)\.py/, "notebooks/$1.ipynb");
             }
         );
+    }
+
+    function addColabBadge() {
+        // Lesson pages are built from python_scripts/<name>.py; the matching
+        // notebook lives in notebooks/<name>.ipynb.
+        var match = window.location.pathname.match(/python_scripts\/([^\/]+)\.html$/);
+        var article = document.querySelector('article.bd-article') ||
+            document.querySelector('#main-content');
+        if (!match || !article) {
+            return;
+        }
+        var link = document.createElement('a');
+        link.href = 'https://colab.research.google.com/github/' +
+            'marcinsawinski/scikit-learn-mooc/blob/main/notebooks/' +
+            match[1] + '.ipynb';
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.className = 'colab-badge remove-from-content-only';
+        link.innerHTML = '<img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>';
+        article.insertBefore(link, article.firstChild);
     }
 
     function displayContentOnly() {
@@ -57,6 +78,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", function() {
+        addColabBadge();
         if (inIframe() || contentOnly()) {
             displayContentOnly();
         }

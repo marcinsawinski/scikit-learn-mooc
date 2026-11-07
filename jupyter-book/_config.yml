@@ -76,13 +76,14 @@ sphinx:
 #######################################################################################
 # Launch button settings
 repository:
-  url                         : https://github.com/INRIA/scikit-learn-mooc
+  url                         : https://github.com/marcinsawinski/scikit-learn-mooc
   branch: main
 
 launch_buttons:
   binderhub_url: "https://mybinder.org"
-#  colab_url: "https://colab.research.google.com" # Not working for now,
-#  because it needs .ipynb
+  # The generated link points to python_scripts/*.py; _static/sklearn_mooc.js
+  # rewrites it to the matching notebooks/*.ipynb, which Colab can open.
+  colab_url: "https://colab.research.google.com"
 #  Disable thebe support since it does not start in the right folder, see
 #  https://github.com/INRIA/scikit-learn-mooc/issues/669 for more details
 #  thebe: true

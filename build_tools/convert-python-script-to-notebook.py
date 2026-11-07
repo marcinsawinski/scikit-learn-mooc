@@ -17,6 +17,8 @@ generated notebooks" in:
 https://github.com/executablebooks/MyST-NB/issues/148#issuecomment-632407608
 """
 
+import os
+import re
 import sys
 import json
 
@@ -24,11 +26,20 @@ from docutils.core import publish_from_doctree
 
 from bs4 import BeautifulSoup
 
+from nbformat.v4 import new_markdown_cell
 from myst_parser.parsers.mdit import create_md_parser
 from myst_parser.config.main import MdParserConfig
 from myst_parser.mdit_to_docutils.base import DocutilsRenderer
 import jupytext
 
+# GitHub repository and branch the generated notebooks are published from.
+# Used for the "Open in Colab" badge and to fetch datasets and figures, so
+# that notebooks also work when opened outside a clone of the repository.
+GITHUB_REPO = "marcinsawinski/scikit-learn-mooc"
+GITHUB_BRANCH = "main"
+RAW_URL = (
+    f"https://raw.githubusercontent.com/{GITHUB_REPO}/refs/heads/{GITHUB_BRANCH}/"
+)
 
 # https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#directives
 # Docutils supports the following directives:
@@ -157,6 +168,37 @@ def replace_escaped_dollars(nb):
         nb.cells[i]["source"] = output_src
 
 
+def make_add_colab_badge(output_filename):
+    """Returns a processor inserting an "Open in Colab" badge as first cell."""
+    notebook_name = os.path.basename(output_filename)
+    badge = (
+        '<a href="https://colab.research.google.com/github/'
+        f'{GITHUB_REPO}/blob/{GITHUB_BRANCH}/notebooks/{notebook_name}" '
+        'target="_parent"><img src="https://colab.research.google.com/'
+        'assets/colab-badge.svg" alt="Open In Colab"/></a>'
+    )
+
+    def add_colab_badge(nb):
+        nb.cells.insert(0, new_markdown_cell(badge))
+
+    return add_colab_badge
+
+
+def replace_relative_paths(nb):
+    """Replaces ../datasets/ and ../figures/ paths by raw GitHub URLs.
+
+    Lines writing files (to_csv) are kept as is since a URL cannot be written
+    to.
+    """
+    pattern = re.compile(r"\.\./(datasets|figures)/")
+    for c in nb.cells:
+        lines = c["source"].split("\n")
+        c["source"] = "\n".join(
+            line if "to_csv(" in line else pattern.sub(RAW_URL + r"\1/", line)
+            for line in lines
+        )
+
+
 def write_without_cell_ids(nb, output_filename):
     # In nbformat 5, markdown cells have ids, nbformat.write and consequently
     # jupytext writes random cell ids when generating .ipynb from .py, creating
@@ -187,5 +229,7 @@ if __name__ == "__main__":
     notebook_processors = [
         replace_admonitions,
         replace_escaped_dollars,
+        replace_relative_paths,
+        make_add_colab_badge(output_filename),
     ]
     process_filename(notebook_processors, input_filename, output_filename)
