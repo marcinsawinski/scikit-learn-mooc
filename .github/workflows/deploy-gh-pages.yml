@@ -13,6 +13,9 @@ on:
 jobs:
   deploy-gh-pages:
     runs-on: ubuntu-latest
+    permissions:
+      # Needed to push the built book to the gh-pages branch
+      contents: write
     env:
       OMP_NUM_THREADS: 1
       MKL_NUM_THREADS: 2
