@@ -34,3 +34,9 @@ doc/_build
 .idea
 *.code-workspace
 .vscode
+
+# Moodle quiz export: contains the answer key, keep it out of the public repo
+moodle/
+
+# Instructor material (solutions, quiz keys): keep out of the public repo
+private/
