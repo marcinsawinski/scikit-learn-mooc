@@ -790,7 +790,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-and-target">1. Data and target</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-test-sets">2. Train and test sets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-model-nearest-neighbours">3. A first model: nearest neighbours</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-is-0-75-good-compare-with-a-baseline">➕ Going further: is 0.75 good? Compare with a baseline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-is-this-score-good-compare-with-a-baseline">➕ Going further: is this score good? Compare with a baseline</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-model">4. A linear model</a></li>
@@ -847,15 +847,11 @@ next lab.</p></li>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 
 <span class="n">ANSWERS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"cv_knn_accuracy"</span><span class="p">:</span> <span class="s2">"973b372a514f91db"</span><span class="p">,</span>
     <span class="s2">"dominant_feature"</span><span class="p">:</span> <span class="s2">"013f54400c82da08"</span><span class="p">,</span>
     <span class="s2">"dummy_accuracy"</span><span class="p">:</span> <span class="s2">"18db98e3760ea465"</span><span class="p">,</span>
-    <span class="s2">"knn_accuracy"</span><span class="p">:</span> <span class="s2">"ce5d3aa79ae56155"</span><span class="p">,</span>
-    <span class="s2">"knn_days_accuracy"</span><span class="p">:</span> <span class="s2">"dfef75e45d0c9d09"</span><span class="p">,</span>
     <span class="s2">"logreg_accuracy"</span><span class="p">:</span> <span class="s2">"5ecbc825ba5c1685"</span><span class="p">,</span>
     <span class="s2">"n_train"</span><span class="p">:</span> <span class="s2">"26d228663f13a885"</span><span class="p">,</span>
     <span class="s2">"numerical_features"</span><span class="p">:</span> <span class="s2">"8809d6cbbcfd05bc"</span><span class="p">,</span>
-    <span class="s2">"scaled_knn_days_accuracy"</span><span class="p">:</span> <span class="s2">"209c9aa4529a257f"</span><span class="p">,</span>
     <span class="s2">"slower_version"</span><span class="p">:</span> <span class="s2">"9322efcf93952a27"</span>
 <span class="p">}</span>
 
@@ -879,6 +875,19 @@ next lab.</p></li>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"❌ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2"> is not right. "</span>
             <span class="s2">"Re-read the text above this cell and try again."</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">check_score</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Stop with a hint unless `value` is `actual` rounded to 2 decimals.</span>
+
+<span class="sd">    For results that differ slightly between computers (e.g. k-NN ties).</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"❌ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2"> is not right. "</span>
+            <span class="s2">"Read the score printed above and round it to 2 decimals."</span>
         <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
@@ -983,13 +992,13 @@ whom the prediction is right.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">knn_accuracy</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">check</span><span class="p">(</span><span class="s2">"knn_accuracy"</span><span class="p">,</span> <span class="n">knn_accuracy</span><span class="p">)</span>
+<span class="n">check_score</span><span class="p">(</span><span class="s2">"knn_accuracy"</span><span class="p">,</span> <span class="n">knn_accuracy</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data_test</span><span class="p">,</span> <span class="n">target_test</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section id="going-further-is-0-75-good-compare-with-a-baseline">
-<h3>➕ Going further: is 0.75 good? Compare with a baseline<a class="headerlink" href="#going-further-is-0-75-good-compare-with-a-baseline" title="Link to this heading">#</a></h3>
+<section id="going-further-is-this-score-good-compare-with-a-baseline">
+<h3>➕ Going further: is this score good? Compare with a baseline<a class="headerlink" href="#going-further-is-this-score-good-compare-with-a-baseline" title="Link to this heading">#</a></h3>
 <p>A <strong>baseline</strong> is a model that does not learn anything useful from the
 features. Any real model must beat it. scikit-learn provides
 <code class="docutils literal notranslate"><span class="pre">DummyClassifier</span></code>; with <code class="docutils literal notranslate"><span class="pre">strategy=&quot;most_frequent&quot;</span></code> it always predicts the
@@ -1069,7 +1078,7 @@ instead of years. Nothing else changes: same people, same information.</p>
 </div>
 <p>🔮 <strong>Predict first.</strong> We train the same 15-neighbours model on this data.
 Will the test accuracy go <strong>“up”</strong>, <strong>“down”</strong>, or stay <strong>“the same”</strong>
-(compared to 0.75)?</p>
+(compared to the score with age in years)?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_prediction</span> <span class="o">=</span> <span class="n">____</span>
@@ -1092,7 +1101,7 @@ Will the test accuracy go <strong>“up”</strong>, <strong>“down”</strong>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">knn_days_accuracy</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">check</span><span class="p">(</span><span class="s2">"knn_days_accuracy"</span><span class="p">,</span> <span class="n">knn_days_accuracy</span><span class="p">)</span>
+<span class="n">check_score</span><span class="p">(</span><span class="s2">"knn_days_accuracy"</span><span class="p">,</span> <span class="n">knn_days_accuracy</span><span class="p">,</span> <span class="n">knn_days</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data_test_days</span><span class="p">,</span> <span class="n">target_test</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1128,12 +1137,12 @@ distances. <code class="docutils literal notranslate"><span class="pre">Standard
 and standard deviation 1. A <strong>pipeline</strong> chains the scaler and the model,
 so the scaling learned on the training set is reused on the test set.</p>
 <p>🔮 <strong>Predict first.</strong> With the scaler, will the accuracy (still age in days)
-be <strong>“below the dummy”</strong>, <strong>“close to the original 0.75”</strong>, or
-<strong>“far above 0.75”</strong>?</p>
+be <strong>“below the dummy”</strong>, <strong>“close to the original score”</strong>, or
+<strong>“far above the original score”</strong>?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_prediction</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">commit</span><span class="p">(</span><span class="n">my_prediction</span><span class="p">,</span> <span class="p">[</span><span class="s2">"below the dummy"</span><span class="p">,</span> <span class="s2">"close to the original 0.75"</span><span class="p">,</span> <span class="s2">"far above 0.75"</span><span class="p">])</span>
+<span class="n">commit</span><span class="p">(</span><span class="n">my_prediction</span><span class="p">,</span> <span class="p">[</span><span class="s2">"below the dummy"</span><span class="p">,</span> <span class="s2">"close to the original score"</span><span class="p">,</span> <span class="s2">"far above the original score"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1153,7 +1162,7 @@ be <strong>“below the dummy”</strong>, <strong>“close to the original 0.75
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_knn_days_accuracy</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">check</span><span class="p">(</span><span class="s2">"scaled_knn_days_accuracy"</span><span class="p">,</span> <span class="n">scaled_knn_days_accuracy</span><span class="p">)</span>
+<span class="n">check_score</span><span class="p">(</span><span class="s2">"scaled_knn_days_accuracy"</span><span class="p">,</span> <span class="n">scaled_knn_days_accuracy</span><span class="p">,</span> <span class="n">scaled_knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data_test_days</span><span class="p">,</span> <span class="n">target_test</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1242,7 +1251,7 @@ decimals:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cv_knn_accuracy</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">check</span><span class="p">(</span><span class="s2">"cv_knn_accuracy"</span><span class="p">,</span> <span class="n">cv_knn_accuracy</span><span class="p">)</span>
+<span class="n">check_score</span><span class="p">(</span><span class="s2">"cv_knn_accuracy"</span><span class="p">,</span> <span class="n">cv_knn_accuracy</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s2">"scaled knn"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1345,7 +1354,7 @@ still helps it;</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-and-target">1. Data and target</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-test-sets">2. Train and test sets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-first-model-nearest-neighbours">3. A first model: nearest neighbours</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-is-0-75-good-compare-with-a-baseline">➕ Going further: is 0.75 good? Compare with a baseline</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-is-this-score-good-compare-with-a-baseline">➕ Going further: is this score good? Compare with a baseline</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-linear-model">4. A linear model</a></li>

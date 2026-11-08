@@ -884,6 +884,19 @@ next lab.</p></li>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">check_score</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">actual</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Stop with a hint unless `value` is `actual` rounded to 2 decimals.</span>
+
+<span class="sd">    For results that differ slightly between computers (e.g. k-NN ties).</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="nb">round</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mf">0.005</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"❌ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2"> is not right. "</span>
+            <span class="s2">"Read the score printed above and round it to 2 decimals."</span>
+        <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">commit</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Record a prediction before seeing the result."""</span>
     <span class="k">if</span> <span class="n">prediction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
