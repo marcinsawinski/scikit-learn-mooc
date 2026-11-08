@@ -61,13 +61,10 @@ warnings.filterwarnings("ignore", category=FutureWarning)
 ANSWERS = {answers}
 {normalize}
 
-def check(name, value):
+def check(name, value, hint="Re-read the text above this cell and try again."):
     """Stop with a hint unless `value` is the expected answer for `name`."""
     if _hash(value) != ANSWERS[name]:
-        raise ValueError(
-            f"❌ {{name}} = {{value!r}} is not right. "
-            "Re-read the text above this cell and try again."
-        )
+        raise ValueError(f"❌ {{name}} = {{value!r}} is not right. {{hint}}")
     print(f"✅ {{name}}")
 
 
