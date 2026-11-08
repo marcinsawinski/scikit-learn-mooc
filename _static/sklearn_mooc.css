@@ -56,3 +56,30 @@ div.mooc_add a {
     max-width: 60vw;
   }
 }
+
+/* Poznań University of Economics and Business (UEP) branding */
+
+html[data-theme="light"] {
+    --pst-color-primary: #005322;
+    --pst-color-primary-bg: #e2efe6;
+    --pst-color-secondary: #2e7d4f;
+    --pst-color-link: #005322;
+    --pst-color-link-hover: #2e7d4f;
+}
+
+html[data-theme="dark"] {
+    --pst-color-primary: #6cc48f;
+    --pst-color-primary-bg: #12301f;
+    --pst-color-secondary: #8fd1a8;
+    --pst-color-link: #7fcf9e;
+    --pst-color-link-hover: #a8dfbd;
+}
+
+/* The UEP logo is dark green: show it in white on the dark theme. */
+html[data-theme="dark"] .logo__image {
+    filter: brightness(0) invert(1);
+}
+
+.navbar-brand .logo__image {
+    max-height: 4rem;
+}

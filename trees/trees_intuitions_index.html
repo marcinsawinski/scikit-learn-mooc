@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Intuitions on tree-based models &#8212; Scikit-learn course</title>
+    <title>Intuitions on tree-based models &#8212; Machine learning with scikit-learn</title>
   
   
   
@@ -37,7 +37,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=80799b6b" />
+    <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
   <script defer src="../_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
@@ -198,8 +198,8 @@
       
     
     
-    <img src="../_static/scikit-learn-logo.png" class="logo__image only-light" alt="Scikit-learn course - Home"/>
-    <img src="../_static/scikit-learn-logo.png" class="logo__image only-dark pst-js-only" alt="Scikit-learn course - Home"/>
+    <img src="../_static/uep-logo.svg" class="logo__image only-light" alt="Machine learning with scikit-learn - Home"/>
+    <img src="../_static/uep-logo.svg" class="logo__image only-dark pst-js-only" alt="Machine learning with scikit-learn - Home"/>
   
   
 </a></div>
@@ -228,6 +228,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/01_tabular_data_exploration_ex_01.html">📝 Exercise M1.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/01_tabular_data_exploration_sol_01.html">📃 Solution for Exercise M1.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/01_tabular_data_exploration_quiz_m1_01.html">✅ Quiz M1.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m1_01_data_exploration.html">📒 Workbook M1.01 — Who earns more than $10 an hour?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_index.html">Fitting a scikit-learn model on numerical data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -241,6 +242,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation.html">🎥 Validation of a model</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/02_numerical_pipeline_cross_validation.html">Model evaluation using cross-validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02.html">✅ Quiz M1.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m1_02_numerical_pipeline.html">📒 Workbook M1.02 — Predicting high wages from numbers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_index.html">Handling categorical data</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -253,6 +255,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_visualization_video.html">🎥 Visualizing scikit-learn pipelines in Jupyter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/03_categorical_pipeline_visualization.html">Visualizing scikit-learn pipelines in Jupyter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03.html">✅ Quiz M1.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m1_03_categorical_pipeline.html">📒 Workbook M1.03 — Using categorical features</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../predictive_modeling_pipeline/wrap_up_quiz.html">🏁 Wrap-up quiz 1</a></li>
@@ -807,7 +810,7 @@
   <div class="footer-item">
     
 <p class="component-author">
-By scikit-learn developers
+By Marcin Sawiński, Poznań University of Economics and Business
 </p>
 
   </div>
@@ -817,7 +820,7 @@ By scikit-learn developers
 
   <p class="copyright">
     
-      © Copyright 2022-2024.
+      © Copyright 2022-2024 Inria and scikit-learn developers; 2026 adaptation by Marcin Sawiński.
       <br/>
     
   </p>
@@ -832,16 +835,18 @@ By scikit-learn developers
     
 <div class="extra_footer">
   <div>
-  <div class="mooc_add">
-   <a href="https://www.fun-mooc.fr/en/courses/machine-learning-python-scikit-learn">Join the full MOOC experience</a>
-   <a href="https://skolar.probabl.ai/en/a/2573308139833002183">Get officially certified!</a>
-  </div>
-  Brought to you under a <a href="https://github.com/INRIA/scikit-learn-mooc/blob/main/LICENSE">CC-BY License</a> by
-  <a href="https://learninglab.inria.fr">Inria Learning Lab</a>,
+  Course material for
+  <a href="https://ue.poznan.pl/">Poznań University of Economics and Business</a>,
+  adapted by Marcin Sawiński.
+  <br>
+  Based on the <a href="https://inria.github.io/scikit-learn-mooc/">scikit-learn MOOC</a>
+  by <a href="https://learninglab.inria.fr">Inria Learning Lab</a>,
   <a href="https://scikit-learn.fondation-inria.fr">scikit-learn @ La Fondation Inria</a>,
-  <a href="https://www.inria-academy.fr/formation/scikit-learn-la-boite-a-outils-de-lapprentissage-automatique/">Inria Academy</a>,
-  <a href="https://probabl.ai/">probabl</a>,
-  with many thanks to the <a href="https://scikit-learn.org">scikit-learn</a> community as a whole!
+  <a href="https://www.inria-academy.fr/formation/scikit-learn-la-boite-a-outils-de-lapprentissage-automatique/">Inria Academy</a>
+  and <a href="https://probabl.ai/">probabl</a>, with many thanks to the
+  <a href="https://scikit-learn.org">scikit-learn</a> community,
+  used under a <a href="https://github.com/INRIA/scikit-learn-mooc/blob/main/LICENSE">CC-BY License</a>.
+  Changes: Google Colab links, additional workbooks and exercises.
 </div>
 
 </div>
