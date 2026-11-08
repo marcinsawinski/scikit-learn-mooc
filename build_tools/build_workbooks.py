@@ -71,6 +71,19 @@ def check(name, value):
     print(f"✅ {{name}}")
 
 
+def check_score(name, value, actual):
+    """Stop with a hint unless `value` is `actual` rounded to 2 decimals.
+
+    For results that differ slightly between computers (e.g. k-NN ties).
+    """
+    if not isinstance(value, (int, float)) or abs(value - round(actual, 2)) > 0.005:
+        raise ValueError(
+            f"❌ {{name}} = {{value!r}} is not right. "
+            "Read the score printed above and round it to 2 decimals."
+        )
+    print(f"✅ {{name}}")
+
+
 def commit(prediction, options):
     """Record a prediction before seeing the result."""
     if prediction not in options:
