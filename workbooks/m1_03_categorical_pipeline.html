@@ -873,13 +873,10 @@ next lab.</p></li>
     <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">_normalize</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">16</span><span class="p">]</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">check</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">hint</span><span class="o">=</span><span class="s2">"Re-read the text above this cell and try again."</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">"""Stop with a hint unless `value` is the expected answer for `name`."""</span>
     <span class="k">if</span> <span class="n">_hash</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">!=</span> <span class="n">ANSWERS</span><span class="p">[</span><span class="n">name</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"❌ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2"> is not right. "</span>
-            <span class="s2">"Re-read the text above this cell and try again."</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"❌ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">!r}</span><span class="s2"> is not right. </span><span class="si">{</span><span class="n">hint</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"✅ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 
@@ -1126,12 +1123,13 @@ ones. Then a logistic regression makes the prediction.</p>
 </div>
 </div>
 </div>
-<p>✏️ One fold is much worse than the others. Which one? Give its number,
-counting from <strong>1</strong> to 5.</p>
+<p>✏️ One fold is much worse than the others. <strong>Which one?</strong> Give its
+<strong>position</strong> in the list (1 for the first fold, …, 5 for the last one),
+not its score.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">worst_fold</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">check</span><span class="p">(</span><span class="s2">"worst_fold"</span><span class="p">,</span> <span class="n">worst_fold</span><span class="p">)</span>
+<span class="n">check</span><span class="p">(</span><span class="s2">"worst_fold"</span><span class="p">,</span> <span class="n">worst_fold</span><span class="p">,</span> <span class="n">hint</span><span class="o">=</span><span class="s2">"Give the position of the fold (1 to 5), not its score."</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
