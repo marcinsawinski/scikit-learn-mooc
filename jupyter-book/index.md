@@ -26,32 +26,17 @@ step of the design of a predictive modeling pipeline: from choices in data
 preprocessing, to choosing models, gaining insights on their failure modes and
 interpreting their predictions.
 
-```{admonition} Follow the MOOC
+```{admonition} How this course works
 :class: remove-from-content-only tip
 
-<div class="container">
-  <div class="row">
-    <div class="col-xl">
-      The latest version of the MOOC
-      <a href="https://www.fun-mooc.fr/en/courses/machine-learning-python-scikit-learn">
-        here
-      "Machine learning in Python with scikit-learn"
-      </a>,
-      is available for self-paced learning and is continuously updated to run
-      with the latest version of scikit-learn.
-      Enroll for the full MOOC experience (quiz solutions, executable notebooks, discussion
-      forum, etc ...) !
-      </br>
-      The MOOC is free and the platform does not use the student data for any other purpose
-      than improving the educational material.
-    </div>
-    <div class="col-lg-5">
-      <a href="https://www.fun-mooc.fr/en/courses/machine-learning-python-scikit-learn">
-        <img src="figures/mooc_computer.jpg" style="width:100%">
-      </a>
-    </div>
-  </div>
-</div>
+- **In the lab** we go through the lesson notebooks together, on the projector.
+- **After the lab** you work on your own on the **workbook** of the topic
+  (📒 pages in the menu), then do its **Moodle quiz**.
+- **At the start of the next lab** some of you present a part of the
+  workbook.
+
+Every notebook opens in Google Colab with the **Open in Colab** button: no
+installation needed.
 ```
 
 ## Prerequisites
@@ -72,9 +57,10 @@ or use the following resources:
 - [Introduction to Matplotlib](https://sebastianraschka.com/blog/2020/numpy-intro.html#410-matplotlib)
 
 
-## MOOC material
+## Credits
 
-The MOOC material is developed publicly under the [CC-BY license](
+This course is adapted from the scikit-learn MOOC by Inria. The MOOC
+material is developed publicly under the [CC-BY license](
 https://github.com/INRIA/scikit-learn-mooc/blob/main/LICENSE).
 
 You can cite us through the project's Zenodo archive using the following DOI:

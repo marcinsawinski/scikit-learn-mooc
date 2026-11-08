@@ -121,6 +121,10 @@ def to_notebook(source, colab_path):
     }
     for cell in nb.cells:
         cell.pop("id", None)
+        # Setup cells ("#@title", collapsed in Colab) are collapsed in the
+        # Jupyter Book too.
+        if cell.cell_type == "code" and cell.source.startswith("#@title"):
+            cell.metadata.setdefault("tags", []).append("hide-input")
     nb.nbformat_minor = 4
     return nb
 
