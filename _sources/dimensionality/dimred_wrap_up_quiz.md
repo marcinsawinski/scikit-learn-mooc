@@ -2,6 +2,11 @@
 
 **This quiz requires some programming to be answered.**
 
+<!-- colab-badge -->
+<a href="https://colab.research.google.com/github/marcinsawinski/scikit-learn-mooc/blob/main/quiz_notebooks/dimred_wrap_up_quiz.ipynb" target="_blank" rel="noopener"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+The notebook behind this badge already contains the code given below.
+
 Load the `periodic_signals.csv` dataset with the following cell of code. It
 contains readings from 170 industrial sensors installed throughout a
 manufacturing facility. Each sensor records the average power consumption (in
@@ -14,7 +19,7 @@ affects clustering, first with `KMeans` and then with `HDBSCAN`.
 ```python
 import pandas as pd
 
-periodic_signals = pd.read_csv("../datasets/periodic_signals.csv")
+periodic_signals = pd.read_csv("https://raw.githubusercontent.com/marcinsawinski/scikit-learn-mooc/refs/heads/main/datasets/periodic_signals.csv")
 _ = periodic_signals.iloc[0].plot(
     xlabel="time (minutes)",
     ylabel="power (Watts)",

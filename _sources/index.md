@@ -1,5 +1,14 @@
 # Introduction
 
+By Marcin Sawiński, [Poznań University of Economics and Business](https://ue.poznan.pl/)
+
+© Copyright 2022-2024 Inria and scikit-learn developers; 2026 adaptation by
+Marcin Sawiński.
+
+Course material for
+[Poznań University of Economics and Business](https://ue.poznan.pl/), adapted
+by Marcin Sawiński.
+
 ## Course presentation
 
 ```{admonition} Welcome!

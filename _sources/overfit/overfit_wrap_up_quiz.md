@@ -2,12 +2,17 @@
 
 **This quiz requires some programming to be answered.**
 
+<!-- colab-badge -->
+<a href="https://colab.research.google.com/github/marcinsawinski/scikit-learn-mooc/blob/main/quiz_notebooks/overfit_wrap_up_quiz.ipynb" target="_blank" rel="noopener"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+The notebook behind this badge already contains the code given below.
+
 Open the dataset `blood_transfusion.csv` with the following command:
 
 ```python
 import pandas as pd
 
-blood_transfusion = pd.read_csv("../datasets/blood_transfusion.csv")
+blood_transfusion = pd.read_csv("https://raw.githubusercontent.com/marcinsawinski/scikit-learn-mooc/refs/heads/main/datasets/blood_transfusion.csv")
 target_name = "Class"
 data = blood_transfusion.drop(columns=target_name)
 target = blood_transfusion[target_name]
