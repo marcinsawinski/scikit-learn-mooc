@@ -15,7 +15,9 @@ notebook so students get immediate feedback without seeing the answer.
 The ``GAP_HELPERS`` placeholder is replaced by the helper code.
 
 The solution notebooks are executed, so every ``check`` is verified against
-the real data before the student version is written.
+the real data before the student version is written. The student version is
+executed too, with its gaps filled in with the solution values: it must run
+without the ``# VERIFY`` lines, which students never get.
 """
 
 import ast
@@ -110,6 +112,17 @@ def split(source):
     return blanks, "\n".join(student_lines) + "\n", "\n".join(solution_lines) + "\n"
 
 
+def filled_student_source(source):
+    """What a student runs once every gap holds the right value."""
+    lines = []
+    for line in source.splitlines():
+        m = BLANK.match(line)
+        if line.rstrip().endswith("# VERIFY"):
+            continue
+        lines.append(f"{m['indent']}{m['name']} = {m['value']}" if m else line)
+    return "\n".join(lines) + "\n"
+
+
 def with_helpers(source, answers):
     helpers = HELPERS_TEMPLATE.format(
         answers=json.dumps(answers, indent=4), normalize=NORMALIZE_SRC
@@ -154,6 +167,11 @@ def build(solution_path, student_dir, executed_dir):
     solution_nb = to_notebook(with_helpers(solution_src, answers), colab_path)
     NotebookClient(solution_nb, timeout=600, kernel_name="python3").execute()
     nbformat.write(solution_nb, executed_dir / f"{solution_path.stem}.ipynb")
+
+    # The student version must also run once its gaps are filled in: a name
+    # defined only on a "# VERIFY" line would be missing there.
+    filled_nb = to_notebook(with_helpers(filled_student_source(source), answers), colab_path)
+    NotebookClient(filled_nb, timeout=600, kernel_name="python3").execute()
 
     student_nb = to_notebook(with_helpers(student_src, answers), colab_path)
     nbformat.write(student_nb, student_path)
