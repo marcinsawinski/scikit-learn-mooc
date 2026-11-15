@@ -11,6 +11,11 @@ with the badge at the top of each notebook.
 | `m2_01_train_test_error.ipynb` | Training error against testing error, repeated splits, grouped samples |
 | `m2_02_validation_learning_curves.ipynb` | Validation curves, learning curves, underfitting and overfitting |
 | `m2_03_bias_variance.ipynb` | Bias, variance and noise, measured |
+| `m3_01_manual_tuning.ipynb` | Hyperparameters of a pipeline, searching by hand, logarithmic grids |
+| `m3_02_automated_tuning.ipynb` | Grid search, randomized search, successive halving, nested cross-validation |
+| `m4_01_linear_models.ipynb` | Reading linear and logistic regression, outliers, comparing coefficients |
+| `m4_02_feature_engineering.ipynb` | One-hot, sine/cosine and spline features, interactions, extrapolation |
+| `m4_03_regularization.ipynb` | Ridge, Lasso, collinear features, scaling and the penalty, `C` |
 
 The code is written for you, but it does not run until you read the text and
 fill in every `____` gap. `check(...)` tells you whether a value is right;

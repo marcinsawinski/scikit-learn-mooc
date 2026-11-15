@@ -78,3 +78,24 @@ Rhyme Rhyming Dictionary](https://www.megarhyme.com/blog/wikinews-dataset/).
 **Attribution:** Please cite the following when using this dataset: Yeh, I.
 (1998). Concrete Compressive Strength [Dataset]. UCI Machine Learning
 Repository. https://doi.org/10.24432/C5PK67.
+
+---
+**Source:** [spambase](https://archive.ics.uci.edu/dataset/94/spambase)
+(columns for special characters renamed, target renamed `is_spam`)
+
+**License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+**Attribution:** Please cite the following when using this dataset: Hopkins, M.,
+Reeber, E., Forman, G., & Suermondt, J. (1999). Spambase [Dataset]. UCI Machine
+Learning Repository. https://doi.org/10.24432/C53G6X.
+
+---
+**Source:** [metro_traffic](https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume)
+(years 2016 and 2017, one row per hour, holiday name repeated for every hour of
+the day, weather description dropped)
+
+**License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+**Attribution:** Please cite the following when using this dataset: Hogue, J.
+(2019). Metro Interstate Traffic Volume [Dataset]. UCI Machine Learning
+Repository. https://doi.org/10.24432/C5X60B.
