@@ -435,6 +435,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_ex_02.html">📝 Exercise M7.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_sol_02.html">📃 Solution for Exercise M7.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_01.html">✅ Quiz M7.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m7_01_baselines.html">📒 Workbook M7.01 — Is this model better than nothing?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/cross_validation_choices_index.html">Choice of cross-validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -442,11 +443,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_grouping.html">Sample grouping</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_time.html">Non i.i.d. data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_02.html">✅ Quiz M7.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m7_02_cross_validation_choices.html">📒 Workbook M7.02 — The same model, three different scores</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/cross_validation_nested_index.html">Nested cross-validation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_nested.html">Nested cross-validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_03.html">✅ Quiz M7.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m7_03_nested_cross_validation.html">📒 Workbook M7.03 — Tuning with the wrong referee</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/metrics_classification_index.html">Classification metrics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -454,6 +457,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/metrics_ex_01.html">📝 Exercise M7.02</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/metrics_sol_01.html">📃 Solution for Exercise M7.02</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_04.html">✅ Quiz M7.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m7_04_classification_metrics.html">📒 Workbook M7.04 — Whom should the bank call?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/metrics_regression_index.html">Regression metrics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -461,6 +465,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/metrics_ex_02.html">📝 Exercise M7.03</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/metrics_sol_02.html">📃 Solution for Exercise M7.03</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_05.html">✅ Quiz M7.05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m7_05_regression_metrics.html">📒 Workbook M7.05 — One model, four numbers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation_wrap_up_quiz.html">🏁 Wrap-up quiz 7</a></li>
@@ -758,6 +763,8 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motorway-traffic-metro-interstate-traffic-volume">Motorway traffic (Metro Interstate Traffic Volume)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wine-quality">Wine quality</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#football-players-fifa-22">Football players (FIFA 22)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parkinson-s-telemonitoring">Parkinson’s telemonitoring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bank-marketing-calls">Bank marketing calls</a></li>
 </ul>
             </nav>
         </div>
@@ -825,6 +832,18 @@ folder of the repository.</p>
 <td><p>8000</p></td>
 <td><p>M6.01, M6.02, M6.03</p></td>
 <td><p>the weekly wage of a player</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#parkinsons-dataset"><span class="std std-ref">Parkinson’s</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">parkinsons_telemonitoring.csv</span></code></p></td>
+<td><p>5875</p></td>
+<td><p>M7.01, M7.02, M7.03, M7.05</p></td>
+<td><p>the severity of a patient’s symptoms</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#bank-dataset"><span class="std std-ref">Bank calls</span></a></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">bank_marketing.csv</span></code></p></td>
+<td><p>12 000</p></td>
+<td><p>M7.04</p></td>
+<td><p>whether a client subscribes</p></td>
 </tr>
 </tbody>
 </table>
@@ -1143,6 +1162,116 @@ collected by Stefano Leone.</p>
 players of the OpenML version.</p>
 <p><strong>Licence:</strong> CC0 (public domain), as declared on OpenML and Kaggle.</p>
 </section>
+<section id="parkinson-s-telemonitoring">
+<span id="parkinsons-dataset"></span><h2>Parkinson’s telemonitoring<a class="headerlink" href="#parkinson-s-telemonitoring" title="Link to this heading">#</a></h2>
+<p>Each row is one voice recording made at home by a person in the early stage
+of Parkinson’s disease, during a six-month trial of a telemonitoring device.
+There are several recordings per day of test and many days per patient.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Columns</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">subject</span></code></p></td>
+<td><p>number identifying the patient</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">age</span></code>, <code class="docutils literal notranslate"><span class="pre">sex</span></code></p></td>
+<td><p>age in years; sex (0 = man, 1 = woman)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test_time</span></code></p></td>
+<td><p>days since the patient joined the trial</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jitter_…</span></code> (5 columns)</p></td>
+<td><p>measures of the variation of the pitch of the voice from one vibration to the next</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shimmer_…</span></code> (6 columns)</p></td>
+<td><p>measures of the variation of its loudness</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nhr</span></code>, <code class="docutils literal notranslate"><span class="pre">hnr</span></code></p></td>
+<td><p>ratios of noise to tonal components in the voice</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rpde</span></code>, <code class="docutils literal notranslate"><span class="pre">dfa</span></code>, <code class="docutils literal notranslate"><span class="pre">ppe</span></code></p></td>
+<td><p>three other measures of the irregularity of the voice signal</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">motor_updrs</span></code></p></td>
+<td><p>motor part of the UPDRS, the clinical scale of the severity of the symptoms</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">total_updrs</span></code></p></td>
+<td><p>total UPDRS score (higher is worse); the target</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The UPDRS scores were assessed by clinicians at the start, the middle and the
+end of the trial, and filled in linearly for the days in between.</p>
+<p><strong>Source:</strong> <a class="reference external" href="https://archive.ics.uci.edu/dataset/189/parkinsons+telemonitoring">UCI Machine Learning Repository, Parkinsons
+Telemonitoring</a>.
+The columns were renamed; the rows are unchanged.</p>
+<p><strong>Licence:</strong> <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+Tsanas, A. &amp; Little, M. (2009). Parkinsons Telemonitoring [Dataset]. UCI
+Machine Learning Repository. <a class="reference external" href="https://doi.org/10.24432/C5ZS3N">https://doi.org/10.24432/C5ZS3N</a></p>
+</section>
+<section id="bank-marketing-calls">
+<span id="bank-dataset"></span><h2>Bank marketing calls<a class="headerlink" href="#bank-marketing-calls" title="Link to this heading">#</a></h2>
+<p>Each row is one phone call made by a Portuguese bank, between 2008 and 2010,
+to offer a client a term deposit (a savings product).</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">age</span></code>, <code class="docutils literal notranslate"><span class="pre">job</span></code>, <code class="docutils literal notranslate"><span class="pre">marital</span></code>, <code class="docutils literal notranslate"><span class="pre">education</span></code></p></td>
+<td><p>age, type of job, marital status and level of education of the client</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">default</span></code></p></td>
+<td><p>whether the client has a credit in default</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">balance</span></code></p></td>
+<td><p>average yearly balance of the account, in euros</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">housing</span></code>, <code class="docutils literal notranslate"><span class="pre">loan</span></code></p></td>
+<td><p>whether the client has a housing loan, a personal loan</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">contact</span></code></p></td>
+<td><p>how the client was reached (<code class="docutils literal notranslate"><span class="pre">cellular</span></code>, <code class="docutils literal notranslate"><span class="pre">telephone</span></code> or <code class="docutils literal notranslate"><span class="pre">unknown</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">day</span></code>, <code class="docutils literal notranslate"><span class="pre">month</span></code></p></td>
+<td><p>day of the month and month of the call</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">duration</span></code></p></td>
+<td><p>length of the call, in seconds</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">campaign</span></code></p></td>
+<td><p>number of calls made to this client during this campaign, this one included</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pdays</span></code></p></td>
+<td><p>days since the client was last called in a previous campaign (−1 if never)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">previous</span></code></p></td>
+<td><p>number of calls made to this client before this campaign</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">poutcome</span></code></p></td>
+<td><p>result of the previous campaign for this client</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">subscribed</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">yes</span></code> if the client accepted the offer; the target</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Source:</strong> <a class="reference external" href="https://archive.ics.uci.edu/dataset/222/bank+marketing">UCI Machine Learning Repository, Bank
+Marketing</a>.</p>
+<p><strong>Differences from the original:</strong> a random sample of 12 000 of the 45 211
+calls, kept in their original order; the target <code class="docutils literal notranslate"><span class="pre">y</span></code> was renamed <code class="docutils literal notranslate"><span class="pre">subscribed</span></code>
+and <code class="docutils literal notranslate"><span class="pre">day_of_week</span></code> renamed <code class="docutils literal notranslate"><span class="pre">day</span></code>; missing categories are written <code class="docutils literal notranslate"><span class="pre">unknown</span></code>.</p>
+<p><strong>Licence:</strong> <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+Moro, S., Rita, P., &amp; Cortez, P. (2014). Bank Marketing [Dataset]. UCI Machine
+Learning Repository. <a class="reference external" href="https://doi.org/10.24432/C5K306">https://doi.org/10.24432/C5K306</a></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1217,6 +1346,8 @@ players of the OpenML version.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motorway-traffic-metro-interstate-traffic-volume">Motorway traffic (Metro Interstate Traffic Volume)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wine-quality">Wine quality</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#football-players-fifa-22">Football players (FIFA 22)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parkinson-s-telemonitoring">Parkinson’s telemonitoring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bank-marketing-calls">Bank marketing calls</a></li>
 </ul>
   </nav></div>
 
@@ -1256,10 +1387,6 @@ By Marcin Sawiński, Poznań University of Economics and Business
     
 <div class="extra_footer">
   <div>
-  Course material for
-  <a href="https://ue.poznan.pl/">Poznań University of Economics and Business</a>,
-  adapted by Marcin Sawiński.
-  <br>
   Based on the <a href="https://inria.github.io/scikit-learn-mooc/">scikit-learn MOOC</a>
   by <a href="https://learninglab.inria.fr">Inria Learning Lab</a>,
   <a href="https://scikit-learn.fondation-inria.fr">scikit-learn @ La Fondation Inria</a>,

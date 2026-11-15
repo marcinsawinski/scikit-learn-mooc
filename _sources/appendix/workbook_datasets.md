@@ -20,6 +20,8 @@ folder of the repository.
 | [Traffic](traffic-dataset) | `metro_traffic.csv` | 16 551 | M4.01, M4.02, M4.03 | the number of vehicles per hour |
 | [Wine](wine-dataset) | `wine_quality.csv` | 6497 | M5.01, M5.02, M5.03 | colour, alcohol content, or quality |
 | [Football](football-dataset) | `football_players.csv` | 8000 | M6.01, M6.02, M6.03 | the weekly wage of a player |
+| [Parkinson's](parkinsons-dataset) | `parkinsons_telemonitoring.csv` | 5875 | M7.01, M7.02, M7.03, M7.05 | the severity of a patient's symptoms |
+| [Bank calls](bank-dataset) | `bank_marketing.csv` | 12 000 | M7.04 | whether a client subscribes |
 
 (wages-dataset)=
 ## Wages (1985 Current Population Survey)
@@ -200,3 +202,65 @@ collected by Stefano Leone.
 players of the OpenML version.
 
 **Licence:** CC0 (public domain), as declared on OpenML and Kaggle.
+
+(parkinsons-dataset)=
+## Parkinson's telemonitoring
+
+Each row is one voice recording made at home by a person in the early stage
+of Parkinson's disease, during a six-month trial of a telemonitoring device.
+There are several recordings per day of test and many days per patient.
+
+| Columns | Meaning |
+|---|---|
+| `subject` | number identifying the patient |
+| `age`, `sex` | age in years; sex (0 = man, 1 = woman) |
+| `test_time` | days since the patient joined the trial |
+| `jitter_…` (5 columns) | measures of the variation of the pitch of the voice from one vibration to the next |
+| `shimmer_…` (6 columns) | measures of the variation of its loudness |
+| `nhr`, `hnr` | ratios of noise to tonal components in the voice |
+| `rpde`, `dfa`, `ppe` | three other measures of the irregularity of the voice signal |
+| `motor_updrs` | motor part of the UPDRS, the clinical scale of the severity of the symptoms |
+| `total_updrs` | total UPDRS score (higher is worse); the target |
+
+The UPDRS scores were assessed by clinicians at the start, the middle and the
+end of the trial, and filled in linearly for the days in between.
+
+**Source:** [UCI Machine Learning Repository, Parkinsons
+Telemonitoring](https://archive.ics.uci.edu/dataset/189/parkinsons+telemonitoring).
+The columns were renamed; the rows are unchanged.
+
+**Licence:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Tsanas, A. & Little, M. (2009). Parkinsons Telemonitoring [Dataset]. UCI
+Machine Learning Repository. <https://doi.org/10.24432/C5ZS3N>
+
+(bank-dataset)=
+## Bank marketing calls
+
+Each row is one phone call made by a Portuguese bank, between 2008 and 2010,
+to offer a client a term deposit (a savings product).
+
+| Column | Meaning |
+|---|---|
+| `age`, `job`, `marital`, `education` | age, type of job, marital status and level of education of the client |
+| `default` | whether the client has a credit in default |
+| `balance` | average yearly balance of the account, in euros |
+| `housing`, `loan` | whether the client has a housing loan, a personal loan |
+| `contact` | how the client was reached (`cellular`, `telephone` or `unknown`) |
+| `day`, `month` | day of the month and month of the call |
+| `duration` | length of the call, in seconds |
+| `campaign` | number of calls made to this client during this campaign, this one included |
+| `pdays` | days since the client was last called in a previous campaign (−1 if never) |
+| `previous` | number of calls made to this client before this campaign |
+| `poutcome` | result of the previous campaign for this client |
+| `subscribed` | `yes` if the client accepted the offer; the target |
+
+**Source:** [UCI Machine Learning Repository, Bank
+Marketing](https://archive.ics.uci.edu/dataset/222/bank+marketing).
+
+**Differences from the original:** a random sample of 12 000 of the 45 211
+calls, kept in their original order; the target `y` was renamed `subscribed`
+and `day_of_week` renamed `day`; missing categories are written `unknown`.
+
+**Licence:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Moro, S., Rita, P., & Cortez, P. (2014). Bank Marketing [Dataset]. UCI Machine
+Learning Repository. <https://doi.org/10.24432/C5K306>
