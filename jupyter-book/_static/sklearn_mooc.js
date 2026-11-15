@@ -33,6 +33,18 @@
         );
     }
 
+    function openColabInNewTab() {
+        // Every "Open in Colab" link (the badge on lesson pages, the badge at
+        // the top of workbooks, the launch button of the theme) opens in a
+        // new tab, so the reader keeps the book open.
+        document.querySelectorAll('a[href^="https://colab.research.google.com"]').forEach(
+            function(el) {
+                el.target = '_blank';
+                el.rel = 'noopener';
+            }
+        );
+    }
+
     function addColabBadge() {
         // Lesson pages are built from python_scripts/<name>.py; the matching
         // notebook lives in notebooks/<name>.ipynb.
@@ -77,11 +89,55 @@
         document.getElementsByTagName('head')[0].appendChild(style);
     }
 
+    function fixSidebarToggle() {
+        // The page has two "toggle primary sidebar" buttons: a hidden one in
+        // the header and the visible one above the article. The theme only
+        // wires up the first, so the visible button does nothing. Make it
+        // hide/show the left sidebar on wide screens (the choice is
+        // remembered from page to page), and open the navigation drawer on
+        // narrow screens as the theme intends.
+        var buttons = document.querySelectorAll('.primary-toggle');
+        var sidebar = document.querySelector('#pst-primary-sidebar');
+        if (buttons.length < 2 || !sidebar) {
+            return;
+        }
+        var storageKey = 'mooc-sidebar-hidden';
+
+        function setHidden(hidden) {
+            sidebar.classList.toggle('pst-sidebar-hidden', hidden);
+            document.body.classList.toggle('mooc-sidebar-hidden', hidden);
+            try {
+                window.localStorage.setItem(storageKey, hidden ? '1' : '0');
+            } catch (e) {}
+        }
+
+        var remembered = null;
+        try {
+            remembered = window.localStorage.getItem(storageKey);
+        } catch (e) {}
+        if (remembered === '1' && window.matchMedia('(min-width: 992px)').matches) {
+            setHidden(true);
+        }
+
+        Array.prototype.slice.call(buttons, 1).forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                if (window.matchMedia('(min-width: 992px)').matches) {
+                    setHidden(!sidebar.classList.contains('pst-sidebar-hidden'));
+                } else {
+                    buttons[0].click();
+                }
+            });
+        });
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
+        fixSidebarToggle();
         addColabBadge();
         if (inIframe() || contentOnly()) {
             displayContentOnly();
         }
         adjustBinderLink();
+        openColabInNewTab();
     });
 }());

@@ -83,3 +83,16 @@ html[data-theme="dark"] .logo__image {
 .navbar-brand .logo__image {
     max-height: 4rem;
 }
+
+
+/* When the left sidebar is hidden with the toggle button, let the content use
+   the freed width (useful on a projector). */
+@media (min-width: 992px) {
+    body.mooc-sidebar-hidden .bd-page-width {
+        max-width: none;
+    }
+
+    body.mooc-sidebar-hidden .bd-main .bd-content .bd-article-container {
+        max-width: none;
+    }
+}
