@@ -47,8 +47,6 @@ html:
   use_repository_button       : true
   use_issues_button           : true
   favicon: _static/favicon.ico
-  comments:
-    hypothesis: true
   extra_footer: |
     <div>
       Course material for
