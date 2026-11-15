@@ -101,6 +101,8 @@
         if (buttons.length < 2 || !sidebar) {
             return;
         }
+        // 960px is the width below which the theme switches to its mobile
+        // layout, where the sidebar is a drawer.
         var storageKey = 'mooc-sidebar-hidden';
 
         function setHidden(hidden) {
@@ -115,14 +117,14 @@
         try {
             remembered = window.localStorage.getItem(storageKey);
         } catch (e) {}
-        if (remembered === '1' && window.matchMedia('(min-width: 992px)').matches) {
+        if (remembered === '1' && window.matchMedia('(min-width: 960px)').matches) {
             setHidden(true);
         }
 
         Array.prototype.slice.call(buttons, 1).forEach(function(button) {
             button.addEventListener('click', function(event) {
                 event.preventDefault();
-                if (window.matchMedia('(min-width: 992px)').matches) {
+                if (window.matchMedia('(min-width: 960px)').matches) {
                     setHidden(!sidebar.classList.contains('pst-sidebar-hidden'));
                 } else {
                     buttons[0].click();

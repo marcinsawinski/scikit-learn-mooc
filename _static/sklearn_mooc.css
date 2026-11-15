@@ -87,7 +87,14 @@ html[data-theme="dark"] .logo__image {
 
 /* When the left sidebar is hidden with the toggle button, let the content use
    the freed width (useful on a projector). */
-@media (min-width: 992px) {
+@media (min-width: 960px) {
+    /* The theme's own rule only hides the sidebar from 992px up, while the
+       sidebar is shown from 960px up: without this, it reappears in between
+       (for example at 175% zoom on a laptop). */
+    body.mooc-sidebar-hidden .bd-sidebar-primary {
+        display: none;
+    }
+
     body.mooc-sidebar-hidden .bd-page-width {
         max-width: none;
     }
