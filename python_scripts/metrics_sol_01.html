@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -268,6 +268,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -277,11 +278,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -835,7 +838,7 @@ Check its documentation to learn how to do that.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy score: 0.631 ± 0.140
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Accuracy score: 0.626 ± 0.140
 </pre></div>
 </div>
 </div>
@@ -852,7 +855,7 @@ Check its documentation to learn how to do that.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Balanced accuracy score: 0.505 ± 0.106
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Balanced accuracy score: 0.503 ± 0.109
 </pre></div>
 </div>
 </div>
@@ -921,7 +924,7 @@ in the <code class="docutils literal notranslate"><span class="pre">cross_val_sc
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Precision score: 0.247 ± 0.168
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Precision score: 0.248 ± 0.172
 </pre></div>
 </div>
 </div>
@@ -944,14 +947,14 @@ for both metrics using a box plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'fit_time': array([0.00198746, 0.00198269, 0.00190973, 0.00185943, 0.00187063,
-        0.00184035, 0.00176978, 0.00183129, 0.00185156, 0.00187445]),
- 'score_time': array([0.00195551, 0.00173497, 0.00169301, 0.00177455, 0.00170255,
-        0.00166368, 0.00166821, 0.00167823, 0.00176644, 0.00167251]),
- 'test_accuracy': array([0.28      , 0.52      , 0.77333333, 0.56      , 0.65333333,
-        0.64      , 0.69333333, 0.77333333, 0.64864865, 0.75675676]),
- 'test_balanced_accuracy': array([0.39327485, 0.4751462 , 0.66081871, 0.40643275, 0.48684211,
-        0.42105263, 0.55116959, 0.73684211, 0.4623323 , 0.51186791])}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'fit_time': array([0.0028131 , 0.00253367, 0.00265646, 0.00251293, 0.00248528,
+        0.0025847 , 0.00252795, 0.00251293, 0.00249815, 0.00250936]),
+ 'score_time': array([0.00278759, 0.00251198, 0.00252271, 0.00247025, 0.0025177 ,
+        0.00249195, 0.00247836, 0.00248957, 0.00257659, 0.00243592]),
+ 'test_accuracy': array([0.30666667, 0.53333333, 0.77333333, 0.57333333, 0.58666667,
+        0.64      , 0.69333333, 0.76      , 0.66216216, 0.75675676]),
+ 'test_balanced_accuracy': array([0.42982456, 0.48391813, 0.66081871, 0.41520468, 0.40497076,
+        0.42105263, 0.55116959, 0.72807018, 0.49174407, 0.51186791])}
 </pre></div>
 </div>
 </div>
@@ -980,7 +983,7 @@ for both metrics using a box plot.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/92d43f2f1a3aea3e7e2349d324d18a1787e7f5584a7f14b2fc151d4306190500.png" src="../_images/92d43f2f1a3aea3e7e2349d324d18a1787e7f5584a7f14b2fc151d4306190500.png" />
+<img alt="../_images/d3b522977739e70bf8573bc90ec8d7bf7059e2bad61787d2c08d6040a4a7f37c.png" src="../_images/d3b522977739e70bf8573bc90ec8d7bf7059e2bad61787d2c08d6040a4a7f37c.png" />
 </div>
 </div>
 </section>

@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -274,6 +274,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -283,11 +284,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -941,80 +944,80 @@ trees (i.e. shallow trees) might also lead to an underfitted forest.</p>
       <td>2</td>
       <td>None</td>
       <td>2</td>
-      <td>33.941403</td>
-      <td>0.408751</td>
+      <td>34.195743</td>
+      <td>0.524291</td>
     </tr>
     <tr>
       <th>0</th>
       <td>2</td>
       <td>1000</td>
       <td>10</td>
-      <td>37.007155</td>
-      <td>0.718765</td>
+      <td>36.699065</td>
+      <td>0.625377</td>
     </tr>
     <tr>
       <th>7</th>
       <td>None</td>
       <td>None</td>
       <td>20</td>
-      <td>37.348571</td>
-      <td>0.526786</td>
+      <td>37.405221</td>
+      <td>0.425790</td>
     </tr>
     <tr>
       <th>4</th>
       <td>5</td>
       <td>100</td>
       <td>2</td>
-      <td>40.015152</td>
-      <td>0.589324</td>
+      <td>40.087361</td>
+      <td>0.678484</td>
     </tr>
     <tr>
       <th>8</th>
       <td>None</td>
       <td>100</td>
       <td>10</td>
-      <td>40.352326</td>
-      <td>0.557541</td>
+      <td>40.504781</td>
+      <td>0.530667</td>
     </tr>
     <tr>
       <th>6</th>
       <td>None</td>
       <td>1000</td>
       <td>50</td>
-      <td>40.744119</td>
-      <td>0.456816</td>
+      <td>40.883106</td>
+      <td>0.427023</td>
     </tr>
     <tr>
       <th>9</th>
       <td>1</td>
       <td>100</td>
       <td>2</td>
-      <td>49.917890</td>
-      <td>0.664374</td>
+      <td>50.214488</td>
+      <td>0.833713</td>
     </tr>
     <tr>
       <th>2</th>
       <td>1</td>
       <td>100</td>
       <td>1</td>
-      <td>50.047333</td>
-      <td>0.686485</td>
+      <td>50.258287</td>
+      <td>1.330066</td>
     </tr>
     <tr>
       <th>5</th>
       <td>1</td>
       <td>None</td>
       <td>100</td>
-      <td>54.710073</td>
-      <td>0.858643</td>
+      <td>54.283854</td>
+      <td>0.628731</td>
     </tr>
     <tr>
       <th>1</th>
       <td>3</td>
       <td>10</td>
       <td>10</td>
-      <td>55.020915</td>
-      <td>0.950161</td>
+      <td>55.052666</td>
+      <td>0.951038</td>
     </tr>
   </tbody>
 </table>
@@ -1043,7 +1046,7 @@ the unseen data.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On average, our random forest regressor makes an error of 33.70 k$
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On average, our random forest regressor makes an error of 33.86 k$
 </pre></div>
 </div>
 </div>
@@ -1143,160 +1146,160 @@ value that results in a model with good generalization performance.</p>
       <td>300</td>
       <td>100</td>
       <td>0.018640</td>
-      <td>31.017286</td>
-      <td>0.380290</td>
+      <td>30.970917</td>
+      <td>0.355830</td>
     </tr>
     <tr>
       <th>6</th>
       <td>300</td>
       <td>20</td>
       <td>0.047293</td>
-      <td>31.885594</td>
-      <td>0.197648</td>
+      <td>31.947817</td>
+      <td>0.435696</td>
     </tr>
     <tr>
       <th>2</th>
       <td>30</td>
       <td>50</td>
       <td>0.176656</td>
-      <td>32.597685</td>
-      <td>0.420929</td>
+      <td>32.614391</td>
+      <td>0.348190</td>
     </tr>
     <tr>
       <th>13</th>
       <td>300</td>
       <td>10</td>
       <td>0.297739</td>
-      <td>32.801340</td>
-      <td>0.329106</td>
+      <td>33.028718</td>
+      <td>0.556373</td>
     </tr>
     <tr>
       <th>9</th>
       <td>100</td>
       <td>20</td>
       <td>0.083745</td>
-      <td>33.121381</td>
-      <td>0.303172</td>
+      <td>33.070762</td>
+      <td>0.281678</td>
     </tr>
     <tr>
       <th>19</th>
       <td>100</td>
       <td>10</td>
       <td>0.215543</td>
-      <td>33.196555</td>
-      <td>0.353975</td>
+      <td>33.353519</td>
+      <td>0.379055</td>
     </tr>
     <tr>
       <th>12</th>
       <td>100</td>
       <td>20</td>
       <td>0.067503</td>
-      <td>33.671804</td>
-      <td>0.402844</td>
+      <td>33.745921</td>
+      <td>0.554083</td>
     </tr>
     <tr>
       <th>16</th>
       <td>300</td>
       <td>5</td>
       <td>0.059290</td>
-      <td>35.743319</td>
-      <td>0.521999</td>
+      <td>35.916075</td>
+      <td>0.476075</td>
     </tr>
     <tr>
       <th>1</th>
       <td>100</td>
       <td>5</td>
       <td>0.160519</td>
-      <td>36.397163</td>
-      <td>0.424783</td>
+      <td>36.066370</td>
+      <td>0.546105</td>
     </tr>
     <tr>
       <th>0</th>
       <td>1000</td>
       <td>2</td>
       <td>0.125207</td>
-      <td>40.827293</td>
-      <td>0.531857</td>
+      <td>40.788191</td>
+      <td>0.637304</td>
     </tr>
     <tr>
       <th>7</th>
       <td>1000</td>
       <td>2</td>
       <td>0.054511</td>
-      <td>42.215957</td>
-      <td>0.635694</td>
+      <td>42.205036</td>
+      <td>0.666989</td>
     </tr>
     <tr>
       <th>18</th>
       <td>10</td>
       <td>5</td>
       <td>0.248463</td>
-      <td>49.921247</td>
-      <td>0.906368</td>
+      <td>49.982137</td>
+      <td>0.756621</td>
     </tr>
     <tr>
       <th>8</th>
       <td>3</td>
       <td>5</td>
       <td>0.906226</td>
-      <td>50.031444</td>
-      <td>0.611125</td>
+      <td>50.113451</td>
+      <td>0.910238</td>
     </tr>
     <tr>
       <th>5</th>
       <td>10</td>
       <td>100</td>
       <td>0.061034</td>
-      <td>61.733278</td>
-      <td>0.638713</td>
+      <td>61.580673</td>
+      <td>0.700650</td>
     </tr>
     <tr>
       <th>17</th>
       <td>3</td>
       <td>5</td>
       <td>0.079415</td>
-      <td>81.467640</td>
-      <td>0.946620</td>
+      <td>81.473243</td>
+      <td>0.904756</td>
     </tr>
     <tr>
       <th>4</th>
       <td>10</td>
       <td>2</td>
       <td>0.035100</td>
-      <td>82.539074</td>
-      <td>0.901274</td>
+      <td>82.493700</td>
+      <td>0.982824</td>
     </tr>
     <tr>
       <th>15</th>
       <td>3</td>
       <td>50</td>
       <td>0.019923</td>
-      <td>87.642057</td>
-      <td>1.077311</td>
+      <td>87.669493</td>
+      <td>1.024742</td>
     </tr>
     <tr>
       <th>3</th>
       <td>3</td>
       <td>2</td>
       <td>0.039361</td>
-      <td>87.770187</td>
-      <td>1.002457</td>
+      <td>87.864554</td>
+      <td>1.086590</td>
     </tr>
     <tr>
       <th>11</th>
       <td>3</td>
       <td>10</td>
       <td>0.019351</td>
-      <td>88.407525</td>
-      <td>1.080292</td>
+      <td>88.333852</td>
+      <td>1.051465</td>
     </tr>
     <tr>
       <th>10</th>
       <td>3</td>
       <td>5</td>
       <td>0.017240</td>
-      <td>88.921915</td>
-      <td>1.093609</td>
+      <td>88.897948</td>
+      <td>1.112882</td>
     </tr>
   </tbody>
 </table>
@@ -1323,7 +1326,7 @@ test set.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On average, our HGBT regressor makes an error of 30.44 k$
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On average, our HGBT regressor makes an error of 30.46 k$
 </pre></div>
 </div>
 </div>

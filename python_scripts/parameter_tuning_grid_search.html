@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -272,6 +272,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -281,11 +282,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -2532,8 +2535,8 @@ number of nodes for a total of 4 x 3 = 12 combinations.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 768 ms, sys: 37.1 ms, total: 805 ms
-Wall time: 3.97 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.02 s, sys: 44.3 ms, total: 1.06 s
+Wall time: 5.34 s
 </pre></div>
 </div>
 <div class="output text_html"><style>#sk-container-id-2 {
@@ -4119,10 +4122,10 @@ results.</p>
   <tbody>
     <tr>
       <th>5</th>
-      <td>0.236080</td>
-      <td>0.024530</td>
-      <td>0.093078</td>
-      <td>0.007730</td>
+      <td>0.332243</td>
+      <td>0.027593</td>
+      <td>0.111413</td>
+      <td>0.005296</td>
       <td>0.10</td>
       <td>30</td>
       <td>{'classifier__learning_rate': 0.1, 'classifier...</td>
@@ -4134,10 +4137,10 @@ results.</p>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.193758</td>
-      <td>0.004574</td>
-      <td>0.080458</td>
-      <td>0.000603</td>
+      <td>0.268646</td>
+      <td>0.003530</td>
+      <td>0.107433</td>
+      <td>0.002606</td>
       <td>0.10</td>
       <td>10</td>
       <td>{'classifier__learning_rate': 0.1, 'classifier...</td>
@@ -4149,10 +4152,10 @@ results.</p>
     </tr>
     <tr>
       <th>7</th>
-      <td>0.069321</td>
-      <td>0.002396</td>
-      <td>0.038312</td>
-      <td>0.001215</td>
+      <td>0.092697</td>
+      <td>0.004216</td>
+      <td>0.049673</td>
+      <td>0.001716</td>
       <td>1.00</td>
       <td>10</td>
       <td>{'classifier__learning_rate': 1, 'classifier__...</td>
@@ -4164,10 +4167,10 @@ results.</p>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.087945</td>
-      <td>0.018481</td>
-      <td>0.045631</td>
-      <td>0.004949</td>
+      <td>0.119780</td>
+      <td>0.027888</td>
+      <td>0.061928</td>
+      <td>0.008996</td>
       <td>1.00</td>
       <td>3</td>
       <td>{'classifier__learning_rate': 1, 'classifier__...</td>
@@ -4179,10 +4182,10 @@ results.</p>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.144723</td>
-      <td>0.004839</td>
-      <td>0.067637</td>
-      <td>0.001046</td>
+      <td>0.196517</td>
+      <td>0.001033</td>
+      <td>0.090365</td>
+      <td>0.003915</td>
       <td>0.10</td>
       <td>3</td>
       <td>{'classifier__learning_rate': 0.1, 'classifier...</td>
@@ -4194,10 +4197,10 @@ results.</p>
     </tr>
     <tr>
       <th>8</th>
-      <td>0.077755</td>
-      <td>0.003857</td>
-      <td>0.039549</td>
-      <td>0.000072</td>
+      <td>0.102163</td>
+      <td>0.001141</td>
+      <td>0.050237</td>
+      <td>0.000499</td>
       <td>1.00</td>
       <td>30</td>
       <td>{'classifier__learning_rate': 1, 'classifier__...</td>
@@ -4209,10 +4212,10 @@ results.</p>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.299035</td>
-      <td>0.000598</td>
-      <td>0.103731</td>
-      <td>0.002919</td>
+      <td>0.418534</td>
+      <td>0.000060</td>
+      <td>0.136452</td>
+      <td>0.003626</td>
       <td>0.01</td>
       <td>30</td>
       <td>{'classifier__learning_rate': 0.01, 'classifie...</td>
@@ -4224,10 +4227,10 @@ results.</p>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.197455</td>
-      <td>0.000192</td>
-      <td>0.084953</td>
-      <td>0.003461</td>
+      <td>0.279306</td>
+      <td>0.002476</td>
+      <td>0.112175</td>
+      <td>0.003117</td>
       <td>0.01</td>
       <td>10</td>
       <td>{'classifier__learning_rate': 0.01, 'classifie...</td>
@@ -4239,10 +4242,10 @@ results.</p>
     </tr>
     <tr>
       <th>0</th>
-      <td>0.157057</td>
-      <td>0.004341</td>
-      <td>0.066045</td>
-      <td>0.001013</td>
+      <td>0.207974</td>
+      <td>0.001899</td>
+      <td>0.089316</td>
+      <td>0.001716</td>
       <td>0.01</td>
       <td>3</td>
       <td>{'classifier__learning_rate': 0.01, 'classifie...</td>
@@ -4254,10 +4257,10 @@ results.</p>
     </tr>
     <tr>
       <th>10</th>
-      <td>0.050462</td>
-      <td>0.003138</td>
-      <td>0.030323</td>
-      <td>0.000779</td>
+      <td>0.068381</td>
+      <td>0.004002</td>
+      <td>0.042665</td>
+      <td>0.002655</td>
       <td>10.00</td>
       <td>10</td>
       <td>{'classifier__learning_rate': 10, 'classifier_...</td>
@@ -4269,10 +4272,10 @@ results.</p>
     </tr>
     <tr>
       <th>11</th>
-      <td>0.049249</td>
-      <td>0.000619</td>
-      <td>0.030623</td>
-      <td>0.000784</td>
+      <td>0.064879</td>
+      <td>0.000656</td>
+      <td>0.039450</td>
+      <td>0.000439</td>
       <td>10.00</td>
       <td>30</td>
       <td>{'classifier__learning_rate': 10, 'classifier_...</td>
@@ -4284,10 +4287,10 @@ results.</p>
     </tr>
     <tr>
       <th>9</th>
-      <td>0.048393</td>
-      <td>0.003412</td>
-      <td>0.029671</td>
-      <td>0.001142</td>
+      <td>0.065747</td>
+      <td>0.004823</td>
+      <td>0.039264</td>
+      <td>0.001457</td>
       <td>10.00</td>
       <td>3</td>
       <td>{'classifier__learning_rate': 10, 'classifier_...</td>

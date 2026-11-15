@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -272,6 +272,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -281,11 +282,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../python_scripts/cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -793,7 +796,11 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-binary-columns">➕ Going further: binary columns</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-a-category-the-model-has-never-seen">4. ➕ Going further: a category the model has never seen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-a-category-the-model-has-never-seen">4. ➕ Going further: a category the model has never seen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-why-not-pd-get-dummies">➕ Going further: why not <code class="docutils literal notranslate"><span class="pre">pd.get_dummies</span></code>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-rare-categories">➕ Going further: rare categories</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-full-pipeline">5. A full pipeline</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-does-the-order-of-the-rows-matter">➕ Going further: does the order of the rows matter?</a></li>
 </ul>
@@ -854,6 +861,8 @@ next lab.</p></li>
     <span class="s2">"n_binary_columns"</span><span class="p">:</span> <span class="s2">"4b227777d4dd1fc6"</span><span class="p">,</span>
     <span class="s2">"n_categorical"</span><span class="p">:</span> <span class="s2">"7902699be42c8a8e"</span><span class="p">,</span>
     <span class="s2">"n_columns_if_binary"</span><span class="p">:</span> <span class="s2">"b17ef6d19c7a5b1e"</span><span class="p">,</span>
+    <span class="s2">"n_columns_min_frequency"</span><span class="p">:</span> <span class="s2">"ef2d127de37b942b"</span><span class="p">,</span>
+    <span class="s2">"n_dummies_columns"</span><span class="p">:</span> <span class="s2">"6b86b273ff34fce1"</span><span class="p">,</span>
     <span class="s2">"n_onehot_columns"</span><span class="p">:</span> <span class="s2">"f5ca38f748a1d6ea"</span><span class="p">,</span>
     <span class="s2">"n_ones_unknown"</span><span class="p">:</span> <span class="s2">"5feceb66ffc86f38"</span><span class="p">,</span>
     <span class="s2">"worst_fold"</span><span class="p">:</span> <span class="s2">"ef2d127de37b942b"</span>
@@ -1087,6 +1096,86 @@ message above or the
 <p>🧠 <strong>Think.</strong> The model receives a row of zeros for <code class="docutils literal notranslate"><span class="pre">OCCUPATION</span></code>. What does
 that mean for its prediction? Is ignoring the unknown category always a
 good idea?</p>
+<section id="going-further-why-not-pd-get-dummies">
+<h3>➕ Going further: why not <code class="docutils literal notranslate"><span class="pre">pd.get_dummies</span></code>?<a class="headerlink" href="#going-further-why-not-pd-get-dummies" title="Link to this heading">#</a></h3>
+<p>pandas has its own one-hot function, <code class="docutils literal notranslate"><span class="pre">pd.get_dummies</span></code>, and you will see
+it in many tutorials. On the training data it gives the same 6 columns
+as the encoder:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s2">"OCCUPATION"</span><span class="p">]])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The difference is that <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code> <strong>remembers nothing</strong>: every time it
+is called, it builds its columns from the rows it is given.</p>
+<p>✏️ We call <code class="docutils literal notranslate"><span class="pre">pd.get_dummies(new_person)</span></code> on our student alone. How many
+columns will the result have?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_dummies_columns</span> <span class="o">=</span> <span class="n">____</span>
+<span class="n">check</span><span class="p">(</span><span class="s2">"n_dummies_columns"</span><span class="p">,</span> <span class="n">n_dummies_columns</span><span class="p">,</span> <span class="n">hint</span><span class="o">=</span><span class="s2">"How many different occupations are there in `new_person`?"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">new_person</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A model trained on 6 occupation columns now receives a single column it
+has never seen, with a different name. Depending on the model, it stops
+with an error or, worse, quietly uses the wrong columns.
+<code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> learns the categories once, during <code class="docutils literal notranslate"><span class="pre">fit</span></code>, and always
+produces the same columns afterwards. That is why it can live inside a
+pipeline and <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code> cannot.</p>
+</section>
+<section id="going-further-rare-categories">
+<h3>➕ Going further: rare categories<a class="headerlink" href="#going-further-rare-categories" title="Link to this heading">#</a></h3>
+<p>Some occupations are much rarer than others. A category with few people
+gets its own column, and the model has little data to learn its weight
+from. The option <code class="docutils literal notranslate"><span class="pre">min_frequency</span></code> merges all the categories with fewer
+people than a threshold into one shared column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s2">"OCCUPATION"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>✏️ With <code class="docutils literal notranslate"><span class="pre">min_frequency=60</span></code>, every occupation held by <strong>fewer than 60</strong>
+people goes into the shared column. Using the counts above, how many
+columns will the encoder create from <code class="docutils literal notranslate"><span class="pre">OCCUPATION</span></code>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_columns_min_frequency</span> <span class="o">=</span> <span class="n">____</span>
+<span class="n">check</span><span class="p">(</span><span class="s2">"n_columns_min_frequency"</span><span class="p">,</span> <span class="n">n_columns_min_frequency</span><span class="p">,</span> <span class="n">hint</span><span class="o">=</span><span class="s2">"Count the occupations that keep their own column, then add the shared one."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">(</span>
+    <span class="n">min_frequency</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">handle_unknown</span><span class="o">=</span><span class="s2">"infrequent_if_exist"</span><span class="p">,</span> <span class="n">sparse_output</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+<span class="n">encoder</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s2">"OCCUPATION"</span><span class="p">]])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">new_person</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">encoder</span><span class="o">.</span><span class="n">get_feature_names_out</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Look at where our student landed. With
+<code class="docutils literal notranslate"><span class="pre">handle_unknown=&quot;infrequent_if_exist&quot;</span></code>, a category the encoder has never
+seen is treated like the rare ones, not as a row of zeros.</p>
+<p>🧠 <strong>Think.</strong> For the model, a student, a manager and a salesperson are
+now the same thing. What do you gain and what do you lose by merging
+them?</p>
+</section>
 </section>
 <section id="a-full-pipeline">
 <h2>5. A full pipeline<a class="headerlink" href="#a-full-pipeline" title="Link to this heading">#</a></h2>
@@ -1312,6 +1401,7 @@ columns? Why?</p></li>
 <ul class="simple">
 <li><p>how one-hot encoding works and how many columns it creates here;</p></li>
 <li><p>what <code class="docutils literal notranslate"><span class="pre">handle_unknown=&quot;ignore&quot;</span></code> does and when it is risky;</p></li>
+<li><p>why <code class="docutils literal notranslate"><span class="pre">pd.get_dummies</span></code> cannot replace <code class="docutils literal notranslate"><span class="pre">OneHotEncoder</span></code> in a pipeline;</p></li>
 <li><p>why one fold scored so badly and how shuffling fixed it;</p></li>
 <li><p>whether this model should use <code class="docutils literal notranslate"><span class="pre">SEX</span></code> and <code class="docutils literal notranslate"><span class="pre">RACE</span></code>.</p></li>
 </ul>
@@ -1392,7 +1482,11 @@ columns? Why?</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-binary-columns">➕ Going further: binary columns</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-a-category-the-model-has-never-seen">4. ➕ Going further: a category the model has never seen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-a-category-the-model-has-never-seen">4. ➕ Going further: a category the model has never seen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-why-not-pd-get-dummies">➕ Going further: why not <code class="docutils literal notranslate"><span class="pre">pd.get_dummies</span></code>?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-rare-categories">➕ Going further: rare categories</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-full-pipeline">5. A full pipeline</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#going-further-does-the-order-of-the-rows-matter">➕ Going further: does the order of the rows matter?</a></li>
 </ul>

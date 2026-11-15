@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -272,6 +272,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -281,11 +282,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -885,7 +888,7 @@ negative mean absolute error into a positive mean absolute error.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8db54960673f0f5d6aa55e5967b1cfcacdeb3d89d36c2166ff0ef4fc026de1a5.png" src="../_images/8db54960673f0f5d6aa55e5967b1cfcacdeb3d89d36c2166ff0ef4fc026de1a5.png" />
+<img alt="../_images/91583c2fc79be8124cdabc8867bb20bf5d6f52e4b7d380fe39591c73a44cc313.png" src="../_images/91583c2fc79be8124cdabc8867bb20bf5d6f52e4b7d380fe39591c73a44cc313.png" />
 </div>
 </div>
 <p>By plotting the distribution of the training and testing errors, we get
@@ -942,11 +945,11 @@ tradeoff between under-fitting and over-fitting.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 225 ms, sys: 35.8 ms, total: 260 ms
-Wall time: 8.32 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 297 ms, sys: 36.1 ms, total: 333 ms
+Wall time: 10.1 s
 </pre></div>
 </div>
-<img alt="../_images/22e2b22a4720bbce721e8d4abee613c7e296b6fbda602619b98d80886fd72c40.png" src="../_images/22e2b22a4720bbce721e8d4abee613c7e296b6fbda602619b98d80886fd72c40.png" />
+<img alt="../_images/c687de0d81d6a3c72fdb45916134f103af2e715abe24cfe6a2220a234e6058bb.png" src="../_images/c687de0d81d6a3c72fdb45916134f103af2e715abe24cfe6a2220a234e6058bb.png" />
 </div>
 </div>
 <p>The validation curve can be divided into three areas:</p>

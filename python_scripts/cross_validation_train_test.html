@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -272,6 +272,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -281,11 +282,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -3027,242 +3030,242 @@ it into a pandas dataframe to ease visualization and manipulation.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.114077</td>
-      <td>0.002885</td>
+      <td>0.139831</td>
+      <td>0.003342</td>
       <td>-46.909797</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.112533</td>
-      <td>0.002750</td>
+      <td>0.140711</td>
+      <td>0.003061</td>
       <td>-46.421170</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.111709</td>
-      <td>0.002644</td>
+      <td>0.138640</td>
+      <td>0.003253</td>
       <td>-47.411089</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.114768</td>
-      <td>0.002919</td>
+      <td>0.140988</td>
+      <td>0.003236</td>
       <td>-44.319824</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.111193</td>
-      <td>0.002554</td>
+      <td>0.137808</td>
+      <td>0.003051</td>
       <td>-47.607875</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0.112209</td>
-      <td>0.002636</td>
+      <td>0.139618</td>
+      <td>0.003095</td>
       <td>-45.901300</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.124453</td>
-      <td>0.002544</td>
+      <td>0.140770</td>
+      <td>0.003131</td>
       <td>-46.572767</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>0.137487</td>
-      <td>0.002789</td>
+      <td>0.140342</td>
+      <td>0.003141</td>
       <td>-46.194585</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0.113497</td>
-      <td>0.002859</td>
+      <td>0.140553</td>
+      <td>0.003057</td>
       <td>-45.590236</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>0.115004</td>
-      <td>0.002614</td>
+      <td>0.141628</td>
+      <td>0.003114</td>
       <td>-45.727998</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>0.111270</td>
-      <td>0.002529</td>
+      <td>0.138971</td>
+      <td>0.003113</td>
       <td>-49.325285</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>0.111554</td>
-      <td>0.002460</td>
+      <td>0.139349</td>
+      <td>0.003138</td>
       <td>-47.433377</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>0.112427</td>
-      <td>0.002432</td>
+      <td>0.138397</td>
+      <td>0.003131</td>
       <td>-46.899316</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>0.109467</td>
-      <td>0.002402</td>
+      <td>0.136539</td>
+      <td>0.003018</td>
       <td>-46.413821</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>0.112168</td>
-      <td>0.002556</td>
+      <td>0.137465</td>
+      <td>0.003077</td>
       <td>-46.727109</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>0.114962</td>
-      <td>0.002756</td>
+      <td>0.139018</td>
+      <td>0.003190</td>
       <td>-44.254324</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>0.111267</td>
-      <td>0.002803</td>
+      <td>0.138500</td>
+      <td>0.003032</td>
       <td>-48.042372</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>0.116437</td>
-      <td>0.002841</td>
+      <td>0.140887</td>
+      <td>0.003048</td>
       <td>-43.026746</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>0.112165</td>
-      <td>0.002828</td>
+      <td>0.138553</td>
+      <td>0.003009</td>
       <td>-46.176363</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>0.111538</td>
-      <td>0.002752</td>
+      <td>0.138829</td>
+      <td>0.003169</td>
       <td>-47.662623</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>0.111170</td>
-      <td>0.002736</td>
+      <td>0.138673</td>
+      <td>0.003043</td>
       <td>-44.451056</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>0.112931</td>
-      <td>0.002735</td>
+      <td>0.138776</td>
+      <td>0.003062</td>
       <td>-46.173780</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>0.113618</td>
-      <td>0.002711</td>
+      <td>0.141250</td>
+      <td>0.003075</td>
       <td>-45.795231</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>0.117031</td>
-      <td>0.003433</td>
+      <td>0.141097</td>
+      <td>0.003004</td>
       <td>-46.166307</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>0.134897</td>
-      <td>0.002817</td>
+      <td>0.138764</td>
+      <td>0.003048</td>
       <td>-46.360169</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>0.111975</td>
-      <td>0.002465</td>
+      <td>0.139358</td>
+      <td>0.003078</td>
       <td>-46.968612</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>0.113680</td>
-      <td>0.002452</td>
+      <td>0.138841</td>
+      <td>0.003115</td>
       <td>-46.325623</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>0.113160</td>
-      <td>0.002492</td>
+      <td>0.138781</td>
+      <td>0.003161</td>
       <td>-46.522054</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>0.112193</td>
-      <td>0.002322</td>
+      <td>0.141094</td>
+      <td>0.003117</td>
       <td>-47.415111</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>0.111531</td>
-      <td>0.002415</td>
+      <td>0.139549</td>
+      <td>0.003122</td>
       <td>-46.050461</td>
     </tr>
     <tr>
       <th>30</th>
-      <td>0.113518</td>
-      <td>0.002616</td>
+      <td>0.139280</td>
+      <td>0.003058</td>
       <td>-46.182242</td>
     </tr>
     <tr>
       <th>31</th>
-      <td>0.112645</td>
-      <td>0.002445</td>
+      <td>0.140317</td>
+      <td>0.003153</td>
       <td>-45.305162</td>
     </tr>
     <tr>
       <th>32</th>
-      <td>0.112370</td>
-      <td>0.002655</td>
+      <td>0.139627</td>
+      <td>0.003083</td>
       <td>-44.359681</td>
     </tr>
     <tr>
       <th>33</th>
-      <td>0.113392</td>
-      <td>0.002758</td>
+      <td>0.139553</td>
+      <td>0.003045</td>
       <td>-46.829014</td>
     </tr>
     <tr>
       <th>34</th>
-      <td>0.112740</td>
-      <td>0.002755</td>
+      <td>0.139650</td>
+      <td>0.003065</td>
       <td>-46.648786</td>
     </tr>
     <tr>
       <th>35</th>
-      <td>0.111770</td>
-      <td>0.002725</td>
+      <td>0.138955</td>
+      <td>0.003088</td>
       <td>-45.653002</td>
     </tr>
     <tr>
       <th>36</th>
-      <td>0.120713</td>
-      <td>0.002622</td>
+      <td>0.139253</td>
+      <td>0.003080</td>
       <td>-46.864559</td>
     </tr>
     <tr>
       <th>37</th>
-      <td>0.111921</td>
-      <td>0.002795</td>
+      <td>0.138112</td>
+      <td>0.003181</td>
       <td>-47.420250</td>
     </tr>
     <tr>
       <th>38</th>
-      <td>0.112550</td>
-      <td>0.002661</td>
+      <td>0.138336</td>
+      <td>0.003068</td>
       <td>-47.352148</td>
     </tr>
     <tr>
       <th>39</th>
-      <td>0.119040</td>
-      <td>0.002659</td>
+      <td>0.138994</td>
+      <td>0.003115</td>
       <td>-47.102818</td>
     </tr>
   </tbody>
@@ -3326,71 +3329,71 @@ score.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.114077</td>
-      <td>0.002885</td>
+      <td>0.139831</td>
+      <td>0.003342</td>
       <td>-46.909797</td>
       <td>46.909797</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.112533</td>
-      <td>0.002750</td>
+      <td>0.140711</td>
+      <td>0.003061</td>
       <td>-46.421170</td>
       <td>46.421170</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.111709</td>
-      <td>0.002644</td>
+      <td>0.138640</td>
+      <td>0.003253</td>
       <td>-47.411089</td>
       <td>47.411089</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.114768</td>
-      <td>0.002919</td>
+      <td>0.140988</td>
+      <td>0.003236</td>
       <td>-44.319824</td>
       <td>44.319824</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.111193</td>
-      <td>0.002554</td>
+      <td>0.137808</td>
+      <td>0.003051</td>
       <td>-47.607875</td>
       <td>47.607875</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>0.112209</td>
-      <td>0.002636</td>
+      <td>0.139618</td>
+      <td>0.003095</td>
       <td>-45.901300</td>
       <td>45.901300</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.124453</td>
-      <td>0.002544</td>
+      <td>0.140770</td>
+      <td>0.003131</td>
       <td>-46.572767</td>
       <td>46.572767</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>0.137487</td>
-      <td>0.002789</td>
+      <td>0.140342</td>
+      <td>0.003141</td>
       <td>-46.194585</td>
       <td>46.194585</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>0.113497</td>
-      <td>0.002859</td>
+      <td>0.140553</td>
+      <td>0.003057</td>
       <td>-45.590236</td>
       <td>45.590236</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>0.115004</td>
-      <td>0.002614</td>
+      <td>0.141628</td>
+      <td>0.003114</td>
       <td>-45.727998</td>
       <td>45.727998</td>
     </tr>
@@ -3529,8 +3532,8 @@ passing the option <code class="docutils literal notranslate"><span class="pre">
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'fit_time': array([0.13333178, 0.13082933, 0.13073087, 0.13061261, 0.12709022]),
- 'score_time': array([0.00181746, 0.00172734, 0.00198054, 0.0017097 , 0.00174904]),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'fit_time': array([0.16430283, 0.16281223, 0.16041446, 0.16021037, 0.1556201 ]),
+ 'score_time': array([0.00241518, 0.00234342, 0.0025115 , 0.0022347 , 0.00240827]),
  'estimator': [DecisionTreeRegressor(random_state=0),
   DecisionTreeRegressor(random_state=0),
   DecisionTreeRegressor(random_state=0),

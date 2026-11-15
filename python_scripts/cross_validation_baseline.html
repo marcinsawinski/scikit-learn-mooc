@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -270,6 +270,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,11 +280,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -845,13 +848,13 @@ results.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    30.000000
-mean     45.709769
-std       1.242064
-min      43.438413
-25%      44.785105
-50%      45.657744
-75%      46.609069
-max      47.929839
+mean     45.690176
+std       1.256336
+min      42.982525
+25%      44.933354
+50%      45.648299
+75%      46.568999
+max      48.155930
 Name: Decision tree regressor, dtype: float64
 </pre></div>
 </div>
@@ -928,152 +931,152 @@ and the actual decision tree regressor.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>47.007575</td>
+      <td>46.672425</td>
       <td>90.713153</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>47.107992</td>
+      <td>46.592559</td>
       <td>90.539353</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>44.210508</td>
+      <td>45.260969</td>
       <td>91.941912</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>43.438413</td>
+      <td>43.883641</td>
       <td>90.213912</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>47.929839</td>
+      <td>48.155930</td>
       <td>92.015862</td>
     </tr>
     <tr>
       <th>5</th>
-      <td>44.903360</td>
+      <td>45.249289</td>
       <td>90.542490</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>44.366607</td>
+      <td>44.118717</td>
       <td>89.757566</td>
     </tr>
     <tr>
       <th>7</th>
-      <td>44.859852</td>
+      <td>44.600406</td>
       <td>92.477244</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>44.760189</td>
+      <td>45.035188</td>
       <td>90.947952</td>
     </tr>
     <tr>
       <th>9</th>
-      <td>44.984099</td>
+      <td>44.353234</td>
       <td>91.991373</td>
     </tr>
     <tr>
       <th>10</th>
-      <td>46.682750</td>
+      <td>46.994060</td>
       <td>92.023571</td>
     </tr>
     <tr>
       <th>11</th>
-      <td>46.184438</td>
+      <td>46.311618</td>
       <td>90.556965</td>
     </tr>
     <tr>
       <th>12</th>
-      <td>45.442311</td>
+      <td>45.714913</td>
       <td>91.539567</td>
     </tr>
     <tr>
       <th>13</th>
-      <td>45.093356</td>
+      <td>45.060146</td>
       <td>91.185225</td>
     </tr>
     <tr>
       <th>14</th>
-      <td>47.789866</td>
+      <td>47.150258</td>
       <td>92.298971</td>
     </tr>
     <tr>
       <th>15</th>
-      <td>44.759805</td>
+      <td>44.566369</td>
       <td>91.084639</td>
     </tr>
     <tr>
       <th>16</th>
-      <td>46.146946</td>
+      <td>45.581684</td>
       <td>90.984471</td>
     </tr>
     <tr>
       <th>17</th>
-      <td>46.734199</td>
+      <td>47.313779</td>
       <td>89.981744</td>
     </tr>
     <tr>
       <th>18</th>
-      <td>44.676687</td>
+      <td>44.899410</td>
       <td>90.547140</td>
     </tr>
     <tr>
       <th>19</th>
-      <td>47.257286</td>
+      <td>47.302442</td>
       <td>89.820219</td>
     </tr>
     <tr>
       <th>20</th>
-      <td>43.545729</td>
+      <td>42.982525</td>
       <td>91.768721</td>
     </tr>
     <tr>
       <th>21</th>
-      <td>46.367070</td>
+      <td>46.498319</td>
       <td>92.305556</td>
     </tr>
     <tr>
       <th>22</th>
-      <td>45.873177</td>
+      <td>45.331338</td>
       <td>90.503017</td>
     </tr>
     <tr>
       <th>23</th>
-      <td>46.388028</td>
+      <td>46.389964</td>
       <td>92.147974</td>
     </tr>
     <tr>
       <th>24</th>
-      <td>46.247428</td>
+      <td>46.148566</td>
       <td>91.386320</td>
     </tr>
     <tr>
       <th>25</th>
-      <td>45.290232</td>
+      <td>45.718477</td>
       <td>90.815660</td>
     </tr>
     <tr>
       <th>26</th>
-      <td>44.161528</td>
+      <td>43.853532</td>
       <td>92.216574</td>
     </tr>
     <tr>
       <th>27</th>
-      <td>46.170389</td>
+      <td>45.834562</td>
       <td>90.107460</td>
     </tr>
     <tr>
       <th>28</th>
-      <td>45.271014</td>
+      <td>45.359922</td>
       <td>90.620318</td>
     </tr>
     <tr>
       <th>29</th>
-      <td>47.642390</td>
+      <td>47.771047</td>
       <td>91.165331</td>
     </tr>
   </tbody>
@@ -1094,7 +1097,7 @@ and the actual decision tree regressor.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/99e934156385cb935ccec6a22ea5f7827a4a79ef7983daee407b83fc13549a92.png" src="../_images/99e934156385cb935ccec6a22ea5f7827a4a79ef7983daee407b83fc13549a92.png" />
+<img alt="../_images/f3e2e32aeabcc175d8433259b6a7c83db97cf8cfc2ea572cdd9c2617fb76b760.png" src="../_images/f3e2e32aeabcc175d8433259b6a7c83db97cf8cfc2ea572cdd9c2617fb76b760.png" />
 </div>
 </div>
 <p>We see that the generalization performance of our decision tree is far from

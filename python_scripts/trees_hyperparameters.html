@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -272,6 +272,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -281,11 +282,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -950,7 +953,7 @@ observing the decision function.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/469b5b900c83e66623eb8613a4142abdd62ed175d3bb9750a0d177a2e0302af5.png" src="../_images/469b5b900c83e66623eb8613a4142abdd62ed175d3bb9750a0d177a2e0302af5.png" />
+<img alt="../_images/937e3b6281a926e4a0c288907e3d6849bbae7d5a9d2483d8624fcae10ebf82bf.png" src="../_images/937e3b6281a926e4a0c288907e3d6849bbae7d5a9d2483d8624fcae10ebf82bf.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -994,7 +997,7 @@ one should optimize via cross-validation and grid-search.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/310384d3bb81f61106e90ec710815511e351315e4839ffc6a834909c228814e9.png" src="../_images/310384d3bb81f61106e90ec710815511e351315e4839ffc6a834909c228814e9.png" />
+<img alt="../_images/f174ae925b2beb138cf4537e2a255533d83639aae3b6e40ad195899ab9bccb1a.png" src="../_images/f174ae925b2beb138cf4537e2a255533d83639aae3b6e40ad195899ab9bccb1a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1117,7 +1120,7 @@ the depth to check how the tree grows.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/453f478a06c49250cc473ac01db185793d5c3b9da6f6c6a687203fee800ead56.png" src="../_images/453f478a06c49250cc473ac01db185793d5c3b9da6f6c6a687203fee800ead56.png" />
+<img alt="../_images/236a3add53be88c508db9ca22870839fa728e0b3987167bcb65a9521d00a3cc3.png" src="../_images/236a3add53be88c508db9ca22870839fa728e0b3987167bcb65a9521d00a3cc3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1128,7 +1131,7 @@ the depth to check how the tree grows.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e3944fb791940dcf053baefeea2457a113f7cab8c22af60627ae6c4299bf88c6.png" src="../_images/e3944fb791940dcf053baefeea2457a113f7cab8c22af60627ae6c4299bf88c6.png" />
+<img alt="../_images/6541e467294578d34dd573d8f3c67aa3122ace55d9f83fde0f38d317271ebecc.png" src="../_images/6541e467294578d34dd573d8f3c67aa3122ace55d9f83fde0f38d317271ebecc.png" />
 </div>
 </div>
 <p>As expected, the left branch of the tree continue to grow while no further

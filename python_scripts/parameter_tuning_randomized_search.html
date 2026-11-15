@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -272,6 +272,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -281,11 +282,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -2576,8 +2579,8 @@ processors.</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitting 5 folds for each of 10 candidates, totalling 50 fits
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 13.1 s, sys: 207 ms, total: 13.3 s
-Wall time: 13.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 19.8 s, sys: 485 ms, total: 20.3 s
+Wall time: 20.3 s
 </pre></div>
 </div>
 <div class="output text_html"><style>#sk-container-id-2 {
@@ -3146,11 +3149,11 @@ a.param-doc-link::before {
                                                                                 &#x27;native-country&#x27;])])),
                                              (&#x27;classifier&#x27;,
                                               HistGradientBoostingCla...
-                   param_distributions={&#x27;classifier__l2_regularization&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f0ce39a1e90&gt;,
-                                        &#x27;classifier__learning_rate&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f0ce39a1e50&gt;,
-                                        &#x27;classifier__max_bins&#x27;: &lt;__main__.loguniform_int object at 0x7f0ce3994750&gt;,
-                                        &#x27;classifier__max_leaf_nodes&#x27;: &lt;__main__.loguniform_int object at 0x7f0ce3dcbb90&gt;,
-                                        &#x27;classifier__min_samples_leaf&#x27;: &lt;__main__.loguniform_int object at 0x7f0ce81c72d0&gt;},
+                   param_distributions={&#x27;classifier__l2_regularization&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f4f238e1350&gt;,
+                                        &#x27;classifier__learning_rate&#x27;: &lt;scipy.stats._distn_infrastructure.rv_continuous_frozen object at 0x7f4f238e1cd0&gt;,
+                                        &#x27;classifier__max_bins&#x27;: &lt;__main__.loguniform_int object at 0x7f4f238d0110&gt;,
+                                        &#x27;classifier__max_leaf_nodes&#x27;: &lt;__main__.loguniform_int object at 0x7f4f23899210&gt;,
+                                        &#x27;classifier__min_samples_leaf&#x27;: &lt;__main__.loguniform_int object at 0x7f4f3632c9d0&gt;},
                    verbose=1)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item sk-dashed-wrapped"><div class="sk-label-container"><div class="sk-label fitted sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-8" type="checkbox" ><label for="sk-estimator-id-8" class="sk-toggleable__label fitted sk-toggleable__label-arrow"><div><div>RandomizedSearchCV</div></div><div><a class="sk-estimator-doc-link fitted" rel="noreferrer" target="_blank" href="https://scikit-learn.org/1.8/modules/generated/sklearn.model_selection.RandomizedSearchCV.html">?<span>Documentation for RandomizedSearchCV</span></a><span class="sk-estimator-doc-link fitted">i<span>Fitted</span></span></div></label><div class="sk-toggleable__content fitted" data-param-prefix="">
         <div class="estimator-table">
             <details>
@@ -3186,7 +3189,7 @@ a.param-doc-link::before {
             <span class="param-doc-description">param_distributions: dict or list of dicts<br><br>Dictionary with parameters names (`str`) as keys and distributions<br>or lists of parameters to try. Distributions must provide a ``rvs``<br>method for sampling (such as those from scipy.stats.distributions).<br>If a list is given, it is sampled uniformly.<br>If a list of dicts is given, first a dict is sampled uniformly, and<br>then a parameter is sampled using that dict as above.</span>
         </a>
     </td>
-            <td class="value">{&#x27;classifier__l2_regularization&#x27;: &lt;scipy.stats....x7f0ce39a1e90&gt;, &#x27;classifier__learning_rate&#x27;: &lt;scipy.stats....x7f0ce39a1e50&gt;, &#x27;classifier__max_bins&#x27;: &lt;__main__.log...x7f0ce3994750&gt;, &#x27;classifier__max_leaf_nodes&#x27;: &lt;__main__.log...x7f0ce3dcbb90&gt;, ...}</td>
+            <td class="value">{&#x27;classifier__l2_regularization&#x27;: &lt;scipy.stats....x7f4f238e1350&gt;, &#x27;classifier__learning_rate&#x27;: &lt;scipy.stats....x7f4f238e1cd0&gt;, &#x27;classifier__max_bins&#x27;: &lt;__main__.log...x7f4f238d0110&gt;, &#x27;classifier__max_leaf_nodes&#x27;: &lt;__main__.log...x7f4f23899210&gt;, ...}</td>
         </tr>
     
 
@@ -3648,7 +3651,7 @@ a.param-doc-link::before {
             <span class="param-doc-description">learning_rate: float, default=0.1<br><br>The learning rate, also known as *shrinkage*. This is used as a<br>multiplicative factor for the leaves values. Use ``1`` for no<br>shrinkage.</span>
         </a>
     </td>
-            <td class="value">np.float64(0....3052062935756)</td>
+            <td class="value">np.float64(1.636916608784607)</td>
         </tr>
     
 
@@ -3680,7 +3683,7 @@ a.param-doc-link::before {
             <span class="param-doc-description">max_leaf_nodes: int or None, default=31<br><br>The maximum number of leaves for each tree. Must be strictly greater<br>than 1. If None, there is no maximum limit.</span>
         </a>
     </td>
-            <td class="value">np.int64(8)</td>
+            <td class="value">np.int64(42)</td>
         </tr>
     
 
@@ -3712,7 +3715,7 @@ a.param-doc-link::before {
             <span class="param-doc-description">min_samples_leaf: int, default=20<br><br>The minimum number of samples per leaf. For small datasets with less<br>than a few hundred samples, it is recommended to lower this value<br>since only very shallow trees would be built.</span>
         </a>
     </td>
-            <td class="value">np.int64(19)</td>
+            <td class="value">np.int64(22)</td>
         </tr>
     
 
@@ -3728,7 +3731,7 @@ a.param-doc-link::before {
             <span class="param-doc-description">l2_regularization: float, default=0<br><br>The L2 regularization parameter penalizing leaves with small hessians.<br>Use ``0`` for no regularization (default).</span>
         </a>
     </td>
-            <td class="value">np.float64(0....0730358440223)</td>
+            <td class="value">np.float64(0....0031286843041)</td>
         </tr>
     
 
@@ -3760,7 +3763,7 @@ a.param-doc-link::before {
             <span class="param-doc-description">max_bins: int, default=255<br><br>The maximum number of bins to use for non-missing values. Before<br>training, each feature of the input array `X` is binned into<br>integer-valued bins, which allows for a much faster training stage.<br>Features with a small number of unique values may use less than<br>``max_bins`` bins. In addition to the ``max_bins`` bins, one more bin<br>is always reserved for missing values. Must be no larger than 255.</span>
         </a>
     </td>
-            <td class="value">np.int64(110)</td>
+            <td class="value">np.int64(212)</td>
         </tr>
     
 
@@ -4086,7 +4089,7 @@ forceTheme('sk-container-id-2');</script></body></div></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The test accuracy score of the best model is 0.87
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The test accuracy score of the best model is 0.85
 </pre></div>
 </div>
 </div>
@@ -4102,11 +4105,11 @@ forceTheme('sk-container-id-2');</script></body></div></div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The best parameters are:
-{'classifier__l2_regularization': np.float64(0.0022800730358440223),
- 'classifier__learning_rate': np.float64(0.16723052062935756),
- 'classifier__max_bins': np.int64(110),
- 'classifier__max_leaf_nodes': np.int64(8),
- 'classifier__min_samples_leaf': np.int64(19)}
+{'classifier__l2_regularization': np.float64(0.05490031286843041),
+ 'classifier__learning_rate': np.float64(1.636916608784607),
+ 'classifier__max_bins': np.int64(212),
+ 'classifier__max_leaf_nodes': np.int64(42),
+ 'classifier__min_samples_leaf': np.int64(22)}
 </pre></div>
 </div>
 </div>
@@ -4167,113 +4170,113 @@ previously.</p>
   </thead>
   <tbody>
     <tr>
-      <th>2</th>
-      <td>0.002280</td>
-      <td>0.167231</td>
-      <td>8</td>
-      <td>19</td>
-      <td>110</td>
-      <td>0.863613</td>
-      <td>0.001660</td>
-      <td>1</td>
-    </tr>
-    <tr>
       <th>9</th>
-      <td>0.000003</td>
-      <td>0.405030</td>
-      <td>10</td>
-      <td>30</td>
-      <td>96</td>
-      <td>0.861920</td>
-      <td>0.003011</td>
-      <td>2</td>
+      <td>0.054900</td>
+      <td>1.636917</td>
+      <td>42</td>
+      <td>22</td>
+      <td>212</td>
+      <td>0.840545</td>
+      <td>0.003735</td>
+      <td>1</td>
     </tr>
     <tr>
       <th>8</th>
-      <td>383.944626</td>
-      <td>0.064719</td>
-      <td>86</td>
-      <td>38</td>
-      <td>42</td>
-      <td>0.855259</td>
-      <td>0.002676</td>
-      <td>3</td>
+      <td>20.761957</td>
+      <td>0.009190</td>
+      <td>66</td>
+      <td>26</td>
+      <td>99</td>
+      <td>0.832273</td>
+      <td>0.003583</td>
+      <td>2</td>
     </tr>
     <tr>
       <th>6</th>
-      <td>0.093429</td>
-      <td>0.637115</td>
+      <td>8.856577</td>
+      <td>0.028040</td>
+      <td>5</td>
+      <td>10</td>
+      <td>25</td>
+      <td>0.829025</td>
+      <td>0.004032</td>
       <td>3</td>
-      <td>1</td>
-      <td>11</td>
-      <td>0.843057</td>
-      <td>0.002672</td>
-      <td>4</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0.007293</td>
-      <td>0.073189</td>
-      <td>137</td>
-      <td>2</td>
-      <td>5</td>
-      <td>0.828288</td>
-      <td>0.002060</td>
-      <td>5</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0.000011</td>
-      <td>0.238850</td>
-      <td>11</td>
-      <td>74</td>
-      <td>2</td>
-      <td>0.802435</td>
-      <td>0.002542</td>
-      <td>6</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.716900</td>
-      <td>0.001204</td>
-      <td>4</td>
-      <td>5</td>
-      <td>107</td>
-      <td>0.758947</td>
-      <td>0.000013</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.000006</td>
-      <td>0.001087</td>
-      <td>4</td>
-      <td>34</td>
-      <td>198</td>
-      <td>0.758947</td>
-      <td>0.000013</td>
-      <td>7</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.000402</td>
-      <td>2.852400</td>
-      <td>2</td>
-      <td>16</td>
-      <td>22</td>
-      <td>0.716524</td>
-      <td>0.005123</td>
-      <td>9</td>
+      <td>0.309074</td>
+      <td>0.111917</td>
+      <td>3</td>
+      <td>80</td>
+      <td>6</td>
+      <td>0.826677</td>
+      <td>0.002100</td>
+      <td>4</td>
     </tr>
     <tr>
       <th>0</th>
-      <td>6.415182</td>
-      <td>4.870068</td>
+      <td>0.108899</td>
+      <td>0.367621</td>
+      <td>118</td>
+      <td>87</td>
+      <td>4</td>
+      <td>0.813628</td>
+      <td>0.002526</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>16.014374</td>
+      <td>0.011822</td>
+      <td>5</td>
+      <td>15</td>
+      <td>62</td>
+      <td>0.808577</td>
+      <td>0.003605</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.140994</td>
+      <td>0.002195</td>
+      <td>7</td>
+      <td>6</td>
+      <td>10</td>
+      <td>0.758947</td>
+      <td>0.000013</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>160.578171</td>
+      <td>0.009923</td>
+      <td>4</td>
       <td>3</td>
-      <td>1</td>
-      <td>65</td>
-      <td>0.283476</td>
-      <td>0.005123</td>
+      <td>36</td>
+      <td>0.758947</td>
+      <td>0.000013</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.000006</td>
+      <td>0.001155</td>
+      <td>61</td>
+      <td>2</td>
+      <td>85</td>
+      <td>0.758947</td>
+      <td>0.000013</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000002</td>
+      <td>5.463068</td>
+      <td>191</td>
+      <td>84</td>
+      <td>6</td>
+      <td>0.741449</td>
+      <td>0.029669</td>
       <td>10</td>
     </tr>
   </tbody>

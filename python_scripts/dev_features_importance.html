@@ -36,7 +36,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=6a604523" />
     <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css?v=dc457339" />
   
   <!-- So that users can add custom icons -->
@@ -57,7 +57,7 @@
     <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script data-sd-tabs-storage-prefix="sphinx-design-tab-id-" src="../_static/design-tabs.js?v=fcb327ea"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -274,6 +274,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_01_train_test_error.html">📒 Workbook M2.01 — How strong will the concrete be?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -283,11 +284,13 @@
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_02_validation_learning_curves.html">📒 Workbook M2.02 — Too simple, too flexible, or short of data?</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workbooks/m2_03_bias_variance.html">📒 Workbook M2.03 — One hundred laboratories</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
@@ -1009,7 +1012,7 @@ this notebook</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/44bd9db9c9cb9f3900a7ad287a33859880f151d96dcdc3c7a8fe5536322d9240.png" src="../_images/44bd9db9c9cb9f3900a7ad287a33859880f151d96dcdc3c7a8fe5536322d9240.png" />
+<img alt="../_images/c98653ce974a62c7132cef22ea5860b0612d2855cd53cd5f09ac58504313d031.png" src="../_images/c98653ce974a62c7132cef22ea5860b0612d2855cd53cd5f09ac58504313d031.png" />
 </div>
 </div>
 <p>We see in the upper right plot that the median income seems to be positively
@@ -1040,8 +1043,8 @@ features are taken into account in the estimation (marginal dependence).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.601346610641635
-model score on testing data: 0.5975758091559618
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.6013466104317073
+model score on testing data: 0.5975757252275394
 </pre></div>
 </div>
 </div>
@@ -1137,8 +1140,8 @@ and scaling the variance to 1).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.6013157556102933
-model score on testing data: 0.597241071795384
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.6013157556102915
+model score on testing data: 0.597241071795377
 </pre></div>
 </div>
 </div>
@@ -1204,7 +1207,7 @@ caution.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/75575416e187b7cf0d308104b6d88355f6157449a6a22b50db9e40dd214f9f17.png" src="../_images/75575416e187b7cf0d308104b6d88355f6157449a6a22b50db9e40dd214f9f17.png" />
+<img alt="../_images/a88b73e2049ccca92fc5e886d8f91792473e1e31b9b05ebacb3f7a5e0439d868.png" src="../_images/a88b73e2049ccca92fc5e886d8f91792473e1e31b9b05ebacb3f7a5e0439d868.png" />
 </div>
 </div>
 <p>Every coefficient looks pretty stable, which mean that different Ridge model
@@ -1231,7 +1234,7 @@ regularization parameters <code class="docutils literal notranslate"><span class
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.5899811014945939
-model score on testing data: 0.5769786920519311
+model score on testing data: 0.5769786920519312
 </pre></div>
 </div>
 </div>
@@ -1285,7 +1288,7 @@ choosing one does not mean that the other is not important for prediction.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/516e4e6b107328de05c791fc5dcdfb5c671df1bda774bebd2f1045659ad922f9.png" src="../_images/516e4e6b107328de05c791fc5dcdfb5c671df1bda774bebd2f1045659ad922f9.png" />
+<img alt="../_images/ac72d56f2bdd8efe7e402b9b48274528b10f3c95b7fe5d34d2543c962c34282a.png" src="../_images/ac72d56f2bdd8efe7e402b9b48274528b10f3c95b7fe5d34d2543c962c34282a.png" />
 </div>
 </div>
 <p>We can see that both the coefficients associated to <code class="docutils literal notranslate"><span class="pre">AveRooms</span></code> and <code class="docutils literal notranslate"><span class="pre">AveBedrms</span></code>
@@ -1324,8 +1327,8 @@ investigate the built-in <code class="docutils literal notranslate"><span class=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.9797580931441378
-model score on testing data: 0.848337031691157
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.9798499281672742
+model score on testing data: 0.8494158292648837
 </pre></div>
 </div>
 </div>
@@ -1354,7 +1357,7 @@ reduction of the criterion brought by that feature.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/aa7eef008c1f3afc867d998d2b74b92050cf17dcf9777cba75849cb696e23970.png" src="../_images/aa7eef008c1f3afc867d998d2b74b92050cf17dcf9777cba75849cb696e23970.png" />
+<img alt="../_images/05cb708d15bdea3fe7dbfa5c8170768e27f21eaaf1d8d3c1caa45f6afb2630a4.png" src="../_images/05cb708d15bdea3fe7dbfa5c8170768e27f21eaaf1d8d3c1caa45f6afb2630a4.png" />
 </div>
 </div>
 <p>Median income is still the most important feature.</p>
@@ -1389,8 +1392,8 @@ feature importance.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.9800224985183748
-model score on testing data: 0.8486372970229803
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>model score on training data: 0.9797703454257514
+model score on testing data: 0.8453623548548563
 </pre></div>
 </div>
 </div>
@@ -1451,7 +1454,7 @@ remain the same, thus the feature importance will be close to 0.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>feature importance of "MedInc" on train set is 0.706
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>feature importance of "MedInc" on train set is 0.666
 </pre></div>
 </div>
 </div>
@@ -1477,7 +1480,7 @@ inspect the mean and the standard deviation of the feature importance.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>feature importance of "MedInc" on train set is 0.676 ± 0.00511
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>feature importance of "MedInc" on train set is 0.666 ± 0.0114
 </pre></div>
 </div>
 </div>
@@ -1545,7 +1548,7 @@ can now compute the feature permutation importance for all the features.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9659bcdb63e57a5b80c37f90ab371fa33cf3b230b4f4324b876127c62d39bb66.png" src="../_images/9659bcdb63e57a5b80c37f90ab371fa33cf3b230b4f4324b876127c62d39bb66.png" />
+<img alt="../_images/02382ce0ccd908c6ce16431dd292e83b8476b085b14af272393af2773d30ba59.png" src="../_images/02382ce0ccd908c6ce16431dd292e83b8476b085b14af272393af2773d30ba59.png" />
 </div>
 </div>
 <p>We see again that the feature <code class="docutils literal notranslate"><span class="pre">MedInc</span></code>, <code class="docutils literal notranslate"><span class="pre">Latitude</span></code> and <code class="docutils literal notranslate"><span class="pre">Longitude</span></code> are very
