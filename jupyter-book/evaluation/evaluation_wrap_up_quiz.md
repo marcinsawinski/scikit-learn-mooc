@@ -2,12 +2,17 @@
 
 **This quiz requires some programming to be answered.**
 
+<!-- colab-badge -->
+<a href="https://colab.research.google.com/github/marcinsawinski/scikit-learn-mooc/blob/main/quiz_notebooks/evaluation_wrap_up_quiz.ipynb" target="_blank" rel="noopener"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+The notebook behind this badge already contains the code given below.
+
 Open the dataset `bike_rides.csv` with the following commands:
 
 ```python
 import pandas as pd
 
-cycling = pd.read_csv("../datasets/bike_rides.csv", index_col=0,
+cycling = pd.read_csv("https://raw.githubusercontent.com/marcinsawinski/scikit-learn-mooc/refs/heads/main/datasets/bike_rides.csv", index_col=0,
                       parse_dates=True)
 cycling.index.name = ""
 target_name = "power"

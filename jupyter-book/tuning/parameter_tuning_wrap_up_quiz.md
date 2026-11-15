@@ -2,13 +2,18 @@
 
 **This quiz requires some programming to be answered.**
 
+<!-- colab-badge -->
+<a href="https://colab.research.google.com/github/marcinsawinski/scikit-learn-mooc/blob/main/quiz_notebooks/parameter_tuning_wrap_up_quiz.ipynb" target="_blank" rel="noopener"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+The notebook behind this badge already contains the code given below.
+
 Load the dataset file named `penguins.csv` with the following command:
 
 ```python
 import pandas as pd
 
 
-penguins = pd.read_csv("../datasets/penguins.csv")
+penguins = pd.read_csv("https://raw.githubusercontent.com/marcinsawinski/scikit-learn-mooc/refs/heads/main/datasets/penguins.csv")
 
 columns = ["Body Mass (g)", "Flipper Length (mm)", "Culmen Length (mm)"]
 target_name = "Species"

@@ -2,13 +2,18 @@
 
 **This quiz requires some programming to be answered.**
 
+<!-- colab-badge -->
+<a href="https://colab.research.google.com/github/marcinsawinski/scikit-learn-mooc/blob/main/quiz_notebooks/trees_wrap_up_quiz.ipynb" target="_blank" rel="noopener"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+The notebook behind this badge already contains the code given below.
+
 Open the dataset `ames_housing_no_missing.csv` with the following command:
 
 ```python
 import pandas as pd
 
 ames_housing = pd.read_csv(
-    "../datasets/ames_housing_no_missing.csv",
+    "https://raw.githubusercontent.com/marcinsawinski/scikit-learn-mooc/refs/heads/main/datasets/ames_housing_no_missing.csv",
     na_filter=False,  # required for pandas>2.0
 )
 target_name = "SalePrice"

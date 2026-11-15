@@ -2,13 +2,18 @@
 
 **This quiz requires some programming to be answered.**
 
+<!-- colab-badge -->
+<a href="https://colab.research.google.com/github/marcinsawinski/scikit-learn-mooc/blob/main/quiz_notebooks/ensemble_wrap_up_quiz.ipynb" target="_blank" rel="noopener"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+The notebook behind this badge already contains the code given below.
+
 This wrap-up quiz uses the penguins dataset, but notice that **we do not use the
 traditional `Species` column** as predictive target:
 
 ```python
 import pandas as pd
 
-dataset = pd.read_csv("../datasets/penguins.csv")
+dataset = pd.read_csv("https://raw.githubusercontent.com/marcinsawinski/scikit-learn-mooc/refs/heads/main/datasets/penguins.csv")
 
 feature_names = [
     "Culmen Length (mm)",
