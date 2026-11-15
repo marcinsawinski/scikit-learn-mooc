@@ -8,6 +8,9 @@ with the badge at the top of each notebook.
 | `m1_01_data_exploration.ipynb` | Exploring a tabular dataset |
 | `m1_02_numerical_pipeline.ipynb` | Numerical features, scaling, pipelines, cross-validation |
 | `m1_03_categorical_pipeline.ipynb` | Categorical features, one-hot encoding, column transformer |
+| `m2_01_train_test_error.ipynb` | Training error against testing error, repeated splits, grouped samples |
+| `m2_02_validation_learning_curves.ipynb` | Validation curves, learning curves, underfitting and overfitting |
+| `m2_03_bias_variance.ipynb` | Bias, variance and noise, measured |
 
 The code is written for you, but it does not run until you read the text and
 fill in every `____` gap. `check(...)` tells you whether a value is right;

@@ -52,6 +52,7 @@ parts:
     - file: overfit/overfitting_vs_under_fitting_slides
     - file: python_scripts/cross_validation_train_test
     - file: overfit/overfitting_vs_under_fitting_quiz_m2_01
+    - file: workbooks/m2_01_train_test_error
   - file: overfit/overfit_validation_learning_curves_index
     sections:
     - file: overfit/learning_validation_curves_slides
@@ -60,10 +61,12 @@ parts:
     - file: python_scripts/cross_validation_ex_01
     - file: python_scripts/cross_validation_sol_01
     - file: overfit/learning_validation_curves_quiz_m2_02
+    - file: workbooks/m2_02_validation_learning_curves
   - file: overfit/overfit_bias_variance_index
     sections:
     - file: overfit/bias_vs_variance_slides
     - file: overfit/bias_vs_variance_quiz_m2_03
+    - file: workbooks/m2_03_bias_variance
   - file: overfit/overfit_wrap_up_quiz
   - file: overfit/overfit_take_away
 - caption: Hyperparameter tuning

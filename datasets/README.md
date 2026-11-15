@@ -68,3 +68,13 @@ https://doi.org/10.24432/C5CG6D.
 
 **Attribution:** The dataset is a sub-sample of the version curated by [The Mega
 Rhyme Rhyming Dictionary](https://www.megarhyme.com/blog/wikinews-dataset/).
+
+---
+**Source:** [concrete_strength](https://archive.ics.uci.edu/dataset/165/concrete+compressive+strength)
+(columns renamed)
+
+**License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+**Attribution:** Please cite the following when using this dataset: Yeh, I.
+(1998). Concrete Compressive Strength [Dataset]. UCI Machine Learning
+Repository. https://doi.org/10.24432/C5PK67.
