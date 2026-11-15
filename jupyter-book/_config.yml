@@ -49,10 +49,6 @@ html:
   favicon: _static/favicon.ico
   extra_footer: |
     <div>
-      Course material for
-      <a href="https://ue.poznan.pl/">Poznań University of Economics and Business</a>,
-      adapted by Marcin Sawiński.
-      <br>
       Based on the <a href="https://inria.github.io/scikit-learn-mooc/">scikit-learn MOOC</a>
       by <a href="https://learninglab.inria.fr">Inria Learning Lab</a>,
       <a href="https://scikit-learn.fondation-inria.fr">scikit-learn @ La Fondation Inria</a>,
