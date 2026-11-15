@@ -99,3 +99,24 @@ the day, weather description dropped)
 **Attribution:** Please cite the following when using this dataset: Hogue, J.
 (2019). Metro Interstate Traffic Volume [Dataset]. UCI Machine Learning
 Repository. https://doi.org/10.24432/C5X60B.
+
+---
+**Source:** [wine_quality](https://archive.ics.uci.edu/dataset/186/wine+quality)
+(red and white wines in one file, with a `color` column)
+
+**License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+**Attribution:** Please cite the following when using this dataset: Cortez, P.,
+Cerdeira, A., Almeida, F., Matos, T., & Reis, J. (2009). Wine Quality [Dataset].
+UCI Machine Learning Repository. https://doi.org/10.24432/C56S3T.
+
+---
+**Source:** [football_players](https://www.openml.org/d/45012) (random sample of
+8000 rows; [original
+source](https://www.kaggle.com/datasets/stefanoleone992/fifa-22-complete-player-dataset))
+
+**License:** CC0: Public Domain, as declared on OpenML and Kaggle
+
+**Attribution:** Player attributes from the Career Mode of the video game FIFA
+22, collected by Stefano Leone and published on Kaggle; version curated on
+OpenML as dataset 45012 (`fifa`).

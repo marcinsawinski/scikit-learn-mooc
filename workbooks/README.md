@@ -16,6 +16,12 @@ with the badge at the top of each notebook.
 | `m4_01_linear_models.ipynb` | Reading linear and logistic regression, outliers, comparing coefficients |
 | `m4_02_feature_engineering.ipynb` | One-hot, sine/cosine and spline features, interactions, extrapolation |
 | `m4_03_regularization.ipynb` | Ridge, Lasso, collinear features, scaling and the penalty, `C` |
+| `m5_01_classification_trees.ipynb` | Reading a classification tree, impurity, borders, scaling, missing values |
+| `m5_02_regression_trees.ipynb` | Regression trees, extrapolation, instability |
+| `m5_03_tree_hyperparameters.ipynb` | Depth, leaf size, pruning, duplicate rows, identifier columns |
+| `m6_01_bagging_random_forest.ipynb` | Bootstrap, bagging by hand, random forests, out-of-bag score |
+| `m6_02_boosting.ipynb` | Gradient boosting by hand, early stopping, histogram gradient boosting |
+| `m6_03_ensemble_hyperparameters.ipynb` | Trees and learning rate, monotonic constraints, quantile ranges, feature importance |
 
 The code is written for you, but it does not run until you read the text and
 fill in every `____` gap. `check(...)` tells you whether a value is right;
