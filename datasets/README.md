@@ -120,3 +120,24 @@ source](https://www.kaggle.com/datasets/stefanoleone992/fifa-22-complete-player-
 **Attribution:** Player attributes from the Career Mode of the video game FIFA
 22, collected by Stefano Leone and published on Kaggle; version curated on
 OpenML as dataset 45012 (`fifa`).
+
+---
+**Source:** [parkinsons_telemonitoring](https://archive.ics.uci.edu/dataset/189/parkinsons+telemonitoring)
+(columns renamed)
+
+**License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+**Attribution:** Please cite the following when using this dataset: Tsanas, A. &
+Little, M. (2009). Parkinsons Telemonitoring [Dataset]. UCI Machine Learning
+Repository. https://doi.org/10.24432/C5ZS3N.
+
+---
+**Source:** [bank_marketing](https://archive.ics.uci.edu/dataset/222/bank+marketing)
+(random sample of 12000 rows kept in their original order, target renamed
+`subscribed`, missing categories written as `unknown`)
+
+**License:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+**Attribution:** Please cite the following when using this dataset: Moro, S.,
+Rita, P., & Cortez, P. (2014). Bank Marketing [Dataset]. UCI Machine Learning
+Repository. https://doi.org/10.24432/C5K306.

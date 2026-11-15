@@ -22,6 +22,11 @@ with the badge at the top of each notebook.
 | `m6_01_bagging_random_forest.ipynb` | Bootstrap, bagging by hand, random forests, out-of-bag score |
 | `m6_02_boosting.ipynb` | Gradient boosting by hand, early stopping, histogram gradient boosting |
 | `m6_03_ensemble_hyperparameters.ipynb` | Trees and learning rate, monotonic constraints, quantile ranges, feature importance |
+| `m7_01_baselines.ipynb` | Baselines, fold-by-fold comparison, permutation test |
+| `m7_02_cross_validation_choices.ipynb` | Shuffled, grouped and time-ordered splits |
+| `m7_03_nested_cross_validation.ipynb` | Nested cross-validation with groups |
+| `m7_04_classification_metrics.ipynb` | Precision, recall, thresholds and costs, leakage, calibration |
+| `m7_05_regression_metrics.ipynb` | MAE, RMSE, R², percentage error, bootstrap ranges |
 
 The code is written for you, but it does not run until you read the text and
 fill in every `____` gap. `check(...)` tells you whether a value is right;

@@ -196,28 +196,33 @@ parts:
     - file: python_scripts/cross_validation_ex_02
     - file: python_scripts/cross_validation_sol_02
     - file: evaluation/evaluation_quiz_m7_01
+    - file: workbooks/m7_01_baselines
   - file: evaluation/cross_validation_choices_index
     sections:
     - file: python_scripts/cross_validation_stratification
     - file: python_scripts/cross_validation_grouping
     - file: python_scripts/cross_validation_time
     - file: evaluation/evaluation_quiz_m7_02
+    - file: workbooks/m7_02_cross_validation_choices
   - file: evaluation/cross_validation_nested_index
     sections:
     - file: python_scripts/cross_validation_nested
     - file: evaluation/evaluation_quiz_m7_03
+    - file: workbooks/m7_03_nested_cross_validation
   - file: evaluation/metrics_classification_index
     sections:
     - file: python_scripts/metrics_classification
     - file: python_scripts/metrics_ex_01
     - file: python_scripts/metrics_sol_01
     - file: evaluation/evaluation_quiz_m7_04
+    - file: workbooks/m7_04_classification_metrics
   - file: evaluation/metrics_regression_index
     sections:
     - file: python_scripts/metrics_regression
     - file: python_scripts/metrics_ex_02
     - file: python_scripts/metrics_sol_02
     - file: evaluation/evaluation_quiz_m7_05
+    - file: workbooks/m7_05_regression_metrics
   - file: evaluation/evaluation_wrap_up_quiz
   - file: evaluation/evaluation_module_take_away
 - caption: Concluding remarks
