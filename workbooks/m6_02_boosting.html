@@ -1160,8 +1160,10 @@ or <code class="docutils literal notranslate"><span class="pre">&quot;far</span>
 </div>
 </div>
 <p>With early stopping, <code class="docutils literal notranslate"><span class="pre">n_estimators</span></code> is no longer a value to tune: it is
-an upper limit, and the model finds the right number by itself. The
-price is the part of the training data put aside to watch the error.</p>
+an upper limit, and the model chooses a reasonable number by itself. It
+is not perfect: it judges on a fifth of the training data and gives up
+after 10 trees without progress, so here it stops a little early
+(compare its error with the lowest point of the curve above).</p>
 </section>
 <section id="histogram-gradient-boosting">
 <h2>4. Histogram gradient boosting<a class="headerlink" href="#histogram-gradient-boosting" title="Link to this heading">#</a></h2>
@@ -1191,8 +1193,9 @@ value, which makes training much faster on large data.</p>
 </div>
 </div>
 </div>
-<p>The times depend on your computer; the errors are close. On a table of
-a million rows the difference in time is between minutes and hours.</p>
+<p>On a table of this size the two take about the same time, and the times
+depend on your computer. The gain appears on large tables: with a
+million rows it is the difference between minutes and hours.</p>
 <p>✏️ The <code class="docutils literal notranslate"><span class="pre">overall</span></code> rating takes fewer than 50 different values. Does
 sorting it into 255 bins lose any information? Write <code class="docutils literal notranslate"><span class="pre">&quot;yes&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;no&quot;</span></code>.</p>
 <div class="cell docutils container">

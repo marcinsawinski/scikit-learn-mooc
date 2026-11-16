@@ -984,7 +984,7 @@ cross-validation shuffles the recordings.</p>
 </div>
 </div>
 <p>The search is confident: a handful of neighbours, and an error around
-4 points, half that of the baseline (8.9).</p>
+4 points, half that of the baseline (about 8.7).</p>
 <p>🧠 <strong>Think.</strong> With very few neighbours, whose recordings are the nearest
 neighbours of a recording likely to be? Remember what <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code>
 do in this dataset.</p>
@@ -1032,10 +1032,10 @@ or <strong>“many more neighbours”</strong>?</p>
 </div>
 </div>
 </div>
-<p>The two curves go in <strong>opposite directions</strong>. With shuffled folds, the
+<p>From 3 neighbours on, the two curves go in <strong>opposite directions</strong>. With shuffled folds, the
 best strategy is to find the other recordings of the same patient: few
 neighbours. For a new patient there are no such recordings, and those
-few neighbours are other people who merely have the same age: the more
+few neighbours are other people of the same sex and a similar age: the more
 neighbours are averaged, the better.</p>
 <p>The inner cross-validation is the referee of the search. With the wrong
 referee, the search optimises the wrong game.</p>

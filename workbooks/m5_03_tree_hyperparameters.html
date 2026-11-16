@@ -970,7 +970,7 @@ depth (<code class="docutils literal notranslate"><span class="pre">None</span><
 </div>
 </div>
 <p>✏️ Which tree has the best <strong>testing</strong> accuracy: a <code class="docutils literal notranslate"><span class="pre">&quot;shallow&quot;</span></code> one
-(depth 3 or less) or the <code class="docutils literal notranslate"><span class="pre">&quot;deepest&quot;</span></code> one (no limit)?</p>
+(depth 5 or less) or the <code class="docutils literal notranslate"><span class="pre">&quot;deepest&quot;</span></code> one (no limit)?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_tree_all_rows</span> <span class="o">=</span> <span class="n">____</span>
@@ -1027,8 +1027,9 @@ Which tree will now have the best testing accuracy? <code class="docutils litera
 </div>
 </div>
 </div>
-<p>✏️ Without the copies, which tree has the best testing accuracy? And
-what did the copies reward: <code class="docutils literal notranslate"><span class="pre">&quot;memorising&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;generalising&quot;</span></code>?</p>
+<p>✏️ Without the copies, which tree has the best testing accuracy: a
+<code class="docutils literal notranslate"><span class="pre">&quot;shallow&quot;</span></code> one (depth 5 or less) or the <code class="docutils literal notranslate"><span class="pre">&quot;deepest&quot;</span></code> one? And what did
+the copies reward: <code class="docutils literal notranslate"><span class="pre">&quot;memorising&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;generalising&quot;</span></code>?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_tree_unique_rows</span> <span class="o">=</span> <span class="n">____</span>
@@ -1039,6 +1040,8 @@ what did the copies reward: <code class="docutils literal notranslate"><span cla
 </div>
 </div>
 </div>
+<p>(Without the copies, 19% of the wines are good, so the baseline moves
+from 0.80 to 0.81.)</p>
 <p>The curve now has the shape module 2 promised: the testing accuracy
 rises, then <strong>falls</strong> as the tree memorises. With the copies, memorising
 was a winning strategy, because part of the “new” wines were old ones.
@@ -1164,14 +1167,15 @@ scikit-learn’s example
 <a class="reference external" href="https://scikit-learn.org/1.8/auto_examples/tree/plot_cost_complexity_pruning.html">Post pruning decision trees with cost complexity pruning</a>
 shows how to obtain the interesting values of <code class="docutils literal notranslate"><span class="pre">ccp_alpha</span></code> for a given
 tree.</p>
-<p>🧠 <strong>Think.</strong> The best trees of sections 2, 4 and 5 reach about the same
-testing accuracy, a few points above the baseline. What does that tell
+<p>🧠 <strong>Think.</strong> The best trees of sections 3, 4 and 5 reach about the same
+testing accuracy, about one point above the baseline. What does that tell
 you about the choice between the three brakes? And about how much the
 chemistry says about the taste?</p>
 </section>
 <section id="going-further-a-perfect-tree">
 <h2>6. ➕ Going further: a perfect tree<a class="headerlink" href="#going-further-a-perfect-tree" title="Link to this heading">#</a></h2>
-<p>Back to the easy question of workbook M5.01: red or white? Somebody
+<p>Back to the easy question of workbook M5.01: red or white? (We take the
+whole file again, copies included.) Somebody
 numbered the bottles as they appear in the file and kept that number as
 a column, <code class="docutils literal notranslate"><span class="pre">bottle_id</span></code>. Such identifiers travel with real datasets all
 the time.</p>

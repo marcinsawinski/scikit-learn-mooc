@@ -952,7 +952,7 @@ Repository. <a class="reference external" href="https://doi.org/10.24432/C5PK67"
 <section id="spam-e-mails-spambase">
 <span id="spam-dataset"></span><h2>Spam e-mails (Spambase)<a class="headerlink" href="#spam-e-mails-spambase" title="Link to this heading">#</a></h2>
 <p>Each row is one e-mail collected at Hewlett-Packard Labs in the late 1990s. The text
-of the e-mails is not available: each one is described by 57 counts.</p>
+of the e-mails is not available: each one is described by 57 numbers.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Columns</p></th>
@@ -1039,8 +1039,8 @@ Volume</a>.</p>
 <p><strong>Differences from the original:</strong> only the years 2016 and 2017 are kept; when
 the original has several rows for the same hour, the first one is kept; the
 holiday name, given only at midnight in the original, is repeated for every
-hour of the day; the detailed weather description was dropped. The values
-themselves are untouched.</p>
+hour of the day and written <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">holiday</span></code> on the other days; the detailed
+weather description was dropped. The measurements themselves are untouched.</p>
 <p><strong>Licence:</strong> <a class="reference external" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
 Hogue, J. (2019). Metro Interstate Traffic Volume [Dataset]. UCI Machine
 Learning Repository. <a class="reference external" href="https://doi.org/10.24432/C5X60B">https://doi.org/10.24432/C5X60B</a></p>
@@ -1181,12 +1181,12 @@ There are several recordings per day of test and many days per patient.</p>
 <td><p>age in years; sex (0 = man, 1 = woman)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test_time</span></code></p></td>
-<td><p>days since the patient joined the trial</p></td>
+<td><p>days since the patient joined the trial (slightly negative for a few early recordings)</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">jitter_…</span></code> (5 columns)</p></td>
 <td><p>measures of the variation of the pitch of the voice from one vibration to the next</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shimmer_…</span></code> (6 columns)</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shimmer</span></code>, <code class="docutils literal notranslate"><span class="pre">shimmer_…</span></code> (6 columns)</p></td>
 <td><p>measures of the variation of its loudness</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nhr</span></code>, <code class="docutils literal notranslate"><span class="pre">hnr</span></code></p></td>

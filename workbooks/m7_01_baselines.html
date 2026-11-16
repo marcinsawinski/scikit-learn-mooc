@@ -1066,7 +1066,7 @@ little better than the baseline.</p>
 </div>
 </div>
 </div>
-<p>Reading only “8.66 ± 0.26 against 8.05 ± 0.20”, the two ranges almost
+<p>Reading only “8.66 ± 0.29 against 8.05 ± 0.22”, the two ranges almost
 touch. But both models were tested on <strong>the same six folds</strong>, and some
 folds are simply harder than others for everybody. The fair comparison
 is <strong>fold by fold</strong>: the <code class="docutils literal notranslate"><span class="pre">difference</span></code> column.</p>
@@ -1129,7 +1129,7 @@ is destroyed? Write <code class="docutils literal notranslate"><span class="pre"
 <strong>permutation test</strong>: if the real score were a fluke, some scrambled
 targets would do as well. scikit-learn automates it with
 <code class="docutils literal notranslate"><span class="pre">permutation_test_score</span></code>, which repeats the scrambling many times and
-reports the share of scrambled scores that beat the real one (a
+reports the share of scrambled scores that do at least as well as the real one (a
 <em>p-value</em>).</p>
 <p>So: far better than both baselines, stable across folds, and impossible
 to reproduce by chance. By every test of this workbook, the model is

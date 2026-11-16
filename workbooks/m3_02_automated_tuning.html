@@ -1007,8 +1007,8 @@ two is better? Write <code class="docutils literal notranslate"><span class="pre
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">best_params_</span></code> reports the candidate ranked 1, to many decimals, as if it
-were <em>the</em> answer. It is the winner of a close race between candidates
+<p><code class="docutils literal notranslate"><span class="pre">best_params_</span></code> reports the candidate ranked 1 as if it were <em>the</em>
+answer. It is the winner of a close race between candidates
 that are, as far as we can measure, equally good. scikit-learn’s example
 <a class="reference external" href="https://scikit-learn.org/1.8/auto_examples/model_selection/plot_grid_search_stats.html">Statistical comparison of models using grid search</a>
 shows how to test such differences properly.</p>
@@ -1077,6 +1077,10 @@ from left to right (<code class="docutils literal notranslate"><span class="pre"
 a patchwork that isolates single e-mails: from <strong>underfitting</strong> to
 <strong>overfitting</strong>. The training accuracy in each title climbs towards 1 in
 the bottom-right corner, and you know by now what that is worth.</p>
+<p>One panel does not fit this reading: bottom left, with the largest
+<code class="docutils literal notranslate"><span class="pre">gamma</span></code> and the smallest <code class="docutils literal notranslate"><span class="pre">C</span></code>, the model is allowed so little that it
+predicts the same class almost everywhere. The two settings have to be
+read together.</p>
 <p>Now the full problem: all 57 features, 1000 e-mails, and a grid of 6
 values for each hyperparameter. The colour is the mean cross-validated
 accuracy.</p>
@@ -1153,8 +1157,8 @@ trained in total (again with the final refit)?</p>
 </div>
 </div>
 </div>
-<p>With almost half the work, the randomized search finds a model about as
-good. The advantage grows with the number of hyperparameters: a grid
+<p>With little more than half the work, the randomized search finds a model
+about as good. The advantage grows with the number of hyperparameters: a grid
 with 6 values for each of 5 hyperparameters has 7776 candidates, while a
 randomized search still tries exactly as many as you ask for.</p>
 <section id="going-further-stop-wasting-time-on-bad-candidates">

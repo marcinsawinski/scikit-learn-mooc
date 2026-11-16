@@ -926,7 +926,7 @@ next lab.</p></li>
 <p>A Portuguese bank phoned its clients to offer a savings product. Each
 row is <strong>one call</strong>, with what the bank knew about the client (age, job,
 marital status, education, account balance, existing loans), about the
-campaign (month, number of calls already made to this client, result of
+campaign (month, number of calls made to this client, result of
 the previous campaign) and about the call itself. <code class="docutils literal notranslate"><span class="pre">subscribed</span></code> says
 whether the client accepted.</p>
 <p>The bank wants a model that says, <strong>before picking up the phone</strong>,
@@ -1041,7 +1041,7 @@ share says yes?</p></li>
 </ul>
 <p>✏️ Practise on round numbers. Among 1000 clients, 100 would say yes. A
 model tells the bank to call 25 clients, and 20 of them say yes. What
-are its recall and its precision?</p>
+are its recall and its precision? Give both as numbers between 0 and 1.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">recall_example</span> <span class="o">=</span> <span class="n">____</span>
@@ -1134,7 +1134,7 @@ of statistics but of money. Suppose that</p>
 </ul>
 <p>✏️ A client has a probability <code class="docutils literal notranslate"><span class="pre">p</span></code> of saying yes. Calling him brings
 <code class="docutils literal notranslate"><span class="pre">50</span> <span class="pre">×</span> <span class="pre">p</span></code> euros on average and costs 5. Above which probability is the
-call worth making?</p>
+call worth making? (A number between 0 and 1.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">break_even_probability</span> <span class="o">=</span> <span class="n">____</span>
@@ -1189,8 +1189,8 @@ it appears in the table.</p>
 </div>
 </div>
 </div>
-<p>With the default threshold, the model was hardly better than calling
-everybody. With a threshold that matches the costs, <strong>the same model</strong>
+<p>With the default threshold, the model was only a little better than
+calling everybody. With a threshold that matches the costs, <strong>the same model</strong>
 earns more than twice as much. Of all the settings of a classifier, the
 threshold is the cheapest to change and often the one that matters most.
 scikit-learn’s example
@@ -1304,7 +1304,7 @@ that match reality: <code class="docutils literal notranslate"><span class="pre"
 </div>
 </div>
 </div>
-<p>The balanced model orders the clients exactly as well as the plain one.
+<p>The balanced model orders the clients as well as the plain one.
 What changed is the <strong>scale</strong> of its probabilities: it announces 41% on
 average when 11% of the clients say yes. Its higher recall at 0.5 is
 only the effect of a moved threshold, the one you moved by hand in

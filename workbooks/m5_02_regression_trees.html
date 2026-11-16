@@ -864,12 +864,12 @@ next lab.</p></li>
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
 
 <span class="n">ANSWERS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"best_with_two_features"</span><span class="p">:</span> <span class="s2">"dc9c5edb8b2d479e"</span><span class="p">,</span>
     <span class="s2">"changes_most"</span><span class="p">:</span> <span class="s2">"dc9c5edb8b2d479e"</span><span class="p">,</span>
     <span class="s2">"impossible_prediction"</span><span class="p">:</span> <span class="s2">"9f6183312a353732"</span><span class="p">,</span>
     <span class="s2">"leaf_prediction"</span><span class="p">:</span> <span class="s2">"4a44dc15364204a8"</span><span class="p">,</span>
     <span class="s2">"max_values_depth_5"</span><span class="p">:</span> <span class="s2">"e29c9c180c6279b0"</span><span class="p">,</span>
-    <span class="s2">"n_nodes_depth_2"</span><span class="p">:</span> <span class="s2">"7902699be42c8a8e"</span>
+    <span class="s2">"n_nodes_depth_2"</span><span class="p">:</span> <span class="s2">"7902699be42c8a8e"</span><span class="p">,</span>
+    <span class="s2">"worst_with_two_features"</span><span class="p">:</span> <span class="s2">"9b2e163cb22a718e"</span>
 <span class="p">}</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_normalize</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
@@ -918,8 +918,9 @@ next lab.</p></li>
 </div>
 <section id="data-and-target">
 <h2>1. Data and target<a class="headerlink" href="#data-and-target" title="Link to this heading">#</a></h2>
-<p>We keep the white wines of workbook M5.01 and predict <code class="docutils literal notranslate"><span class="pre">alcohol</span></code> (percent
-by volume). Measuring alcohol properly needs a distillation; measuring
+<p>We keep the white wines of workbook M5.01, each of them <strong>once</strong> (the
+file contains repeated rows; workbook M5.03 shows why that matters), and
+predict <code class="docutils literal notranslate"><span class="pre">alcohol</span></code> (percent by volume). Measuring alcohol properly needs a distillation; measuring
 <strong>density</strong> only needs a scale. Alcohol is lighter than water, so a wine
 with more alcohol is less dense. Sugar is heavier than water, so a sweet
 wine is denser.</p>
@@ -932,7 +933,7 @@ wine is denser.</p>
 <span class="n">wine</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="s2">"https://raw.githubusercontent.com/marcinsawinski/scikit-learn-mooc/refs/heads/main/datasets/wine_quality.csv"</span>
 <span class="p">)</span>
-<span class="n">white</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[</span><span class="n">wine</span><span class="p">[</span><span class="s2">"color"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"white"</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">white</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[</span><span class="n">wine</span><span class="p">[</span><span class="s2">"color"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"white"</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">target</span> <span class="o">=</span> <span class="n">white</span><span class="p">[</span><span class="s2">"alcohol"</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">white</span><span class="p">)</span><span class="si">}</span><span class="s2"> white wines, alcohol from </span><span class="si">{</span><span class="n">target</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">target</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2"> %"</span><span class="p">)</span>
 
@@ -1078,21 +1079,26 @@ density alone, and then with the density <strong>and</strong> the residual sugar
 </div>
 </div>
 <p>The errors are mean absolute errors in percentage points of alcohol.</p>
-<p>✏️ With <strong>both</strong> features, which kind of model has the lowest error?
-Write <code class="docutils literal notranslate"><span class="pre">&quot;linear</span> <span class="pre">regression&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;tree&quot;</span></code>.</p>
+<p>✏️ Adding the sugar lowers the error of every model. With <strong>both</strong>
+features, which model has the <strong>highest</strong> error? Copy its name from the
+table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_with_two_features</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">check</span><span class="p">(</span><span class="s2">"best_with_two_features"</span><span class="p">,</span> <span class="n">best_with_two_features</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">worst_with_two_features</span> <span class="o">=</span> <span class="n">____</span>
+<span class="n">check</span><span class="p">(</span><span class="s2">"worst_with_two_features"</span><span class="p">,</span> <span class="n">worst_with_two_features</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>🧠 <strong>Think.</strong> With the density alone, the unlimited tree is no better
-than the tree limited to depth 5. With two features it is clearly the
-best. A wine can be dense because it has little alcohol <strong>or</strong> because
-it has a lot of sugar. Why does the second feature help a deep tree so
-much?</p>
+<p>🧠 <strong>Think.</strong></p>
+<ol class="arabic simple">
+<li><p>A wine can be dense because it has little alcohol <strong>or</strong> because it
+has a lot of sugar. Why does knowing the sugar help every model so
+much?</p></li>
+<li><p>The unlimited tree is worse than the tree limited to depth 5, with
+one feature and with two. Which word of module 2 describes its
+problem?</p></li>
+</ol>
 </section>
 <section id="going-further-outside-the-data">
 <h2>4. ➕ Going further: outside the data<a class="headerlink" href="#going-further-outside-the-data" title="Link to this heading">#</a></h2>
@@ -1140,7 +1146,8 @@ alcohol content. Which one? <code class="docutils literal notranslate"><span cla
 </div>
 </div>
 </div>
-<p>✏️ Which model predicts an impossible value for this wine?</p>
+<p>✏️ Which model predicts an impossible value for this wine? Write
+<code class="docutils literal notranslate"><span class="pre">&quot;linear</span> <span class="pre">regression&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;tree&quot;</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">impossible_prediction</span> <span class="o">=</span> <span class="n">____</span>
@@ -1201,7 +1208,8 @@ end up with the most different predictions? <code class="docutils literal notran
 </div>
 </div>
 </div>
-<p>✏️ Which kind of model changes the most when the training data changes?</p>
+<p>✏️ Which kind of model changes the most when the training data changes?
+Write <code class="docutils literal notranslate"><span class="pre">&quot;linear</span> <span class="pre">regression&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;tree&quot;</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">changes_most</span> <span class="o">=</span> <span class="n">____</span>
@@ -1210,7 +1218,7 @@ end up with the most different predictions? <code class="docutils literal notran
 </div>
 </div>
 </div>
-<p>The two lines can hardly be told apart. The two trees agree on the
+<p>The two lines almost coincide. The two trees agree on the
 general direction and disagree almost everywhere on the details: each
 has built its steps around its own 300 wines. In the words of module 2,
 a deep tree is a <strong>high-variance</strong> model.</p>

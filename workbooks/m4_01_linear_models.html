@@ -1001,7 +1001,9 @@ their predicted traffic volumes differ?</p>
 </div>
 </div>
 <p>Is this a useful model? As always, we compare with a baseline that
-predicts the mean traffic for every hour.</p>
+predicts the mean traffic for every hour. (Both errors below are measured
+on the data used for training. With two numbers to learn from 16 551
+hours, that makes no difference here.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span>
@@ -1203,7 +1205,8 @@ important”</strong>?</p>
 </div>
 </div>
 </div>
-<p>✏️ Where does <code class="docutils literal notranslate"><span class="pre">snow_1h</span></code> rank in the last column (ignore the signs)?</p>
+<p>✏️ Where does <code class="docutils literal notranslate"><span class="pre">snow_1h</span></code> rank in the last column (ignore the signs)? Write
+<code class="docutils literal notranslate"><span class="pre">&quot;most</span> <span class="pre">important&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;least</span> <span class="pre">important&quot;</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">snow_rank</span> <span class="o">=</span> <span class="n">____</span>
@@ -1239,7 +1242,7 @@ it. We give it the hour of the day and the temperature.</p>
 </div>
 </div>
 <p>🔮 <strong>Predict first.</strong> A model that always answers “not heavy” is right
-64% of the time. Everybody knows that traffic depends on the hour. Will
+about 65% of the time. Everybody knows that traffic depends on the hour. Will
 the logistic regression be <strong>“no better than always answering not
 heavy”</strong>, <strong>“a little better”</strong> or <strong>“much better”</strong>?</p>
 <div class="cell docutils container">
@@ -1323,8 +1326,7 @@ the most likely?</p>
 </div>
 </div>
 </div>
-<p>The model’s answer is the one hour at which heavy traffic <strong>never</strong>
-happens. A logistic regression multiplies <code class="docutils literal notranslate"><span class="pre">hour</span></code> by one weight: its
+<p>The model’s answer is an hour at which heavy traffic <strong>never</strong> happens. A logistic regression multiplies <code class="docutils literal notranslate"><span class="pre">hour</span></code> by one weight: its
 probability can only go <strong>up all the way or down all the way</strong> as the
 hour grows. Real traffic goes up in the morning and down in the evening,
 and no single weight can say that.</p>

@@ -984,6 +984,7 @@ much more than small ones.</p></li>
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">root_mean_squared_error</span>
 
+<span class="n">example_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">])</span>
 <span class="n">mae</span> <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">"real"</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s2">"predicted"</span><span class="p">])</span>
 <span class="n">rmse</span> <span class="o">=</span> <span class="n">root_mean_squared_error</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">"real"</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s2">"predicted"</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"example: MAE </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">example_errors</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, RMSE </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">example_errors</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
@@ -1041,12 +1042,12 @@ below 0 is worse.</p>
 <strong>one</strong> patient and wants to know whether he is getting better or worse.</p>
 <p>🔮 <strong>Predict first.</strong> We compute R² separately on the test recordings
 of each of the 42 patients, with the same predictions. Will most of
-these 42 values be <strong>“close to the overall R²”</strong>, <strong>“around 0”</strong> or
+these 42 values be <strong>“close to the overall value”</strong>, <strong>“around 0”</strong> or
 <strong>“clearly negative”</strong>?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_prediction</span> <span class="o">=</span> <span class="n">____</span>
-<span class="n">commit</span><span class="p">(</span><span class="n">my_prediction</span><span class="p">,</span> <span class="p">[</span><span class="s2">"close to the overall R²"</span><span class="p">,</span> <span class="s2">"around 0"</span><span class="p">,</span> <span class="s2">"clearly negative"</span><span class="p">])</span>
+<span class="n">commit</span><span class="p">(</span><span class="n">my_prediction</span><span class="p">,</span> <span class="p">[</span><span class="s2">"close to the overall value"</span><span class="p">,</span> <span class="s2">"around 0"</span><span class="p">,</span> <span class="s2">"clearly negative"</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1080,6 +1081,9 @@ that patient’s own mean score? Write <code class="docutils literal notranslate
 </div>
 </div>
 </div>
+<p>(The few patients whose R² is not negative have a constant score in the
+test period. R² is not defined there, and scikit-learn returns 0: the
+model is no better for them.)</p>
 <p>Nothing changed in the predictions or in the errors. What changed is
 <strong>what the model is compared with</strong>.</p>
 <ul class="simple">
@@ -1112,7 +1116,8 @@ and 52. On which test set is its R² higher? Write <code class="docutils literal
 real value. It is popular because it needs no unit: “we are 15% off”.</p>
 <p>✏️ The model is 4 points off for a patient whose real score is 8, and
 4 points off for a patient whose real score is 50. What is the
-percentage error for the <strong>first</strong> patient?</p>
+percentage error for the <strong>first</strong> patient? Give a number of percent
+(for example <code class="docutils literal notranslate"><span class="pre">12</span></code> for 12%).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">percentage_error_mild_patient</span> <span class="o">=</span> <span class="n">____</span>

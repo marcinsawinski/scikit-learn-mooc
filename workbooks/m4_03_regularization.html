@@ -1194,6 +1194,9 @@ can be used to <strong>select</strong> features? Write <code class="docutils lit
 </div>
 </div>
 </div>
+<p>(For Ridge we took the <code class="docutils literal notranslate"><span class="pre">alpha</span></code> with the lowest <strong>testing</strong> error. That is
+the shortcut workbook M3.02 warned against: its figure is a little
+flattering, and it still loses.)</p>
 <p>The Lasso has ignored most of the junk by itself and comes close to the
 model that was given only the real columns. A column with a weight of
 exactly zero can be removed from the data: the Lasso is a model and a
@@ -1257,7 +1260,7 @@ the data decide which. The predictions are fine; the <strong>weights mean
 nothing</strong>. Ridge prefers small weights, so it splits the effect between
 the two columns, the same way every time.</p>
 <p>🧠 <strong>Think.</strong> Somebody reads the first fold and concludes: “the hotter
-it is in Fahrenheit, the less traffic”. What do you answer?</p>
+it is in Celsius, the less traffic”. What do you answer?</p>
 </section>
 <section id="going-further-the-penalty-depends-on-the-units">
 <h2>6. ➕ Going further: the penalty depends on the units<a class="headerlink" href="#going-further-the-penalty-depends-on-the-units" title="Link to this heading">#</a></h2>
@@ -1294,7 +1297,8 @@ and retrain. For which model will the <strong>predictions change</strong>? <code
 </div>
 </div>
 </div>
-<p>✏️ Which model gives different predictions when a unit changes?</p>
+<p>✏️ Which model gives different predictions when a unit changes? Copy its
+name from the table.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">depends_on_units</span> <span class="o">=</span> <span class="n">____</span>
@@ -1339,9 +1343,9 @@ with all 353 columns, for several values of <code class="docutils literal notran
 </div>
 </div>
 </div>
-<p>✏️ Which value of <code class="docutils literal notranslate"><span class="pre">C</span></code> regularises the <strong>most</strong> (the smallest weights):
-the smallest or the largest? And is the model with <code class="docutils literal notranslate"><span class="pre">C=100</span></code> underfitting
-or overfitting?</p>
+<p>✏️ Which value of <code class="docutils literal notranslate"><span class="pre">C</span></code> regularises the <strong>most</strong> (the smallest weights)?
+Write <code class="docutils literal notranslate"><span class="pre">&quot;smallest</span> <span class="pre">C&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;largest</span> <span class="pre">C&quot;</span></code>. And is the model with <code class="docutils literal notranslate"><span class="pre">C=100</span></code>
+underfitting or overfitting?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">strongest_regularisation</span> <span class="o">=</span> <span class="n">____</span>

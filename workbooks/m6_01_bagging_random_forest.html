@@ -984,7 +984,7 @@ lower error: the <code class="docutils literal notranslate"><span class="pre">&q
 </div>
 </div>
 <p>✏️ Which constant is the right baseline when the error is the mean
-absolute error?</p>
+absolute error? Write <code class="docutils literal notranslate"><span class="pre">&quot;mean&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;median&quot;</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_constant</span> <span class="o">=</span> <span class="n">____</span>
@@ -1154,8 +1154,9 @@ makes the trees more different from one another.</p>
 </div>
 </div>
 <p>✏️ By default, which share of the features may each question of a
-<code class="docutils literal notranslate"><span class="pre">RandomForestRegressor</span></code> choose from? Enter <code class="docutils literal notranslate"><span class="pre">0.3</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>. (Look at the
-table above: which of the two forests behaves like the bagging?)</p>
+<code class="docutils literal notranslate"><span class="pre">RandomForestRegressor</span></code> choose from? Enter <code class="docutils literal notranslate"><span class="pre">0.3</span></code> or <code class="docutils literal notranslate"><span class="pre">1</span></code>. (The cell prints
+the value once your answer is accepted; the documentation of
+<code class="docutils literal notranslate"><span class="pre">RandomForestRegressor</span></code> gives it too.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">default_max_features</span> <span class="o">=</span> <span class="n">____</span>
@@ -1169,8 +1170,7 @@ table above: which of the two forests behaves like the bagging?)</p>
 random forest looks at all the features at every question, so it is a
 plain bagging of trees. (For classification the default is the square
 root of the number of features.) Whether a smaller <code class="docutils literal notranslate"><span class="pre">max_features</span></code> helps
-depends on the data, and workbook M6.03 treats it as a hyperparameter to
-tune.</p>
+depends on the data: it is one more hyperparameter to tune.</p>
 </section>
 <section id="going-further-a-validation-score-for-free">
 <h2>6. ➕ Going further: a validation score for free<a class="headerlink" href="#going-further-a-validation-score-for-free" title="Link to this heading">#</a></h2>

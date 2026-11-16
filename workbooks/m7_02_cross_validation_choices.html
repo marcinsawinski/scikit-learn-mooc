@@ -1063,8 +1063,9 @@ draws this kind of picture for every splitter.</p>
 </div>
 </div>
 <p>Age and sex together are almost a name tag. And the severity of a
-patient hardly changes in six months. So a model can do very well on
-shuffled recordings by learning “the 72-year-old man is at about 35”,
+patient changes slowly: recordings made a few days apart have almost
+the same score. So a model can do very well on shuffled recordings by
+learning “this 72-year-old man is at about 35 these weeks”,
 which says nothing about any other 72-year-old man.</p>
 <p>🔮 <strong>Predict first.</strong> We remove <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">sex</span></code> and keep only the 16
 voice measurements. Will the two cross-validations now agree? <code class="docutils literal notranslate"><span class="pre">&quot;yes&quot;</span></code>
@@ -1209,8 +1210,8 @@ data?</p>
 </div>
 <p>The average hides a wide range: for some new patients the model is a few
 points off, for others more than twenty. With only 42 patients, each
-fold of a <code class="docutils literal notranslate"><span class="pre">GroupKFold</span></code> contains 7 of them, which is why its scores vary
-so much from fold to fold. <strong>The number of independent things in this
+fold of a <code class="docutils literal notranslate"><span class="pre">GroupKFold</span></code> contains 7 of them, so the score of a fold
+depends a lot on which 7 it holds. <strong>The number of independent things in this
 dataset is 42, not 5875.</strong></p>
 <p>🧠 <strong>Think.</strong></p>
 <ol class="arabic simple">

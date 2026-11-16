@@ -1023,8 +1023,7 @@ has:</p>
 </div>
 </div>
 <p>✏️ Using the counts above, how many columns will one-hot encoding of
-<strong>all</strong> categorical columns produce? Compute it yourself, then run the
-next cell to see if you were right.</p>
+<strong>all</strong> categorical columns produce? Compute it yourself from the counts.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_onehot_columns</span> <span class="o">=</span> <span class="n">____</span>
@@ -1087,8 +1086,7 @@ later, a new person has an occupation that was not in the training data?</p>
 <p>By default the encoder refuses: it raises an error. In production, this
 would crash the whole prediction service for one unusual person.</p>
 <p>The option <code class="docutils literal notranslate"><span class="pre">handle_unknown</span></code> controls this. ✏️ Set it to the value that
-makes the encoder <strong>ignore</strong> unknown categories (as a string; see the error
-message above or the
+makes the encoder <strong>ignore</strong> unknown categories (as a string; see the
 <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html">documentation</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1115,8 +1113,8 @@ good idea?</p>
 <section id="going-further-why-not-pd-get-dummies">
 <h3>➕ Going further: why not <code class="docutils literal notranslate"><span class="pre">pd.get_dummies</span></code>?<a class="headerlink" href="#going-further-why-not-pd-get-dummies" title="Link to this heading">#</a></h3>
 <p>pandas has its own one-hot function, <code class="docutils literal notranslate"><span class="pre">pd.get_dummies</span></code>, and you will see
-it in many tutorials. On the training data it gives the same 6 columns
-as the encoder:</p>
+it in many tutorials. On our data it gives the same 6 columns as the
+encoder:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s2">"OCCUPATION"</span><span class="p">]])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -1239,22 +1237,29 @@ not its score.</p>
 </div>
 </div>
 </div>
-<p>With <code class="docutils literal notranslate"><span class="pre">cv=5</span></code>, scikit-learn cuts the data <strong>in order</strong>: the first fold tests
-on the first fifth of the rows, the last fold on the last fifth. Let us
-look at the share of high wages along the file:</p>
+<p>For a classifier, <code class="docutils literal notranslate"><span class="pre">cv=5</span></code> gives every fold the same share of each class,
+but it does <strong>not shuffle</strong>: inside each class, the rows are taken in the
+order of the file. Let us look at which occupations end up in the test
+part of each fold:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fifth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)))</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">target</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">fifth</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="s2">"fifth of the file"</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">StratifiedKFold</span>
+
+<span class="n">folds</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># what `cv=5` means for a classifier</span>
+<span class="n">tested_in</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">test_rows</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">folds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">),</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">tested_in</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_rows</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"fold </span><span class="si">{</span><span class="n">number</span><span class="si">}</span><span class="s2">"</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"OCCUPATION"</span><span class="p">],</span> <span class="n">tested_in</span><span class="p">)</span><span class="o">.</span><span class="n">rename_axis</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">"occupation"</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s2">"tested in"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The rows are not in random order: the share of high wages changes a lot
-from one part of the file to another. The last fold is trained on the first
-four fifths (roughly a quarter of high wages) and tested on the last fifth,
-where more than half of the people earn more than $10. It is tested on
-people who are quite different from the ones it was trained on.</p>
+<p>The rows are not in random order: the file is <strong>sorted by occupation</strong>. So
+each fold is tested on a few occupations only. The last one is tested
+almost entirely on <code class="docutils literal notranslate"><span class="pre">Professional</span></code> workers, and most of them are in that
+test fold: the model has seen very few professionals during training. It
+is tested on people who are quite different from the ones it was trained
+on.</p>
 <p>The fix: <strong>shuffle</strong> the rows before cutting them into folds.
 <code class="docutils literal notranslate"><span class="pre">StratifiedKFold(shuffle=True)</span></code> does that, while keeping the same share of
 each class in every fold.</p>

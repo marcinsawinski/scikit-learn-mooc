@@ -80,7 +80,7 @@ Repository. <https://doi.org/10.24432/C5PK67>
 ## Spam e-mails (Spambase)
 
 Each row is one e-mail collected at Hewlett-Packard Labs in the late 1990s. The text
-of the e-mails is not available: each one is described by 57 counts.
+of the e-mails is not available: each one is described by 57 numbers.
 
 | Columns | Meaning |
 |---|---|
@@ -131,8 +131,8 @@ Volume](https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume)
 **Differences from the original:** only the years 2016 and 2017 are kept; when
 the original has several rows for the same hour, the first one is kept; the
 holiday name, given only at midnight in the original, is repeated for every
-hour of the day; the detailed weather description was dropped. The values
-themselves are untouched.
+hour of the day and written `No holiday` on the other days; the detailed
+weather description was dropped. The measurements themselves are untouched.
 
 **Licence:** [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 Hogue, J. (2019). Metro Interstate Traffic Volume [Dataset]. UCI Machine
@@ -214,9 +214,9 @@ There are several recordings per day of test and many days per patient.
 |---|---|
 | `subject` | number identifying the patient |
 | `age`, `sex` | age in years; sex (0 = man, 1 = woman) |
-| `test_time` | days since the patient joined the trial |
+| `test_time` | days since the patient joined the trial (slightly negative for a few early recordings) |
 | `jitter_…` (5 columns) | measures of the variation of the pitch of the voice from one vibration to the next |
-| `shimmer_…` (6 columns) | measures of the variation of its loudness |
+| `shimmer`, `shimmer_…` (6 columns) | measures of the variation of its loudness |
 | `nhr`, `hnr` | ratios of noise to tonal components in the voice |
 | `rpde`, `dfa`, `ppe` | three other measures of the irregularity of the voice signal |
 | `motor_updrs` | motor part of the UPDRS, the clinical scale of the severity of the symptoms |
